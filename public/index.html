@@ -7,149 +7,176 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --green:#1D9E75;--green-d:#0F6E56;--green-l:#E1F5EE;
-  --blue-l:#E6F1FB;--pink-l:#FBEAF0;
-  --red:#e00000;--saldo-verde:#00b050;
-  --border:#e2e2e2;--bg:#f7f7f5;--white:#fff;
-  --text:#1a1a1a;--muted:#6b6b6b;--th-bg:#f1f0eb;
+  --g:#1D9E75;--gd:#0F6E56;--gl:#E1F5EE;
+  --bl:#E6F1FB;--pl:#FBEAF0;
+  --rv:#00b050;--rr:#e00000;
+  --br:#e2e2e2;--bg:#f7f7f5;--wh:#fff;
+  --tx:#1a1a1a;--mu:#6b6b6b;--th:#f1f0eb;
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;background:var(--bg);color:var(--text)}
-input,select,button{font-family:inherit;font-size:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;background:var(--bg);color:var(--tx)}
+input,select,button{font-family:inherit;font-size:12px;box-sizing:border-box}
 button{cursor:pointer}
+.hide{display:none!important}
 .screen{display:none}.screen.active{display:block}
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)}
-.login-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:2.5rem 2rem;width:360px}
-.login-logo{text-align:center;margin-bottom:2rem}
-.login-logo .ic{width:48px;height:48px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.login-logo .ic svg{width:24px;height:24px;color:var(--green-d)}
-.login-logo h1{font-size:17px;font-weight:600}
-.login-logo p{font-size:11px;color:var(--muted);margin-top:3px}
-.fg{margin-bottom:12px}
-.fg label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:500}
-.fg input{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px}
-.fg input:focus{outline:none;border-color:var(--green)}
-.btn-login{width:100%;padding:9px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;margin-top:4px}
-.btn-login:hover{background:var(--green-d)}
-.lerr{color:#c0392b;font-size:11px;margin-top:6px;text-align:center;display:none}
-.hint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
-.topbar{height:44px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:8px;position:sticky;top:0;z-index:50}
-.topbar .brand{display:flex;align-items:center;gap:7px;flex:1}
-.topbar .brand .ic{width:26px;height:26px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center}
-.topbar .brand .ic svg{width:14px;height:14px;color:var(--green-d)}
-.topbar .brand h2{font-size:13px;font-weight:600}
-.topbar .right{display:flex;align-items:center;gap:7px}
-.uav{width:24px;height:24px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--green-d)}
-.btn-logout{font-size:10px;padding:2px 8px;border:1px solid var(--border);border-radius:4px;background:none;color:var(--muted)}
-.tabs{display:flex;border-bottom:1px solid var(--border);background:var(--white);padding:0 14px}
-.tab{padding:7px 12px;font-size:11px;font-weight:500;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
-.tab.active{color:var(--green);border-bottom-color:var(--green)}
-.toolbar{padding:7px 14px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--white)}
-.toolbar label{font-size:10px;color:var(--muted);font-weight:500}
-.toolbar select{padding:3px 6px;border:1px solid var(--border);border-radius:4px;background:var(--white);font-size:11px}
+
+/* LOGIN */
+.lw{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.lc{background:var(--wh);border:1px solid var(--br);border-radius:10px;padding:2rem 1.75rem;width:320px}
+.ll{text-align:center;margin-bottom:1.5rem}
+.ll .ic{width:44px;height:44px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.ll .ic svg{width:22px;height:22px;color:var(--gd)}
+.ll h1{font-size:16px;font-weight:600}
+.ll p{font-size:11px;color:var(--mu);margin-top:2px}
+.fg{margin-bottom:10px}
+.fg label{display:block;font-size:11px;color:var(--mu);margin-bottom:3px;font-weight:500}
+.fg input{width:100%;padding:7px 9px;border:1px solid var(--br);border-radius:6px}
+.fg input:focus{outline:none;border-color:var(--g)}
+.bl{width:100%;padding:8px;background:var(--g);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600}
+.bl:hover{background:var(--gd)}
+.le{color:#c0392b;font-size:11px;margin-top:6px;text-align:center;display:none}
+
+/* TOPBAR */
+.tb{height:42px;background:var(--wh);border-bottom:1px solid var(--br);display:flex;align-items:center;padding:0 12px;position:sticky;top:0;z-index:50}
+.tb .br2{display:flex;align-items:center;gap:6px;flex:1}
+.tb .br2 .ic{width:24px;height:24px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center}
+.tb .br2 .ic svg{width:13px;height:13px;color:var(--gd)}
+.tb .br2 h2{font-size:13px;font-weight:600}
+.tb .ri{display:flex;align-items:center;gap:6px}
+.av{width:22px;height:22px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--gd)}
+.lo{font-size:10px;padding:2px 7px;border:1px solid var(--br);border-radius:4px;background:none;color:var(--mu)}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--br);background:var(--wh);padding:0 12px}
+.tab{padding:6px 12px;font-size:11px;font-weight:500;cursor:pointer;color:var(--mu);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab.active{color:var(--g);border-bottom-color:var(--g)}
+
+/* TOOLBAR */
+.tl{padding:6px 12px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--br);background:var(--wh);flex-wrap:wrap}
+.tl label{font-size:10px;color:var(--mu);font-weight:500}
+.tl select{padding:3px 6px;border:1px solid var(--br);border-radius:4px;background:var(--wh);font-size:11px}
 .sp{flex:1}
-.btn-new{display:flex;align-items:center;gap:4px;padding:4px 10px;background:var(--green);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600}
-.btn-new:hover{background:var(--green-d)}
-.btn-new svg{width:11px;height:11px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:8px 14px;background:var(--bg);border-bottom:1px solid var(--border)}
-.stat{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:7px 10px}
-.stat .sl{font-size:9px;color:var(--muted);font-weight:500;margin-bottom:2px;text-transform:uppercase}
-.stat .sv{font-size:18px;font-weight:700}
-.stat.g .sv{color:var(--green-d)}.stat.r .sv{color:#c0392b}.stat.b .sv{color:#185FA5}
-.legend{display:flex;gap:10px;padding:4px 14px;border-bottom:1px solid var(--border);background:var(--white);flex-wrap:wrap}
-.li{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--muted)}
-.lbox{width:11px;height:11px;border-radius:2px;flex-shrink:0}
-.table-wrap{overflow-x:auto}
-table{border-collapse:collapse;width:100%}
-th{padding:4px 6px;font-size:10px;font-weight:600;color:var(--muted);border:1px solid var(--border);background:var(--th-bg);text-align:center;white-space:nowrap}
-td{padding:4px 6px;border:1px solid var(--border);font-size:11px;text-align:center;vertical-align:middle;white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis}
-.td-caixa{font-weight:600;text-align:left;background:#fafaf8}
-.td-macho{background:var(--blue-l)}.td-femea{background:var(--pink-l)}
-.td-sep{background:#1a1a1a;width:3px;padding:0}
-.saldo-v{background:var(--saldo-verde);color:#fff;font-weight:700}
-.saldo-r{background:var(--red);color:#fff;font-weight:700}
-.th-qtd{background:#D6E4F0;color:#0C447C}
-.th-saldo{background:#D5E8D4;color:#27500A}
+.bn{display:flex;align-items:center;gap:4px;padding:4px 10px;background:var(--g);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600}
+.bn:hover{background:var(--gd)}
+.bn svg{width:10px;height:10px}
+
+/* STATS */
+.st{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--br)}
+.sc{background:var(--wh);border:1px solid var(--br);border-radius:6px;padding:6px 10px}
+.sc .sl{font-size:9px;color:var(--mu);font-weight:500;margin-bottom:2px;text-transform:uppercase;letter-spacing:.3px}
+.sc .sv{font-size:18px;font-weight:700}
+.sc.g .sv{color:var(--gd)}.sc.r .sv{color:#c0392b}.sc.b .sv{color:#185FA5}
+
+/* LEGEND */
+.lg{display:flex;gap:8px;padding:4px 12px;border-bottom:1px solid var(--br);background:var(--wh);flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--mu)}
+.lb{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* TABLE */
+.tw{overflow-x:auto}
+table{border-collapse:collapse;font-size:11px}
+table.main{width:100%}
+th{padding:4px 8px;font-size:10px;font-weight:600;color:var(--mu);border:1px solid var(--br);background:var(--th);text-align:center;white-space:nowrap}
+td{padding:4px 8px;border:1px solid var(--br);text-align:center;vertical-align:middle;white-space:nowrap}
+.tc{font-weight:600;text-align:left;background:#fafaf8}
+.tm{background:var(--bl)}.tf{background:var(--pl)}
+.ts{background:#1a1a1a;width:3px;padding:0}
+.sv2{background:var(--rv);color:#fff;font-weight:700}
+.sr{background:var(--rr);color:#fff;font-weight:700}
+.tq{background:#D6E4F0;color:#0C447C}
+.tsa{background:#D5E8D4;color:#27500A}
 tr:hover td{filter:brightness(0.97)}
-.td-occs{background:#FFF8F0;text-align:left;padding:3px 5px;white-space:normal;min-width:120px;max-width:180px}
-.occ-list{display:flex;flex-direction:column;gap:2px;margin-bottom:2px}
-.occ-tag{display:inline-flex;align-items:center;gap:2px;background:#fff;border:1px solid #FAC775;border-radius:3px;padding:1px 4px;font-size:10px;white-space:nowrap}
-.occ-tag .ot{font-weight:600;color:#712B13}
-.occ-tag .od{color:var(--muted)}
-.occ-tag .oq{color:#0F6E56;font-weight:600}
-.occ-tag .del-occ{background:none;border:none;color:#ccc;font-size:11px;padding:0 0 0 2px;cursor:pointer}
-.occ-tag .del-occ:hover{color:#c0392b}
-.btn-add-occ{display:inline-flex;align-items:center;gap:2px;padding:1px 6px;background:var(--green-l);border:1px solid #9FE1CB;border-radius:3px;color:var(--green-d);font-size:10px;font-weight:600;cursor:pointer}
-.btn-add-occ:hover{background:#9FE1CB}
-.action-btns{display:flex;flex-direction:column;gap:2px;align-items:center}
-.btn-sm{font-size:10px;padding:2px 6px;border-radius:3px;border:1px solid var(--border);background:var(--white);color:var(--text)}
-.btn-sm:hover{background:var(--bg)}
-.btn-arq{background:#FCEBEB;color:#A32D2D;border-color:#F7C1C1}
-.btn-arq:hover{background:#F09595}
-.empty{text-align:center;padding:2rem;color:var(--muted)}
-.loading{text-align:center;padding:1.5rem;color:var(--muted)}
-.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:5px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center;padding:1rem}
-.overlay.open{display:flex}
-.modal{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:1.25rem;width:100%;max-width:440px;max-height:90vh;overflow-y:auto}
-.modal h3{font-size:13px;font-weight:600;margin-bottom:.9rem;padding-bottom:8px;border-bottom:1px solid var(--border)}
+
+/* OCC CELL */
+.oc{background:#FFF8F0;text-align:left;padding:3px 6px;white-space:normal;min-width:130px;max-width:200px}
+.ol{display:flex;flex-direction:column;gap:2px;margin-bottom:2px}
+.ot2{display:inline-flex;align-items:center;gap:3px;background:#fff;border:1px solid #FAC775;border-radius:3px;padding:1px 4px;font-size:10px;white-space:nowrap}
+.ot2 .tp{font-weight:600;color:#712B13}
+.ot2 .dt{color:var(--mu)}
+.ot2 .qt{color:#0F6E56;font-weight:600}
+.ot2 .dx{background:none;border:none;color:#ccc;font-size:11px;padding:0 0 0 2px;cursor:pointer;line-height:1}
+.ot2 .dx:hover{color:#c0392b}
+.ba{display:inline-flex;align-items:center;gap:2px;padding:2px 6px;background:var(--gl);border:1px solid #9FE1CB;border-radius:3px;color:var(--gd);font-size:10px;font-weight:600;cursor:pointer;margin-top:1px}
+.ba:hover{background:#9FE1CB}
+
+/* ACTION */
+.ac{display:flex;flex-direction:column;gap:2px;align-items:center}
+.bs{font-size:10px;padding:2px 6px;border-radius:3px;border:1px solid var(--br);background:var(--wh);color:var(--tx);cursor:pointer}
+.bs:hover{background:var(--bg)}
+.bx{background:#FCEBEB;color:#A32D2D;border-color:#F7C1C1}
+.bx:hover{background:#F09595;color:#501313}
+
+/* MISC */
+.empty{text-align:center;padding:2rem;color:var(--mu);font-size:12px}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid var(--br);border-top-color:var(--g);border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle;margin-right:4px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.loading{padding:1.5rem;text-align:center;color:var(--mu)}
+
+/* MODAL */
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.ov.open{display:flex}
+.mo{background:var(--wh);border-radius:10px;border:1px solid var(--br);padding:1.25rem;width:100%;max-width:420px;max-height:90vh;overflow-y:auto}
+.mo h3{font-size:13px;font-weight:600;margin-bottom:.9rem;padding-bottom:7px;border-bottom:1px solid var(--br)}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.mfg{margin-bottom:8px}
-.mfg label{display:block;font-size:10px;color:var(--muted);margin-bottom:3px;font-weight:500}
-.mfg input,.mfg select{width:100%;padding:5px 7px;border:1px solid var(--border);border-radius:5px;font-size:11px}
-.mfg input:focus,.mfg select:focus{outline:none;border-color:var(--green)}
-.merr{color:#c0392b;font-size:10px;margin-top:4px;display:none;padding:4px 7px;background:#FCEBEB;border-radius:4px}
-.mbtns{display:flex;justify-content:flex-end;gap:7px;margin-top:.9rem;padding-top:9px;border-top:1px solid var(--border)}
-.btn-cancel{padding:5px 12px;border:1px solid var(--border);border-radius:5px;background:none;font-size:11px}
-.btn-cancel:hover{background:var(--bg)}
-.btn-save{padding:5px 14px;background:var(--green);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600}
-.btn-save:hover{background:var(--green-d)}
-.btn-save:disabled{opacity:0.6;cursor:not-allowed}
-.arch-wrap{padding:14px}
-.arch-title{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:8px}
-.toast{position:fixed;bottom:16px;right:16px;z-index:999;display:flex;flex-direction:column;gap:5px}
-.toast-item{background:var(--text);color:#fff;padding:7px 12px;border-radius:6px;font-size:11px;animation:fadeIn .2s;max-width:260px}
-.toast-item.err{background:#c0392b}.toast-item.ok{background:var(--green-d)}
-@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.mf{margin-bottom:8px}
+.mf label{display:block;font-size:10px;color:var(--mu);margin-bottom:3px;font-weight:500}
+.mf input,.mf select{width:100%;padding:5px 7px;border:1px solid var(--br);border-radius:5px;font-size:11px}
+.mf input:focus,.mf select:focus{outline:none;border-color:var(--g)}
+.me{color:#c0392b;font-size:10px;margin-top:4px;display:none;padding:4px 7px;background:#FCEBEB;border-radius:4px}
+.mb{display:flex;justify-content:flex-end;gap:6px;margin-top:.9rem;padding-top:8px;border-top:1px solid var(--br)}
+.bc{padding:5px 12px;border:1px solid var(--br);border-radius:5px;background:none;font-size:11px;cursor:pointer}
+.bc:hover{background:var(--bg)}
+.bv{padding:5px 14px;background:var(--g);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer}
+.bv:hover{background:var(--gd)}
+.bv:disabled{opacity:0.6;cursor:not-allowed}
+
+/* TOAST */
+.toast{position:fixed;bottom:14px;right:14px;z-index:999;display:flex;flex-direction:column;gap:4px}
+.ti{background:var(--tx);color:#fff;padding:6px 12px;border-radius:6px;font-size:11px;animation:fi .2s;max-width:240px}
+.ti.ok{background:var(--gd)}.ti.err{background:#c0392b}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ARCH */
+.aw{padding:12px}
+.at{font-size:11px;font-weight:600;color:var(--mu);margin-bottom:8px}
 </style>
 </head>
 <body>
 <div id="app">
-  <div class="screen active" id="s-login">
-<div class="login-wrap">
-<div class="login-card">
-  <div class="login-logo">
+
+<!-- LOGIN -->
+<div class="screen active" id="s-login">
+<div class="lw"><div class="lc">
+  <div class="ll">
     <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-    <h1>Biotério</h1>
-    <p>Sistema de gestão de estoque de animais</p>
+    <h1>Biotério</h1><p>Gestão de estoque de animais</p>
   </div>
   <div class="fg"><label>Usuário</label><input id="lu" type="text" placeholder="admin"/></div>
   <div class="fg"><label>Senha</label><input id="lp" type="password" placeholder="••••"/></div>
-  <button class="btn-login" onclick="doLogin()">Entrar</button>
-  <div class="lerr" id="lerr">Usuário ou senha incorretos.</div>
-  <p class="hint">Acesso restrito ao pessoal autorizado</p>
-</div>
-</div>
+  <button class="bl" onclick="doLogin()">Entrar</button>
+  <div class="le" id="lerr">Usuário ou senha incorretos.</div>
+</div></div>
 </div>
 
+<!-- MAIN -->
 <div class="screen" id="s-main">
-  <div class="topbar">
-    <div class="brand">
+  <div class="tb">
+    <div class="br2">
       <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
       <h2>Biotério — Gestão de Animais</h2>
     </div>
-    <div class="right">
-      <div class="uav" id="uav">AD</div>
-      <span id="uname" style="font-size:11px;color:var(--muted)">Admin</span>
-      <button class="btn-logout" onclick="doLogout()">Sair</button>
+    <div class="ri">
+      <div class="av" id="uav">AD</div>
+      <span id="uname" style="font-size:10px;color:var(--mu)">Admin</span>
+      <button class="lo" onclick="doLogout()">Sair</button>
     </div>
   </div>
   <div class="tabs">
     <div class="tab active" id="tab-ativo" onclick="switchTab('ativo')">Estoque ativo</div>
     <div class="tab" id="tab-arch" onclick="switchTab('arch')">Arquivados</div>
   </div>
+
   <div id="pane-ativo">
-    <div class="toolbar">
+    <div class="tl">
       <label>Sala:</label>
       <select id="fSala" onchange="loadData()"><option value="">Todas</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
       <label>Linhagem:</label>
@@ -157,128 +184,115 @@ tr:hover td{filter:brightness(0.97)}
       <label>Sexo:</label>
       <select id="fSexo" onchange="loadData()"><option value="">Todos</option><option>Macho</option><option>Fêmea</option></select>
       <div class="sp"></div>
-      <button class="btn-new" onclick="openAdd()">
+      <button class="bn" onclick="openAdd()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         Novo mini-isolador
       </button>
     </div>
-    <div class="stats">
-      <div class="stat b"><div class="sl">Caixas ativas</div><div class="sv" id="st-cx">—</div></div>
-      <div class="stat"><div class="sl">Total inicial</div><div class="sv" id="st-ti">—</div></div>
-      <div class="stat g"><div class="sl">Saldo atual</div><div class="sv" id="st-sa">—</div></div>
-      <div class="stat r"><div class="sl">Caixas zeradas</div><div class="sv" id="st-ze">—</div></div>
+    <div class="st">
+      <div class="sc b"><div class="sl">Caixas ativas</div><div class="sv" id="st-cx">—</div></div>
+      <div class="sc"><div class="sl">Total inicial</div><div class="sv" id="st-ti">—</div></div>
+      <div class="sc g"><div class="sl">Saldo atual</div><div class="sv" id="st-sa">—</div></div>
+      <div class="sc r"><div class="sl">Caixas zeradas</div><div class="sv" id="st-ze">—</div></div>
     </div>
-    <div class="legend">
-      <div class="li"><div class="lbox" style="background:var(--blue-l);border:1px solid #B5D4F4"></div>Macho</div>
-      <div class="li"><div class="lbox" style="background:var(--pink-l);border:1px solid #F4C0D1"></div>Fêmea</div>
-      <div class="li"><div class="lbox" style="background:var(--saldo-verde)"></div>Saldo positivo</div>
-      <div class="li"><div class="lbox" style="background:var(--red)"></div>Saldo zerado</div>
-      <div class="li"><div class="lbox" style="background:#FFF8F0;border:1px solid #FAC775"></div>Ocorrências</div>
+    <div class="lg">
+      <div class="li"><div class="lb" style="background:var(--bl);border:1px solid #B5D4F4"></div>Macho</div>
+      <div class="li"><div class="lb" style="background:var(--pl);border:1px solid #F4C0D1"></div>Fêmea</div>
+      <div class="li"><div class="lb" style="background:var(--rv)"></div>Saldo positivo</div>
+      <div class="li"><div class="lb" style="background:var(--rr)"></div>Saldo zerado</div>
+      <div class="li"><div class="lb" style="background:#FFF8F0;border:1px solid #FAC775"></div>Ocorrências</div>
     </div>
-    <div class="table-wrap">
-      <div class="loading" id="loading-main"><span class="spinner"></span>Carregando...</div>
-      <table id="main-tbl" style="display:none"><thead id="thead-main"></thead><tbody id="tbody-main"></tbody></table>
+    <div class="tw">
+      <div class="loading" id="ld-main"><span class="spin"></span>Carregando...</div>
+      <table class="main" id="main-tbl" style="display:none">
+        <thead id="thead-main"></thead>
+        <tbody id="tbody-main"></tbody>
+      </table>
       <div class="empty" id="empty-main" style="display:none">Nenhum registro encontrado.</div>
     </div>
   </div>
+
   <div id="pane-arch" style="display:none">
-    <div class="arch-wrap">
-      <p class="arch-title">Mini-isoladores arquivados</p>
-      <div class="loading" id="loading-arch"><span class="spinner"></span>Carregando...</div>
-      <table id="arch-tbl" style="display:none;table-layout:auto;width:100%;border-collapse:collapse">
-        <thead><tr>
-          <th style="text-align:left;padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Caixa</th>
-          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Sala</th>
-          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Linhagem</th>
-          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Nasc.</th>
-          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Origem</th>
-          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Sexo</th>
-          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Qtd</th>
-          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Ocorrências</th>
-        </tr></thead>
-        <tbody id="tbody-arch"></tbody>
-      </table>
+    <div class="aw">
+      <p class="at">Mini-isoladores arquivados</p>
+      <div class="loading" id="ld-arch"><span class="spin"></span>Carregando...</div>
+      <div class="tw">
+        <table id="arch-tbl" style="display:none;border-collapse:collapse;width:100%">
+          <thead><tr>
+            <th style="text-align:left">Caixa</th><th>Sala</th><th>Linhagem</th>
+            <th>Nasc.</th><th>Origem</th><th>Sexo</th><th>Qtd</th><th>Ocorrências</th>
+          </tr></thead>
+          <tbody id="tbody-arch"></tbody>
+        </table>
+      </div>
       <div class="empty" id="empty-arch" style="display:none">Nenhum registro arquivado.</div>
     </div>
   </div>
 </div>
 </div>
-<div class="toast" id="toast-container"></div>
-<div class="overlay" id="m-add">
-<div class="modal">
+
+<div class="toast" id="tc"></div>
+
+<!-- MODAL NOVO -->
+<div class="ov" id="m-add"><div class="mo">
   <h3>Novo mini-isolador</h3>
-  <div class="mfg"><label>Número da caixa *</label><input id="a-num" placeholder="Ex: 66.173"/></div>
+  <div class="mf"><label>Número da caixa *</label><input id="a-num" placeholder="Ex: 66.173"/></div>
   <div class="r2">
-    <div class="mfg"><label>Sala *</label><select id="a-sala"><option value="">Selecione</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
-    <div class="mfg"><label>Linhagem *</label><select id="a-lin"><option value="">Selecione</option><option>Swiss</option><option>Balb/c</option><option>C57Bl/6</option><option>NSG</option><option>Townes</option></select></div>
-  </div>
-  <div class="r2">
-    <div class="mfg"><label>Data de nascimento *</label><input type="date" id="a-nasc"/></div>
-    <div class="mfg"><label>Origem *</label><input id="a-orig" placeholder="Ex: 66.93"/></div>
+    <div class="mf"><label>Sala *</label><select id="a-sala"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+    <div class="mf"><label>Linhagem *</label><select id="a-lin"><option value="">—</option><option>Swiss</option><option>Balb/c</option><option>C57Bl/6</option><option>NSG</option><option>Townes</option></select></div>
   </div>
   <div class="r2">
-    <div class="mfg"><label>Sexo *</label><select id="a-sexo"><option value="">Selecione</option><option>Macho</option><option>Fêmea</option></select></div>
-    <div class="mfg"><label>Quantidade *</label><input type="number" id="a-qtd" min="1" placeholder="0"/></div>
+    <div class="mf"><label>Nascimento *</label><input type="date" id="a-nasc"/></div>
+    <div class="mf"><label>Origem *</label><input id="a-orig" placeholder="Ex: 66.93"/></div>
   </div>
-  <div class="merr" id="a-err"></div>
-  <div class="mbtns">
-    <button class="btn-cancel" onclick="closeM('m-add')">Cancelar</button>
-    <button class="btn-save" id="a-btn" onclick="saveAdd()">Salvar</button>
+  <div class="r2">
+    <div class="mf"><label>Sexo *</label><select id="a-sexo"><option value="">—</option><option>Macho</option><option>Fêmea</option></select></div>
+    <div class="mf"><label>Quantidade *</label><input type="number" id="a-qtd" min="1" placeholder="0"/></div>
   </div>
-</div>
-</div>
+  <div class="me" id="a-err"></div>
+  <div class="mb"><button class="bc" onclick="closeM('m-add')">Cancelar</button><button class="bv" id="a-btn" onclick="saveAdd()">Salvar</button></div>
+</div></div>
 
-<div class="overlay" id="m-edit">
-<div class="modal">
+<!-- MODAL EDITAR -->
+<div class="ov" id="m-edit"><div class="mo">
   <h3>Editar mini-isolador</h3>
-  <div class="mfg"><label>Número da caixa</label><input id="e-num" disabled style="opacity:0.5;background:#f5f5f3"/></div>
+  <div class="mf"><label>Número</label><input id="e-num" disabled style="opacity:0.5"/></div>
   <div class="r2">
-    <div class="mfg"><label>Sala *</label><select id="e-sala"><option value="">Selecione</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
-    <div class="mfg"><label>Linhagem *</label><select id="e-lin"><option value="">Selecione</option><option>Swiss</option><option>Balb/c</option><option>C57Bl/6</option><option>NSG</option><option>Townes</option></select></div>
-  </div>
-  <div class="r2">
-    <div class="mfg"><label>Data de nascimento *</label><input type="date" id="e-nasc"/></div>
-    <div class="mfg"><label>Origem *</label><input id="e-orig"/></div>
+    <div class="mf"><label>Sala *</label><select id="e-sala"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+    <div class="mf"><label>Linhagem *</label><select id="e-lin"><option value="">—</option><option>Swiss</option><option>Balb/c</option><option>C57Bl/6</option><option>NSG</option><option>Townes</option></select></div>
   </div>
   <div class="r2">
-    <div class="mfg"><label>Sexo *</label><select id="e-sexo"><option value="">Selecione</option><option>Macho</option><option>Fêmea</option></select></div>
-    <div class="mfg"><label>Quantidade *</label><input type="number" id="e-qtd" min="1"/></div>
+    <div class="mf"><label>Nascimento *</label><input type="date" id="e-nasc"/></div>
+    <div class="mf"><label>Origem *</label><input id="e-orig"/></div>
   </div>
-  <div class="merr" id="e-err"></div>
-  <div class="mbtns">
-    <button class="btn-cancel" onclick="closeM('m-edit')">Cancelar</button>
-    <button class="btn-save" id="e-btn" onclick="saveEdit()">Salvar alterações</button>
+  <div class="r2">
+    <div class="mf"><label>Sexo *</label><select id="e-sexo"><option value="">—</option><option>Macho</option><option>Fêmea</option></select></div>
+    <div class="mf"><label>Quantidade *</label><input type="number" id="e-qtd" min="1"/></div>
   </div>
-</div>
-</div>
+  <div class="me" id="e-err"></div>
+  <div class="mb"><button class="bc" onclick="closeM('m-edit')">Cancelar</button><button class="bv" id="e-btn" onclick="saveEdit()">Salvar</button></div>
+</div></div>
 
-<div class="overlay" id="m-occ">
-<div class="modal" style="max-width:340px">
+<!-- MODAL OCC -->
+<div class="ov" id="m-occ"><div class="mo" style="max-width:320px">
   <h3>Adicionar ocorrência</h3>
-  <p id="occ-lbl" style="font-size:11px;color:var(--muted);margin-bottom:10px;margin-top:-6px"></p>
-  <div class="mfg"><label>Tipo *</label>
-    <select id="o-tipo">
-      <option value="">Selecione</option>
-      <option>Acasalamento</option><option>Descarte</option><option>Doença</option>
-      <option>Óbito</option><option>Pedido</option><option>Raquítico</option>
-      <option>Transferência</option><option>Outros</option>
-    </select>
+  <p id="occ-lbl" style="font-size:10px;color:var(--mu);margin-bottom:10px;margin-top:-6px"></p>
+  <div class="mf"><label>Tipo *</label>
+    <select id="o-tipo"><option value="">—</option><option>Acasalamento</option><option>Descarte</option><option>Doença</option><option>Óbito</option><option>Pedido</option><option>Raquítico</option><option>Transferência</option><option>Outros</option></select>
   </div>
   <div class="r2">
-    <div class="mfg"><label>Data *</label><input type="date" id="o-data"/></div>
-    <div class="mfg"><label>Quantidade *</label><input type="number" id="o-qtd" min="1" placeholder="0"/></div>
+    <div class="mf"><label>Data *</label><input type="date" id="o-data"/></div>
+    <div class="mf"><label>Quantidade *</label><input type="number" id="o-qtd" min="1" placeholder="0"/></div>
   </div>
-  <div class="merr" id="o-err"></div>
-  <div class="mbtns">
-    <button class="btn-cancel" onclick="closeM('m-occ')">Cancelar</button>
-    <button class="btn-save" id="o-btn" onclick="saveOcc()">Adicionar</button>
-  </div>
-</div>
-</div>
+  <div class="me" id="o-err"></div>
+  <div class="mb"><button class="bc" onclick="closeM('m-occ')">Cancelar</button><button class="bv" id="o-btn" onclick="saveOcc()">Adicionar</button></div>
+</div></div>
+
 <script>
 const API=window.location.origin+'/api';
 const USERS=[{u:'admin',p:'1234',name:'Admin'},{u:'biot',p:'bio2024',name:'Biotério'}];
 let me=null,allData=[],editId=null,occId=null;
+
 function doLogin(){
   const u=document.getElementById('lu').value.trim(),p=document.getElementById('lp').value;
   const f=USERS.find(x=>x.u===u&&x.p===p);
@@ -298,118 +312,86 @@ function switchTab(t){
   document.getElementById('pane-arch').style.display=t==='arch'?'block':'none';
   if(t==='arch')loadArch();
 }
-async function api(path,method='GET',body=null){
+async function req(path,method='GET',body=null){
   const opts={method,headers:{'Content-Type':'application/json'}};
   if(body)opts.body=JSON.stringify(body);
   const r=await fetch(API+path,opts);
   if(r.status===204)return null;
-  const json=await r.json();
-  if(!r.ok)throw new Error(json.error||'Erro desconhecido');
-  return json;
+  const j=await r.json();
+  if(!r.ok)throw new Error(j.error||'Erro');
+  return j;
 }
 async function loadData(){
   const sala=document.getElementById('fSala').value,lin=document.getElementById('fLin').value,sexo=document.getElementById('fSexo').value;
-  document.getElementById('loading-main').style.display='block';
+  document.getElementById('ld-main').style.display='block';
   document.getElementById('main-tbl').style.display='none';
   document.getElementById('empty-main').style.display='none';
   let qs='?arquivado=false';
   if(sala)qs+='&sala='+sala;
   if(lin)qs+='&linhagem='+encodeURIComponent(lin);
   if(sexo)qs+='&sexo='+encodeURIComponent(sexo);
-  try{allData=await api('/isoladores'+qs);renderStats(allData);renderTable(allData);}
+  try{allData=await req('/isoladores'+qs);renderStats(allData);renderTable(allData);}
   catch(e){toast(e.message,'err');}
-  finally{document.getElementById('loading-main').style.display='none';}
+  finally{document.getElementById('ld-main').style.display='none';}
 }
 async function loadArch(){
-  document.getElementById('loading-arch').style.display='block';
+  document.getElementById('ld-arch').style.display='block';
   document.getElementById('arch-tbl').style.display='none';
   document.getElementById('empty-arch').style.display='none';
-  try{const data=await api('/isoladores?arquivado=true');renderArch(data);}
+  try{const d=await req('/isoladores?arquivado=true');renderArch(d);}
   catch(e){toast(e.message,'err');}
-  finally{document.getElementById('loading-arch').style.display='none';}
+  finally{document.getElementById('ld-arch').style.display='none';}
 }
-function renderStats(data){
-  const total=data.reduce((s,r)=>s+r.quantidade,0);
-  const saldo=data.reduce((s,r)=>s+(r.saldo||0),0);
-  const zero=data.filter(r=>(r.saldo||0)===0).length;
-  document.getElementById('st-cx').textContent=data.length;
-  document.getElementById('st-ti').textContent=total;
-  document.getElementById('st-sa').textContent=saldo;
-  document.getElementById('st-ze').textContent=zero;
+function renderStats(d){
+  document.getElementById('st-cx').textContent=d.length;
+  document.getElementById('st-ti').textContent=d.reduce((s,r)=>s+r.quantidade,0);
+  document.getElementById('st-sa').textContent=d.reduce((s,r)=>s+(r.saldo||0),0);
+  document.getElementById('st-ze').textContent=d.filter(r=>(r.saldo||0)===0).length;
 }
-function fmtD(d){if(!d)return '';const p=d.split('T')[0].split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function fd(d){if(!d)return '';const p=d.split('T')[0].split('-');return p[2]+'/'+p[1]+'/'+p[0];}
 function renderTable(data){
-  const tbl=document.getElementById('main-tbl'),thead=document.getElementById('thead-main'),tbody=document.getElementById('tbody-main'),empty=document.getElementById('empty-main');
-  if(!data.length){empty.style.display='block';return;}
- thead.innerHTML=`<tr>
- <th style="text-align:left;width:70px">Caixa</th>
-    <th style="width:40px">Sala</th><th style="width:70px">Linhagem</th>
-    <th style="width:80px">Nascimento</th><th style="width:70px">Origem</th>
-    <th colspan="2" class="th-qtd">Quantidade</th>
-    <th class="td-sep"></th>
-    <th style="background:#FFF8F0;color:#712B13">Ocorrências</th>
-    <th class="th-saldo">Saldo</th>
-    <th>Ações</th>
+  const tbl=document.getElementById('main-tbl'),th=document.getElementById('thead-main'),tb=document.getElementById('tbody-main'),em=document.getElementById('empty-main');
+  if(!data.length){em.style.display='block';return;}
+  th.innerHTML=`<tr>
+    <th rowspan="2" style="text-align:left">Caixa</th>
+    <th rowspan="2">Sala</th>
+    <th rowspan="2">Linhagem</th>
+    <th rowspan="2">Nasc.</th>
+    <th rowspan="2">Origem</th>
+    <th colspan="2" class="tq">Qtd</th>
+    <th rowspan="2" class="ts"></th>
+    <th rowspan="2" style="background:#FFF8F0;color:#712B13">Ocorrências</th>
+    <th rowspan="2" class="tsa">Saldo</th>
+    <th rowspan="2">Ações</th>
   </tr>
   <tr>
-    <th></th><th></th><th></th><th></th><th></th>
-    <th class="th-qtd">Macho</th><th class="th-qtd">Fêmea</th>
-    <th class="td-sep"></th>
-    <th style="background:#FFF8F0;font-size:9px;color:var(--muted)">+ para adicionar</th>
-    <th class="th-saldo"></th><th></th>
-  </tr>
-    <th>Sala</th><th>Linhagem</th><th>Nascimento</th><th>Origem</th>
-    <th colspan="2" class="th-qtd">Quantidade</th>
-    <th class="td-sep"></th>
-    <th style="background:#FFF8F0;color:#712B13">Ocorrências</th>
-    <th class="th-saldo">Saldo</th>
-    <th>Ações</th>
-  </tr>
-  <tr>
-    <th></th><th></th><th></th><th></th><th></th>
-    <th class="th-qtd">Macho</th><th class="th-qtd">Fêmea</th>
-    <th class="td-sep"></th>
-    <th style="background:#FFF8F0;font-size:9px;color:var(--muted)">+ para adicionar</th>
-    <th class="th-saldo"></th><th></th>
+    <th class="tq">M</th>
+    <th class="tq">F</th>
   </tr>`;
-  tbody.innerHTML=data.map(row=>{
-    const saldo=row.saldo??0,isMacho=row.sexo==='Macho',occs=row.ocorrencias||[];
-    const occHtml=occs.map(o=>`<div class="occ-tag">
-      <span class="ot">${o.tipo}</span>
-      <span class="od">${fmtD(o.data_occ)}</span>
-      <span class="oq">${o.quantidade}</span>
-      <button class="del-occ" onclick="deleteOcc(${o.id})">×</button>
-    </div>`).join('');
-    const archBtn=saldo===0&&!row.arquivado?`<button class="btn-sm btn-arq" onclick="archiveRow(${row.id})">Arquivar</button>`:'';
+  tb.innerHTML=data.map(row=>{
+    const s=row.saldo??0,m=row.sexo==='Macho',o=row.ocorrencias||[];
+    const oh=o.map(x=>`<div class="ot2"><span class="tp">${x.tipo}</span><span class="dt">${fd(x.data_occ)}</span><span class="qt">${x.quantidade}</span><button class="dx" onclick="delOcc(${x.id})">×</button></div>`).join('');
     return `<tr>
-      <td class="td-caixa">${row.numero}</td>
-      <td>${row.sala}</td><td>${row.linhagem}</td><td>${fmtD(row.data_nasc)}</td>
-      <td>${row.origem}</td>
-      <td class="td-macho">${isMacho?row.quantidade:''}</td>
-      <td class="td-femea">${!isMacho?row.quantidade:''}</td>
-      <td class="td-sep"></td>
-      <td class="td-occs">
-        <div class="occ-list">${occHtml}</div>
-        ${!row.arquivado?`<button class="btn-add-occ" onclick="openOcc(${row.id},'${row.numero}',${saldo})">+ ocorrência</button>`:''}
-      </td>
-      <td class="${saldo===0?'saldo-r':'saldo-v'}">${saldo}</td>
-      <td><div class="action-btns"><button class="btn-sm" onclick="openEdit(${row.id})">Editar</button>${archBtn}</div></td>
+      <td class="tc">${row.numero}</td>
+      <td>${row.sala}</td><td>${row.linhagem}</td><td>${fd(row.data_nasc)}</td><td>${row.origem}</td>
+      <td class="tm">${m?row.quantidade:''}</td>
+      <td class="tf">${!m?row.quantidade:''}</td>
+      <td class="ts"></td>
+      <td class="oc"><div class="ol">${oh}</div>${!row.arquivado?`<button class="ba" onclick="openOcc(${row.id},'${row.numero}',${s})">+ ocorrência</button>`:''}</td>
+      <td class="${s===0?'sr':'sv2'}">${s}</td>
+      <td><div class="ac"><button class="bs" onclick="openEdit(${row.id})">Editar</button>${s===0&&!row.arquivado?`<button class="bs bx" onclick="archRow(${row.id})">Arquivar</button>`:''}</div></td>
     </tr>`;
   }).join('');
   tbl.style.display='table';
 }
 function renderArch(data){
-  const tbl=document.getElementById('arch-tbl'),tbody=document.getElementById('tbody-arch'),empty=document.getElementById('empty-arch');
-  if(!data.length){empty.style.display='block';return;}
-  tbody.innerHTML=data.map(row=>`<tr>
-    <td style="text-align:left;padding:4px 6px;border:1px solid var(--border);font-weight:600">${row.numero}</td>
-    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.sala}</td>
-    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.linhagem}</td>
-    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${fmtD(row.data_nasc)}</td>
-    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.origem}</td>
-    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.sexo}</td>
-    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.quantidade}</td>
-    <td style="padding:4px 6px;border:1px solid var(--border);font-size:10px">${(row.ocorrencias||[]).map(o=>o.tipo+' ('+o.quantidade+')').join(', ')||'—'}</td>
+  const tbl=document.getElementById('arch-tbl'),tb=document.getElementById('tbody-arch'),em=document.getElementById('empty-arch');
+  if(!data.length){em.style.display='block';return;}
+  tb.innerHTML=data.map(r=>`<tr>
+    <td style="text-align:left;font-weight:600">${r.numero}</td>
+    <td>${r.sala}</td><td>${r.linhagem}</td><td>${fd(r.data_nasc)}</td>
+    <td>${r.origem}</td><td>${r.sexo}</td><td>${r.quantidade}</td>
+    <td style="font-size:10px">${(r.ocorrencias||[]).map(o=>o.tipo+' ('+o.quantidade+')').join(', ')||'—'}</td>
   </tr>`).join('');
   tbl.style.display='table';
 }
@@ -423,7 +405,7 @@ async function saveAdd(){
   const err=document.getElementById('a-err');err.style.display='none';
   if(!num||!sala||!lin||!nasc||!orig||!sexo||qtd<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
   const btn=document.getElementById('a-btn');btn.disabled=true;btn.textContent='Salvando...';
-  try{await api('/isoladores','POST',{numero:num,sala,linhagem:lin,data_nasc:nasc,origem:orig,sexo,quantidade:qtd});closeM('m-add');toast('Cadastrado!','ok');loadData();}
+  try{await req('/isoladores','POST',{numero:num,sala,linhagem:lin,data_nasc:nasc,origem:orig,sexo,quantidade:qtd});closeM('m-add');toast('Cadastrado!','ok');loadData();}
   catch(e){err.textContent=e.message;err.style.display='block';}
   finally{btn.disabled=false;btn.textContent='Salvar';}
 }
@@ -444,16 +426,14 @@ async function saveEdit(){
   const err=document.getElementById('e-err');err.style.display='none';
   if(!sala||!lin||!nasc||!orig||!sexo||qtd<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
   const btn=document.getElementById('e-btn');btn.disabled=true;btn.textContent='Salvando...';
-  try{await api('/isoladores/'+editId,'PUT',{sala,linhagem:lin,data_nasc:nasc,origem:orig,sexo,quantidade:qtd});closeM('m-edit');toast('Atualizado!','ok');loadData();}
+  try{await req('/isoladores/'+editId,'PUT',{sala,linhagem:lin,data_nasc:nasc,origem:orig,sexo,quantidade:qtd});closeM('m-edit');toast('Atualizado!','ok');loadData();}
   catch(e){err.textContent=e.message;err.style.display='block';}
-  finally{btn.disabled=false;btn.textContent='Salvar alterações';}
+  finally{btn.disabled=false;btn.textContent='Salvar';}
 }
 function openOcc(id,numero,saldo){
   occId=id;
   document.getElementById('occ-lbl').textContent='Caixa: '+numero+' — Saldo: '+saldo;
-  document.getElementById('o-tipo').value='';
-  document.getElementById('o-data').value='';
-  document.getElementById('o-qtd').value='';
+  ['o-tipo','o-data','o-qtd'].forEach(x=>document.getElementById(x).value='');
   document.getElementById('o-err').style.display='none';openM('m-occ');
 }
 async function saveOcc(){
@@ -461,26 +441,26 @@ async function saveOcc(){
   const err=document.getElementById('o-err');err.style.display='none';
   if(!tipo||!data||qtd<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
   const btn=document.getElementById('o-btn');btn.disabled=true;btn.textContent='Salvando...';
-  try{await api('/ocorrencias','POST',{isolador_id:occId,tipo,data_occ:data,quantidade:qtd});closeM('m-occ');toast('Ocorrência registrada!','ok');loadData();}
+  try{await req('/ocorrencias','POST',{isolador_id:occId,tipo,data_occ:data,quantidade:qtd});closeM('m-occ');toast('Ocorrência registrada!','ok');loadData();}
   catch(e){err.textContent=e.message;err.style.display='block';}
   finally{btn.disabled=false;btn.textContent='Adicionar';}
 }
-async function deleteOcc(id){
+async function delOcc(id){
   if(!confirm('Remover esta ocorrência?'))return;
-  try{await api('/ocorrencias','DELETE',{id});toast('Removida.','ok');loadData();}
+  try{await req('/ocorrencias','DELETE',{id});toast('Removida.','ok');loadData();}
   catch(e){toast(e.message,'err');}
 }
-async function archiveRow(id){
+async function archRow(id){
   if(!confirm('Arquivar este mini-isolador?'))return;
-  try{await api('/isoladores/'+id,'PATCH',{arquivado:true});toast('Arquivado!','ok');loadData();}
+  try{await req('/isoladores/'+id,'PATCH',{arquivado:true});toast('Arquivado!','ok');loadData();}
   catch(e){toast(e.message,'err');}
 }
 function openM(id){document.getElementById(id).classList.add('open');}
 function closeM(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.overlay').forEach(ov=>{ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');});});
+document.querySelectorAll('.ov').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});});
 function toast(msg,type='ok'){
-  const c=document.getElementById('toast-container'),el=document.createElement('div');
-  el.className='toast-item '+type;el.textContent=msg;c.appendChild(el);setTimeout(()=>el.remove(),3500);
+  const c=document.getElementById('tc'),el=document.createElement('div');
+  el.className='ti '+type;el.textContent=msg;c.appendChild(el);setTimeout(()=>el.remove(),3500);
 }
 </script>
 </body>
