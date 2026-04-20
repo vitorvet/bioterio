@@ -341,8 +341,18 @@ function fmtD(d){if(!d)return '';const p=d.split('T')[0].split('-');return p[2]+
 function renderTable(data){
   const tbl=document.getElementById('main-tbl'),thead=document.getElementById('thead-main'),tbody=document.getElementById('tbody-main'),empty=document.getElementById('empty-main');
   if(!data.length){empty.style.display='block';return;}
-  thead.innerHTML=`<tr>
-    <th style="text-align:left">Caixa</th>
+ thead.innerHTML=`<tr>
+    <th style="text-align:left;width:70px">Caixa</th>
+    <th style="width:40px">Sala</th>
+    <th style="width:70px">Linhagem</th>
+    <th style="width:80px">Nascimento</th>
+    <th style="width:70px">Origem</th>
+    <th colspan="2" class="th-qtd" style="width:90px">Quantidade</th>
+    <th class="td-sep"></th>
+    <th style="background:#FFF8F0;color:#712B13;width:160px">Ocorrências</th>
+    <th class="th-saldo" style="width:50px">Saldo</th>
+    <th style="width:70px">Ações</th>
+  </tr>
     <th>Sala</th><th>Linhagem</th><th>Nascimento</th><th>Origem</th>
     <th colspan="2" class="th-qtd">Quantidade</th>
     <th class="td-sep"></th>
