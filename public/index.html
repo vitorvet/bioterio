@@ -150,7 +150,7 @@ tr:hover td{filter:brightness(0.97)}
     <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
     <h1>Biotério</h1><p>Gestão de estoque de animais</p>
   </div>
-  <div class="fg"><label>Usuário</label><input id="lu" type="text" placeholder="admin"/></div>
+  <div class="fg"><label>Usuário</label><input id="lu" type="email" placeholder="seu@email.com"/></div>
   <div class="fg"><label>Senha</label><input id="lp" type="password" placeholder="••••"/></div>
   <button class="bl" onclick="doLogin()">Entrar</button>
   <div class="le" id="lerr">Usuário ou senha incorretos.</div>
@@ -290,20 +290,32 @@ tr:hover td{filter:brightness(0.97)}
 
 <script>
 const API=window.location.origin+'/api';
-const USERS=[{u:'admin',p:'1234',name:'Admin'},{u:'biot',p:'bio2024',name:'Biotério'}];
+const SUPA_URL='https://ptpcpazpxwsoquottfkk.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0cGNwYXpweHdzb3F1b3R0ZmtrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTU1MzcsImV4cCI6MjA5MjA3MTUzN30.YjoZXVZOfkE5lCrweIMt2TCyWYAPWEamMemAKnARHxA';
 let me=null,allData=[],editId=null,occId=null;
 
-function doLogin(){
-  const u=document.getElementById('lu').value.trim(),p=document.getElementById('lp').value;
-  const f=USERS.find(x=>x.u===u&&x.p===p);
-  if(!f){document.getElementById('lerr').style.display='block';return;}
-  me=f;document.getElementById('lerr').style.display='none';
-  document.getElementById('uav').textContent=f.name.substring(0,2).toUpperCase();
-  document.getElementById('uname').textContent=f.name;
+async function doLogin(){
+  const email=document.getElementById('lu').value.trim();
+  const pass=document.getElementById('lp').value;
+  const res=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+    body:JSON.stringify({email,password:pass})
+  });
+  const data=await res.json();
+  if(!res.ok){document.getElementById('lerr').style.display='block';return;}
+  me=data.user;
+  document.getElementById('lerr').style.display='none';
+  const nome=data.user.email.split('@')[0];
+  document.getElementById('uav').textContent=nome.substring(0,2).toUpperCase();
+  document.getElementById('uname').textContent=nome;
   showS('s-main');loadData();
 }
 document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-function doLogout(){me=null;document.getElementById('lu').value='';document.getElementById('lp').value='';showS('s-login');}
+async function doLogout(){
+  await fetch(SUPA_URL+'/auth/v1/logout',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(me?.access_token||'')}});
+  me=null;document.getElementById('lu').value='';document.getElementById('lp').value='';showS('s-login');
+}
 function showS(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
 function switchTab(t){
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
