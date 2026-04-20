@@ -1,4 +1,3 @@
-cat > ~/Desktop/bioterio/public/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -21,105 +20,102 @@ button{cursor:pointer}
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)}
 .login-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:2.5rem 2rem;width:360px}
 .login-logo{text-align:center;margin-bottom:2rem}
-.login-logo .ic{width:52px;height:52px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
-.login-logo .ic svg{width:26px;height:26px;color:var(--green-d)}
-.login-logo h1{font-size:18px;font-weight:600}
-.login-logo p{font-size:12px;color:var(--muted);margin-top:3px}
-.fg{margin-bottom:14px}
-.fg label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px;font-weight:500}
-.fg input{width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px}
+.login-logo .ic{width:48px;height:48px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.login-logo .ic svg{width:24px;height:24px;color:var(--green-d)}
+.login-logo h1{font-size:17px;font-weight:600}
+.login-logo p{font-size:11px;color:var(--muted);margin-top:3px}
+.fg{margin-bottom:12px}
+.fg label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:500}
+.fg input{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px}
 .fg input:focus{outline:none;border-color:var(--green)}
-.btn-login{width:100%;padding:10px;background:var(--green);color:#fff;border:none;border-radius:7px;font-size:14px;font-weight:600;margin-top:6px}
+.btn-login{width:100%;padding:9px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;margin-top:4px}
 .btn-login:hover{background:var(--green-d)}
-.lerr{color:#c0392b;font-size:12px;margin-top:8px;text-align:center;display:none}
-.hint{font-size:11px;color:var(--muted);text-align:center;margin-top:12px}
-.topbar{height:48px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:10px;position:sticky;top:0;z-index:50}
-.topbar .brand{display:flex;align-items:center;gap:8px;flex:1}
-.topbar .brand .ic{width:28px;height:28px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center}
-.topbar .brand .ic svg{width:15px;height:15px;color:var(--green-d)}
-.topbar .brand h2{font-size:14px;font-weight:600}
-.topbar .right{display:flex;align-items:center;gap:8px}
-.uav{width:26px;height:26px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--green-d)}
-.btn-logout{font-size:11px;padding:3px 10px;border:1px solid var(--border);border-radius:5px;background:none;color:var(--muted)}
-.btn-logout:hover{background:var(--bg)}
-.tabs{display:flex;border-bottom:1px solid var(--border);background:var(--white);padding:0 16px}
-.tab{padding:8px 14px;font-size:12px;font-weight:500;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.lerr{color:#c0392b;font-size:11px;margin-top:6px;text-align:center;display:none}
+.hint{font-size:11px;color:var(--muted);text-align:center;margin-top:10px}
+.topbar{height:44px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:8px;position:sticky;top:0;z-index:50}
+.topbar .brand{display:flex;align-items:center;gap:7px;flex:1}
+.topbar .brand .ic{width:26px;height:26px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center}
+.topbar .brand .ic svg{width:14px;height:14px;color:var(--green-d)}
+.topbar .brand h2{font-size:13px;font-weight:600}
+.topbar .right{display:flex;align-items:center;gap:7px}
+.uav{width:24px;height:24px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--green-d)}
+.btn-logout{font-size:10px;padding:2px 8px;border:1px solid var(--border);border-radius:4px;background:none;color:var(--muted)}
+.tabs{display:flex;border-bottom:1px solid var(--border);background:var(--white);padding:0 14px}
+.tab{padding:7px 12px;font-size:11px;font-weight:500;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
 .tab.active{color:var(--green);border-bottom-color:var(--green)}
-.toolbar{padding:8px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--white)}
-.toolbar label{font-size:11px;color:var(--muted);font-weight:500}
-.toolbar select{padding:4px 8px;border:1px solid var(--border);border-radius:5px;background:var(--white);font-size:11px}
-.toolbar select:focus{outline:none;border-color:var(--green)}
+.toolbar{padding:7px 14px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--white)}
+.toolbar label{font-size:10px;color:var(--muted);font-weight:500}
+.toolbar select{padding:3px 6px;border:1px solid var(--border);border-radius:4px;background:var(--white);font-size:11px}
 .sp{flex:1}
-.btn-new{display:flex;align-items:center;gap:5px;padding:5px 12px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:600}
+.btn-new{display:flex;align-items:center;gap:4px;padding:4px 10px;background:var(--green);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600}
 .btn-new:hover{background:var(--green-d)}
-.btn-new svg{width:12px;height:12px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
-.stat{background:var(--white);border:1px solid var(--border);border-radius:7px;padding:8px 12px}
-.stat .sl{font-size:10px;color:var(--muted);font-weight:500;margin-bottom:2px}
-.stat .sv{font-size:20px;font-weight:700}
+.btn-new svg{width:11px;height:11px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:8px 14px;background:var(--bg);border-bottom:1px solid var(--border)}
+.stat{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:7px 10px}
+.stat .sl{font-size:9px;color:var(--muted);font-weight:500;margin-bottom:2px;text-transform:uppercase}
+.stat .sv{font-size:18px;font-weight:700}
 .stat.g .sv{color:var(--green-d)}.stat.r .sv{color:#c0392b}.stat.b .sv{color:#185FA5}
-.legend{display:flex;gap:12px;padding:5px 16px;border-bottom:1px solid var(--border);background:var(--white);flex-wrap:wrap}
-.li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted)}
-.lbox{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+.legend{display:flex;gap:10px;padding:4px 14px;border-bottom:1px solid var(--border);background:var(--white);flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--muted)}
+.lbox{width:11px;height:11px;border-radius:2px;flex-shrink:0}
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;table-layout:auto}
-thead tr th{padding:5px 6px;font-size:10px;font-weight:600;color:var(--muted);border:1px solid var(--border);background:var(--th-bg);text-align:center;white-space:nowrap}
-td{padding:5px 6px;border:1px solid var(--border);font-size:11px;text-align:center;vertical-align:middle}
-.td-caixa{font-weight:600;text-align:left;background:#fafaf8;white-space:nowrap}
+table{border-collapse:collapse;width:100%}
+th{padding:4px 6px;font-size:10px;font-weight:600;color:var(--muted);border:1px solid var(--border);background:var(--th-bg);text-align:center;white-space:nowrap}
+td{padding:4px 6px;border:1px solid var(--border);font-size:11px;text-align:center;vertical-align:middle;white-space:nowrap}
+.td-caixa{font-weight:600;text-align:left;background:#fafaf8}
 .td-macho{background:var(--blue-l)}.td-femea{background:var(--pink-l)}
 .td-sep{background:#1a1a1a;width:3px;padding:0}
 .saldo-v{background:var(--saldo-verde);color:#fff;font-weight:700}
 .saldo-r{background:var(--red);color:#fff;font-weight:700}
 .th-qtd{background:#D6E4F0;color:#0C447C}
 .th-saldo{background:#D5E8D4;color:#27500A}
-tr:hover td{filter:brightness(0.975)}
-.td-occs{background:#FFF8F0;text-align:left;padding:4px 6px;min-width:140px;max-width:220px}
-.occ-list{display:flex;flex-direction:column;gap:2px;margin-bottom:3px}
-.occ-tag{display:inline-flex;align-items:center;gap:3px;background:#fff;border:1px solid #FAC775;border-radius:4px;padding:1px 5px;font-size:10px;white-space:nowrap}
+tr:hover td{filter:brightness(0.97)}
+.td-occs{background:#FFF8F0;text-align:left;padding:3px 5px;white-space:normal;min-width:120px;max-width:180px}
+.occ-list{display:flex;flex-direction:column;gap:2px;margin-bottom:2px}
+.occ-tag{display:inline-flex;align-items:center;gap:2px;background:#fff;border:1px solid #FAC775;border-radius:3px;padding:1px 4px;font-size:10px;white-space:nowrap}
 .occ-tag .ot{font-weight:600;color:#712B13}
 .occ-tag .od{color:var(--muted)}
 .occ-tag .oq{color:#0F6E56;font-weight:600}
-.occ-tag .del-occ{background:none;border:none;color:#ccc;font-size:12px;padding:0 0 0 2px;line-height:1;cursor:pointer}
+.occ-tag .del-occ{background:none;border:none;color:#ccc;font-size:11px;padding:0 0 0 2px;cursor:pointer}
 .occ-tag .del-occ:hover{color:#c0392b}
-.btn-add-occ{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;background:var(--green-l);border:1px solid #9FE1CB;border-radius:4px;color:var(--green-d);font-size:10px;font-weight:600;cursor:pointer}
+.btn-add-occ{display:inline-flex;align-items:center;gap:2px;padding:1px 6px;background:var(--green-l);border:1px solid #9FE1CB;border-radius:3px;color:var(--green-d);font-size:10px;font-weight:600;cursor:pointer}
 .btn-add-occ:hover{background:#9FE1CB}
 .action-btns{display:flex;flex-direction:column;gap:2px;align-items:center}
-.btn-sm{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid var(--border);background:var(--white);color:var(--text)}
+.btn-sm{font-size:10px;padding:2px 6px;border-radius:3px;border:1px solid var(--border);background:var(--white);color:var(--text)}
 .btn-sm:hover{background:var(--bg)}
 .btn-arq{background:#FCEBEB;color:#A32D2D;border-color:#F7C1C1}
 .btn-arq:hover{background:#F09595}
-.empty{text-align:center;padding:3rem;color:var(--muted)}
-.loading{text-align:center;padding:2rem;color:var(--muted)}
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+.empty{text-align:center;padding:2rem;color:var(--muted)}
+.loading{text-align:center;padding:1.5rem;color:var(--muted)}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:5px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center;padding:1rem}
 .overlay.open{display:flex}
-.modal{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:1.5rem;width:100%;max-width:460px;max-height:90vh;overflow-y:auto}
-.modal h3{font-size:14px;font-weight:600;margin-bottom:1rem;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.mfg{margin-bottom:10px}
-.mfg label{display:block;font-size:11px;color:var(--muted);margin-bottom:3px;font-weight:500}
-.mfg input,.mfg select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:5px;font-size:12px}
+.modal{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:1.25rem;width:100%;max-width:440px;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:13px;font-weight:600;margin-bottom:.9rem;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mfg{margin-bottom:8px}
+.mfg label{display:block;font-size:10px;color:var(--muted);margin-bottom:3px;font-weight:500}
+.mfg input,.mfg select{width:100%;padding:5px 7px;border:1px solid var(--border);border-radius:5px;font-size:11px}
 .mfg input:focus,.mfg select:focus{outline:none;border-color:var(--green)}
-.merr{color:#c0392b;font-size:11px;margin-top:5px;display:none;padding:5px 8px;background:#FCEBEB;border-radius:4px}
-.mbtns{display:flex;justify-content:flex-end;gap:8px;margin-top:1rem;padding-top:10px;border-top:1px solid var(--border)}
-.btn-cancel{padding:6px 14px;border:1px solid var(--border);border-radius:5px;background:none;font-size:12px}
+.merr{color:#c0392b;font-size:10px;margin-top:4px;display:none;padding:4px 7px;background:#FCEBEB;border-radius:4px}
+.mbtns{display:flex;justify-content:flex-end;gap:7px;margin-top:.9rem;padding-top:9px;border-top:1px solid var(--border)}
+.btn-cancel{padding:5px 12px;border:1px solid var(--border);border-radius:5px;background:none;font-size:11px}
 .btn-cancel:hover{background:var(--bg)}
-.btn-save{padding:6px 16px;background:var(--green);color:#fff;border:none;border-radius:5px;font-size:12px;font-weight:600}
+.btn-save{padding:5px 14px;background:var(--green);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600}
 .btn-save:hover{background:var(--green-d)}
 .btn-save:disabled{opacity:0.6;cursor:not-allowed}
-.arch-wrap{padding:16px}
-.arch-title{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:10px}
-.toast{position:fixed;bottom:20px;right:20px;z-index:999;display:flex;flex-direction:column;gap:6px}
-.toast-item{background:var(--text);color:#fff;padding:8px 14px;border-radius:7px;font-size:12px;animation:fadeIn .2s;max-width:300px}
+.arch-wrap{padding:14px}
+.arch-title{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:8px}
+.toast{position:fixed;bottom:16px;right:16px;z-index:999;display:flex;flex-direction:column;gap:5px}
+.toast-item{background:var(--text);color:#fff;padding:7px 12px;border-radius:6px;font-size:11px;animation:fadeIn .2s;max-width:260px}
 .toast-item.err{background:#c0392b}.toast-item.ok{background:var(--green-d)}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
 <div id="app">
-
-<div class="screen active" id="s-login">
+  <div class="screen active" id="s-login">
 <div class="login-wrap">
 <div class="login-card">
   <div class="login-logo">
@@ -155,19 +151,11 @@ tr:hover td{filter:brightness(0.975)}
   <div id="pane-ativo">
     <div class="toolbar">
       <label>Sala:</label>
-      <select id="fSala" onchange="loadData()">
-        <option value="">Todas</option>
-        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
-      </select>
+      <select id="fSala" onchange="loadData()"><option value="">Todas</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
       <label>Linhagem:</label>
-      <select id="fLin" onchange="loadData()">
-        <option value="">Todas</option>
-        <option>Swiss</option><option>Balb/c</option><option>C57Bl/6</option><option>NSG</option><option>Townes</option>
-      </select>
+      <select id="fLin" onchange="loadData()"><option value="">Todas</option><option>Swiss</option><option>Balb/c</option><option>C57Bl/6</option><option>NSG</option><option>Townes</option></select>
       <label>Sexo:</label>
-      <select id="fSexo" onchange="loadData()">
-        <option value="">Todos</option><option>Macho</option><option>Fêmea</option>
-      </select>
+      <select id="fSexo" onchange="loadData()"><option value="">Todos</option><option>Macho</option><option>Fêmea</option></select>
       <div class="sp"></div>
       <button class="btn-new" onclick="openAdd()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -176,7 +164,7 @@ tr:hover td{filter:brightness(0.975)}
     </div>
     <div class="stats">
       <div class="stat b"><div class="sl">Caixas ativas</div><div class="sv" id="st-cx">—</div></div>
-      <div class="stat">  <div class="sl">Total inicial</div><div class="sv" id="st-ti">—</div></div>
+      <div class="stat"><div class="sl">Total inicial</div><div class="sv" id="st-ti">—</div></div>
       <div class="stat g"><div class="sl">Saldo atual</div><div class="sv" id="st-sa">—</div></div>
       <div class="stat r"><div class="sl">Caixas zeradas</div><div class="sv" id="st-ze">—</div></div>
     </div>
@@ -195,18 +183,18 @@ tr:hover td{filter:brightness(0.975)}
   </div>
   <div id="pane-arch" style="display:none">
     <div class="arch-wrap">
-      <p class="arch-title">Mini-isoladores arquivados (saldo zerado)</p>
+      <p class="arch-title">Mini-isoladores arquivados</p>
       <div class="loading" id="loading-arch"><span class="spinner"></span>Carregando...</div>
       <table id="arch-tbl" style="display:none;table-layout:auto;width:100%;border-collapse:collapse">
         <thead><tr>
-          <th style="text-align:left;padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Caixa</th>
-          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Sala</th>
-          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Linhagem</th>
-          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Nasc.</th>
-          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Origem</th>
-          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Sexo</th>
-          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Qtd</th>
-          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Ocorrências</th>
+          <th style="text-align:left;padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Caixa</th>
+          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Sala</th>
+          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Linhagem</th>
+          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Nasc.</th>
+          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Origem</th>
+          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Sexo</th>
+          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Qtd</th>
+          <th style="padding:4px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Ocorrências</th>
         </tr></thead>
         <tbody id="tbody-arch"></tbody>
       </table>
@@ -215,9 +203,7 @@ tr:hover td{filter:brightness(0.975)}
   </div>
 </div>
 </div>
-
 <div class="toast" id="toast-container"></div>
-
 <div class="overlay" id="m-add">
 <div class="modal">
   <h3>Novo mini-isolador</h3>
@@ -267,9 +253,9 @@ tr:hover td{filter:brightness(0.975)}
 </div>
 
 <div class="overlay" id="m-occ">
-<div class="modal" style="max-width:360px">
+<div class="modal" style="max-width:340px">
   <h3>Adicionar ocorrência</h3>
-  <p id="occ-lbl" style="font-size:11px;color:var(--muted);margin-bottom:12px;margin-top:-6px"></p>
+  <p id="occ-lbl" style="font-size:11px;color:var(--muted);margin-bottom:10px;margin-top:-6px"></p>
   <div class="mfg"><label>Tipo *</label>
     <select id="o-tipo">
       <option value="">Selecione</option>
@@ -289,7 +275,6 @@ tr:hover td{filter:brightness(0.975)}
   </div>
 </div>
 </div>
-
 <script>
 const API=window.location.origin+'/api';
 const USERS=[{u:'admin',p:'1234',name:'Admin'},{u:'biot',p:'bio2024',name:'Biotério'}];
@@ -361,7 +346,7 @@ function renderTable(data){
     <th>Sala</th><th>Linhagem</th><th>Nascimento</th><th>Origem</th>
     <th colspan="2" class="th-qtd">Quantidade</th>
     <th class="td-sep"></th>
-    <th style="background:#FFF8F0;color:#712B13;min-width:140px">Ocorrências</th>
+    <th style="background:#FFF8F0;color:#712B13">Ocorrências</th>
     <th class="th-saldo">Saldo</th>
     <th>Ações</th>
   </tr>
@@ -402,14 +387,14 @@ function renderArch(data){
   const tbl=document.getElementById('arch-tbl'),tbody=document.getElementById('tbody-arch'),empty=document.getElementById('empty-arch');
   if(!data.length){empty.style.display='block';return;}
   tbody.innerHTML=data.map(row=>`<tr>
-    <td style="text-align:left;padding:5px 6px;border:1px solid var(--border);font-weight:600">${row.numero}</td>
-    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.sala}</td>
-    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.linhagem}</td>
-    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${fmtD(row.data_nasc)}</td>
-    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.origem}</td>
-    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.sexo}</td>
-    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.quantidade}</td>
-    <td style="padding:5px 6px;border:1px solid var(--border);font-size:10px">${(row.ocorrencias||[]).map(o=>o.tipo+' ('+o.quantidade+')').join(', ')||'—'}</td>
+    <td style="text-align:left;padding:4px 6px;border:1px solid var(--border);font-weight:600">${row.numero}</td>
+    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.sala}</td>
+    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.linhagem}</td>
+    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${fmtD(row.data_nasc)}</td>
+    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.origem}</td>
+    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.sexo}</td>
+    <td style="padding:4px 6px;border:1px solid var(--border);text-align:center">${row.quantidade}</td>
+    <td style="padding:4px 6px;border:1px solid var(--border);font-size:10px">${(row.ocorrencias||[]).map(o=>o.tipo+' ('+o.quantidade+')').join(', ')||'—'}</td>
   </tr>`).join('');
   tbl.style.display='table';
 }
