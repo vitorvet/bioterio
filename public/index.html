@@ -377,8 +377,7 @@ function renderTable(data){
       <td class="tm">${m?row.quantidade:''}</td>
       <td class="tf">${!m?row.quantidade:''}</td>
       <td class="ts"></td>
-      <td class="oc"><div class="ol">${oh}</div>${!row.arquivado?`<button class="ba" onclick="openOcc(${row.id},'${row.numero}',${s})">+ ocorrência</button>`:''}</td>
-      <td class="${s===0?'sr':'sv2'}">${s}</td>
+<td class="oc"><div class="ol">${oh}</div>${!row.arquivado?`<button class="ba" onclick="openOcc(${row.id},\'${row.numero}\',${s})" ${s===0?'disabled style="opacity:0.4;cursor:not-allowed"':''}>+ ocorrência</button>`:''}</td>      <td class="${s===0?'sr':'sv2'}">${s}</td>
       <td><div class="ac"><button class="bs" onclick="openEdit(${row.id})">Editar</button>${s===0&&!row.arquivado?`<button class="bs bx" onclick="archRow(${row.id})">Arquivar</button>`:''}</div></td>
     </tr>`;
   }).join('');
