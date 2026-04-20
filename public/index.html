@@ -1,3 +1,4 @@
+cat > ~/Desktop/bioterio/public/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,8 +14,8 @@
   --border:#e2e2e2;--bg:#f7f7f5;--white:#fff;
   --text:#1a1a1a;--muted:#6b6b6b;--th-bg:#f1f0eb;
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;background:var(--bg);color:var(--text)}
-input,select,button{font-family:inherit;font-size:13px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;background:var(--bg);color:var(--text)}
+input,select,button{font-family:inherit;font-size:12px}
 button{cursor:pointer}
 .screen{display:none}.screen.active{display:block}
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)}
@@ -32,81 +33,87 @@ button{cursor:pointer}
 .btn-login:hover{background:var(--green-d)}
 .lerr{color:#c0392b;font-size:12px;margin-top:8px;text-align:center;display:none}
 .hint{font-size:11px;color:var(--muted);text-align:center;margin-top:12px}
-.topbar{height:52px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;position:sticky;top:0;z-index:50}
-.topbar .brand{display:flex;align-items:center;gap:10px;flex:1}
-.topbar .brand .ic{width:32px;height:32px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center}
-.topbar .brand .ic svg{width:17px;height:17px;color:var(--green-d)}
-.topbar .brand h2{font-size:15px;font-weight:600}
-.topbar .right{display:flex;align-items:center;gap:10px}
-.uav{width:30px;height:30px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--green-d)}
-.btn-logout{font-size:12px;padding:4px 12px;border:1px solid var(--border);border-radius:6px;background:none;color:var(--muted)}
+.topbar{height:48px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:10px;position:sticky;top:0;z-index:50}
+.topbar .brand{display:flex;align-items:center;gap:8px;flex:1}
+.topbar .brand .ic{width:28px;height:28px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center}
+.topbar .brand .ic svg{width:15px;height:15px;color:var(--green-d)}
+.topbar .brand h2{font-size:14px;font-weight:600}
+.topbar .right{display:flex;align-items:center;gap:8px}
+.uav{width:26px;height:26px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--green-d)}
+.btn-logout{font-size:11px;padding:3px 10px;border:1px solid var(--border);border-radius:5px;background:none;color:var(--muted)}
 .btn-logout:hover{background:var(--bg)}
-.tabs{display:flex;border-bottom:1px solid var(--border);background:var(--white);padding:0 20px}
-.tab{padding:10px 16px;font-size:13px;font-weight:500;cursor:pointer;color:var(--muted);border-bottom:2.5px solid transparent;margin-bottom:-1px}
+.tabs{display:flex;border-bottom:1px solid var(--border);background:var(--white);padding:0 16px}
+.tab{padding:8px 14px;font-size:12px;font-weight:500;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
 .tab.active{color:var(--green);border-bottom-color:var(--green)}
-.toolbar{padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--white)}
-.toolbar label{font-size:12px;color:var(--muted);font-weight:500}
-.toolbar select{padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--white)}
+.toolbar{padding:8px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--white)}
+.toolbar label{font-size:11px;color:var(--muted);font-weight:500}
+.toolbar select{padding:4px 8px;border:1px solid var(--border);border-radius:5px;background:var(--white);font-size:11px}
 .toolbar select:focus{outline:none;border-color:var(--green)}
 .sp{flex:1}
-.btn-new{display:flex;align-items:center;gap:6px;padding:7px 16px;background:var(--green);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600}
+.btn-new{display:flex;align-items:center;gap:5px;padding:5px 12px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:600}
 .btn-new:hover{background:var(--green-d)}
-.btn-new svg{width:14px;height:14px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:14px 20px;background:var(--bg);border-bottom:1px solid var(--border)}
-.stat{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
-.stat .sl{font-size:11px;color:var(--muted);font-weight:500;margin-bottom:4px}
-.stat .sv{font-size:22px;font-weight:700}
+.btn-new svg{width:12px;height:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.stat{background:var(--white);border:1px solid var(--border);border-radius:7px;padding:8px 12px}
+.stat .sl{font-size:10px;color:var(--muted);font-weight:500;margin-bottom:2px}
+.stat .sv{font-size:20px;font-weight:700}
 .stat.g .sv{color:var(--green-d)}.stat.r .sv{color:#c0392b}.stat.b .sv{color:#185FA5}
-.legend{display:flex;gap:16px;padding:8px 20px;border-bottom:1px solid var(--border);background:var(--white);flex-wrap:wrap}
-.li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
-.lbox{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.legend{display:flex;gap:12px;padding:5px 16px;border-bottom:1px solid var(--border);background:var(--white);flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted)}
+.lbox{width:12px;height:12px;border-radius:2px;flex-shrink:0}
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;table-layout:fixed}
-thead tr th{padding:8px 7px;font-size:11px;font-weight:600;color:var(--muted);border:1px solid var(--border);background:var(--th-bg);text-align:center;white-space:nowrap}
-td{padding:7px 7px;border:1px solid var(--border);font-size:12px;text-align:center;vertical-align:middle}
-.td-caixa{font-weight:600;text-align:left;background:#fafaf8}
+table{width:100%;border-collapse:collapse;table-layout:auto}
+thead tr th{padding:5px 6px;font-size:10px;font-weight:600;color:var(--muted);border:1px solid var(--border);background:var(--th-bg);text-align:center;white-space:nowrap}
+td{padding:5px 6px;border:1px solid var(--border);font-size:11px;text-align:center;vertical-align:middle}
+.td-caixa{font-weight:600;text-align:left;background:#fafaf8;white-space:nowrap}
 .td-macho{background:var(--blue-l)}.td-femea{background:var(--pink-l)}
-.td-sep{background:#1a1a1a;width:5px;padding:0}
-.occ-cell{background:#FFF8F0;font-size:11px}
+.td-sep{background:#1a1a1a;width:3px;padding:0}
 .saldo-v{background:var(--saldo-verde);color:#fff;font-weight:700}
 .saldo-r{background:var(--red);color:#fff;font-weight:700}
 .th-qtd{background:#D6E4F0;color:#0C447C}
-.th-occ{background:#FAE5D3;color:#712B13}
 .th-saldo{background:#D5E8D4;color:#27500A}
 tr:hover td{filter:brightness(0.975)}
-.action-btns{display:flex;flex-direction:column;gap:3px;align-items:center}
-.btn-sm{font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--white);color:var(--text)}
+.td-occs{background:#FFF8F0;text-align:left;padding:4px 6px;min-width:140px;max-width:220px}
+.occ-list{display:flex;flex-direction:column;gap:2px;margin-bottom:3px}
+.occ-tag{display:inline-flex;align-items:center;gap:3px;background:#fff;border:1px solid #FAC775;border-radius:4px;padding:1px 5px;font-size:10px;white-space:nowrap}
+.occ-tag .ot{font-weight:600;color:#712B13}
+.occ-tag .od{color:var(--muted)}
+.occ-tag .oq{color:#0F6E56;font-weight:600}
+.occ-tag .del-occ{background:none;border:none;color:#ccc;font-size:12px;padding:0 0 0 2px;line-height:1;cursor:pointer}
+.occ-tag .del-occ:hover{color:#c0392b}
+.btn-add-occ{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;background:var(--green-l);border:1px solid #9FE1CB;border-radius:4px;color:var(--green-d);font-size:10px;font-weight:600;cursor:pointer}
+.btn-add-occ:hover{background:#9FE1CB}
+.action-btns{display:flex;flex-direction:column;gap:2px;align-items:center}
+.btn-sm{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid var(--border);background:var(--white);color:var(--text)}
 .btn-sm:hover{background:var(--bg)}
 .btn-arq{background:#FCEBEB;color:#A32D2D;border-color:#F7C1C1}
 .btn-arq:hover{background:#F09595}
-.btn-occ{width:22px;height:22px;border-radius:50%;background:var(--green-l);border:none;color:var(--green-d);font-size:16px;display:flex;align-items:center;justify-content:center;font-weight:700;line-height:1}
-.btn-occ:hover{background:#9FE1CB}
 .empty{text-align:center;padding:3rem;color:var(--muted)}
 .loading{text-align:center;padding:2rem;color:var(--muted)}
-.spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center;padding:1rem}
 .overlay.open{display:flex}
-.modal{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:1.75rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
-.modal h3{font-size:15px;font-weight:600;margin-bottom:1.25rem;padding-bottom:10px;border-bottom:1px solid var(--border)}
-.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.mfg{margin-bottom:12px}
-.mfg label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:500}
-.mfg input,.mfg select{width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:6px;font-size:13px}
+.modal{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:1.5rem;width:100%;max-width:460px;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:14px;font-weight:600;margin-bottom:1rem;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mfg{margin-bottom:10px}
+.mfg label{display:block;font-size:11px;color:var(--muted);margin-bottom:3px;font-weight:500}
+.mfg input,.mfg select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:5px;font-size:12px}
 .mfg input:focus,.mfg select:focus{outline:none;border-color:var(--green)}
-.merr{color:#c0392b;font-size:12px;margin-top:6px;display:none;padding:6px 10px;background:#FCEBEB;border-radius:5px}
-.mbtns{display:flex;justify-content:flex-end;gap:8px;margin-top:1.25rem;padding-top:12px;border-top:1px solid var(--border)}
-.btn-cancel{padding:7px 16px;border:1px solid var(--border);border-radius:6px;background:none;font-size:13px}
+.merr{color:#c0392b;font-size:11px;margin-top:5px;display:none;padding:5px 8px;background:#FCEBEB;border-radius:4px}
+.mbtns{display:flex;justify-content:flex-end;gap:8px;margin-top:1rem;padding-top:10px;border-top:1px solid var(--border)}
+.btn-cancel{padding:6px 14px;border:1px solid var(--border);border-radius:5px;background:none;font-size:12px}
 .btn-cancel:hover{background:var(--bg)}
-.btn-save{padding:7px 18px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600}
+.btn-save{padding:6px 16px;background:var(--green);color:#fff;border:none;border-radius:5px;font-size:12px;font-weight:600}
 .btn-save:hover{background:var(--green-d)}
 .btn-save:disabled{opacity:0.6;cursor:not-allowed}
-.arch-wrap{padding:20px}
-.arch-title{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:12px}
-.toast{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:8px}
-.toast-item{background:var(--text);color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;animation:fadeIn .2s;max-width:320px}
+.arch-wrap{padding:16px}
+.arch-title{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:10px}
+.toast{position:fixed;bottom:20px;right:20px;z-index:999;display:flex;flex-direction:column;gap:6px}
+.toast-item{background:var(--text);color:#fff;padding:8px 14px;border-radius:7px;font-size:12px;animation:fadeIn .2s;max-width:300px}
 .toast-item.err{background:#c0392b}.toast-item.ok{background:var(--green-d)}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -137,16 +144,14 @@ tr:hover td{filter:brightness(0.975)}
     </div>
     <div class="right">
       <div class="uav" id="uav">AD</div>
-      <span id="uname" style="font-size:12px;color:var(--muted)">Admin</span>
+      <span id="uname" style="font-size:11px;color:var(--muted)">Admin</span>
       <button class="btn-logout" onclick="doLogout()">Sair</button>
     </div>
   </div>
-
   <div class="tabs">
     <div class="tab active" id="tab-ativo" onclick="switchTab('ativo')">Estoque ativo</div>
     <div class="tab" id="tab-arch" onclick="switchTab('arch')">Arquivados</div>
   </div>
-
   <div id="pane-ativo">
     <div class="toolbar">
       <label>Sala:</label>
@@ -180,7 +185,7 @@ tr:hover td{filter:brightness(0.975)}
       <div class="li"><div class="lbox" style="background:var(--pink-l);border:1px solid #F4C0D1"></div>Fêmea</div>
       <div class="li"><div class="lbox" style="background:var(--saldo-verde)"></div>Saldo positivo</div>
       <div class="li"><div class="lbox" style="background:var(--red)"></div>Saldo zerado</div>
-      <div class="li"><div class="lbox" style="background:#FFF8F0;border:1px solid #FAC775"></div>Ocorrência</div>
+      <div class="li"><div class="lbox" style="background:#FFF8F0;border:1px solid #FAC775"></div>Ocorrências</div>
     </div>
     <div class="table-wrap">
       <div class="loading" id="loading-main"><span class="spinner"></span>Carregando...</div>
@@ -188,21 +193,20 @@ tr:hover td{filter:brightness(0.975)}
       <div class="empty" id="empty-main" style="display:none">Nenhum registro encontrado.</div>
     </div>
   </div>
-
   <div id="pane-arch" style="display:none">
     <div class="arch-wrap">
       <p class="arch-title">Mini-isoladores arquivados (saldo zerado)</p>
       <div class="loading" id="loading-arch"><span class="spinner"></span>Carregando...</div>
       <table id="arch-tbl" style="display:none;table-layout:auto;width:100%;border-collapse:collapse">
         <thead><tr>
-          <th style="text-align:left;padding:8px;border:1px solid var(--border);background:var(--th-bg);font-size:11px">Caixa</th>
-          <th style="padding:8px;border:1px solid var(--border);background:var(--th-bg);font-size:11px">Sala</th>
-          <th style="padding:8px;border:1px solid var(--border);background:var(--th-bg);font-size:11px">Linhagem</th>
-          <th style="padding:8px;border:1px solid var(--border);background:var(--th-bg);font-size:11px">Nasc.</th>
-          <th style="padding:8px;border:1px solid var(--border);background:var(--th-bg);font-size:11px">Origem</th>
-          <th style="padding:8px;border:1px solid var(--border);background:var(--th-bg);font-size:11px">Sexo</th>
-          <th style="padding:8px;border:1px solid var(--border);background:var(--th-bg);font-size:11px">Qtd inicial</th>
-          <th style="padding:8px;border:1px solid var(--border);background:var(--th-bg);font-size:11px">Ocorrências</th>
+          <th style="text-align:left;padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Caixa</th>
+          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Sala</th>
+          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Linhagem</th>
+          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Nasc.</th>
+          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Origem</th>
+          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Sexo</th>
+          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Qtd</th>
+          <th style="padding:5px 6px;border:1px solid var(--border);background:var(--th-bg);font-size:10px">Ocorrências</th>
         </tr></thead>
         <tbody id="tbody-arch"></tbody>
       </table>
@@ -217,18 +221,18 @@ tr:hover td{filter:brightness(0.975)}
 <div class="overlay" id="m-add">
 <div class="modal">
   <h3>Novo mini-isolador</h3>
-  <div class="mfg"><label>Número da caixa / mini-isolador *</label><input id="a-num" placeholder="Ex: 66.173"/></div>
+  <div class="mfg"><label>Número da caixa *</label><input id="a-num" placeholder="Ex: 66.173"/></div>
   <div class="r2">
     <div class="mfg"><label>Sala *</label><select id="a-sala"><option value="">Selecione</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
     <div class="mfg"><label>Linhagem *</label><select id="a-lin"><option value="">Selecione</option><option>Swiss</option><option>Balb/c</option><option>C57Bl/6</option><option>NSG</option><option>Townes</option></select></div>
   </div>
   <div class="r2">
     <div class="mfg"><label>Data de nascimento *</label><input type="date" id="a-nasc"/></div>
-    <div class="mfg"><label>Origem dos filhotes *</label><input id="a-orig" placeholder="Ex: 66.93"/></div>
+    <div class="mfg"><label>Origem *</label><input id="a-orig" placeholder="Ex: 66.93"/></div>
   </div>
   <div class="r2">
     <div class="mfg"><label>Sexo *</label><select id="a-sexo"><option value="">Selecione</option><option>Macho</option><option>Fêmea</option></select></div>
-    <div class="mfg"><label>Quantidade na caixa *</label><input type="number" id="a-qtd" min="1" placeholder="0"/></div>
+    <div class="mfg"><label>Quantidade *</label><input type="number" id="a-qtd" min="1" placeholder="0"/></div>
   </div>
   <div class="merr" id="a-err"></div>
   <div class="mbtns">
@@ -252,7 +256,7 @@ tr:hover td{filter:brightness(0.975)}
   </div>
   <div class="r2">
     <div class="mfg"><label>Sexo *</label><select id="e-sexo"><option value="">Selecione</option><option>Macho</option><option>Fêmea</option></select></div>
-    <div class="mfg"><label>Quantidade inicial *</label><input type="number" id="e-qtd" min="1"/></div>
+    <div class="mfg"><label>Quantidade *</label><input type="number" id="e-qtd" min="1"/></div>
   </div>
   <div class="merr" id="e-err"></div>
   <div class="mbtns">
@@ -263,9 +267,9 @@ tr:hover td{filter:brightness(0.975)}
 </div>
 
 <div class="overlay" id="m-occ">
-<div class="modal" style="max-width:380px">
+<div class="modal" style="max-width:360px">
   <h3>Adicionar ocorrência</h3>
-  <p id="occ-lbl" style="font-size:12px;color:var(--muted);margin-bottom:14px;margin-top:-8px"></p>
+  <p id="occ-lbl" style="font-size:11px;color:var(--muted);margin-bottom:12px;margin-top:-6px"></p>
   <div class="mfg"><label>Tipo *</label>
     <select id="o-tipo">
       <option value="">Selecione</option>
@@ -275,7 +279,7 @@ tr:hover td{filter:brightness(0.975)}
     </select>
   </div>
   <div class="r2">
-    <div class="mfg"><label>Data da ocorrência *</label><input type="date" id="o-data"/></div>
+    <div class="mfg"><label>Data *</label><input type="date" id="o-data"/></div>
     <div class="mfg"><label>Quantidade *</label><input type="number" id="o-qtd" min="1" placeholder="0"/></div>
   </div>
   <div class="merr" id="o-err"></div>
@@ -287,70 +291,59 @@ tr:hover td{filter:brightness(0.975)}
 </div>
 
 <script>
-const API = window.location.origin + '/api';
-const USERS = [
-  { u: 'admin', p: '1234', name: 'Admin' },
-  { u: 'biot',  p: 'bio2024', name: 'Biotério' }
-];
-let me = null, allData = [], editId = null, occId = null;
-const MAX_OCC = 3;
-
-function doLogin() {
-  const u = document.getElementById('lu').value.trim();
-  const p = document.getElementById('lp').value;
-  const f = USERS.find(x => x.u === u && x.p === p);
-  if (!f) { document.getElementById('lerr').style.display = 'block'; return; }
-  me = f;
-  document.getElementById('lerr').style.display = 'none';
-  document.getElementById('uav').textContent = f.name.substring(0,2).toUpperCase();
-  document.getElementById('uname').textContent = f.name;
-  showS('s-main'); loadData();
+const API=window.location.origin+'/api';
+const USERS=[{u:'admin',p:'1234',name:'Admin'},{u:'biot',p:'bio2024',name:'Biotério'}];
+let me=null,allData=[],editId=null,occId=null;
+function doLogin(){
+  const u=document.getElementById('lu').value.trim(),p=document.getElementById('lp').value;
+  const f=USERS.find(x=>x.u===u&&x.p===p);
+  if(!f){document.getElementById('lerr').style.display='block';return;}
+  me=f;document.getElementById('lerr').style.display='none';
+  document.getElementById('uav').textContent=f.name.substring(0,2).toUpperCase();
+  document.getElementById('uname').textContent=f.name;
+  showS('s-main');loadData();
 }
-document.getElementById('lp').addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });
-function doLogout() { me=null; document.getElementById('lu').value=''; document.getElementById('lp').value=''; showS('s-login'); }
-function showS(id) { document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
-function switchTab(t) {
+document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+function doLogout(){me=null;document.getElementById('lu').value='';document.getElementById('lp').value='';showS('s-login');}
+function showS(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function switchTab(t){
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.getElementById('tab-'+t).classList.add('active');
-  document.getElementById('pane-ativo').style.display = t==='ativo'?'block':'none';
-  document.getElementById('pane-arch').style.display  = t==='arch' ?'block':'none';
-  if (t==='arch') loadArch();
+  document.getElementById('pane-ativo').style.display=t==='ativo'?'block':'none';
+  document.getElementById('pane-arch').style.display=t==='arch'?'block':'none';
+  if(t==='arch')loadArch();
 }
-async function api(path, method='GET', body=null) {
-  const opts = { method, headers: {'Content-Type':'application/json'} };
-  if (body) opts.body = JSON.stringify(body);
-  const r = await fetch(API+path, opts);
-  if (r.status===204) return null;
-  const json = await r.json();
-  if (!r.ok) throw new Error(json.error||'Erro desconhecido');
+async function api(path,method='GET',body=null){
+  const opts={method,headers:{'Content-Type':'application/json'}};
+  if(body)opts.body=JSON.stringify(body);
+  const r=await fetch(API+path,opts);
+  if(r.status===204)return null;
+  const json=await r.json();
+  if(!r.ok)throw new Error(json.error||'Erro desconhecido');
   return json;
 }
-async function loadData() {
-  const sala=document.getElementById('fSala').value;
-  const lin=document.getElementById('fLin').value;
-  const sexo=document.getElementById('fSexo').value;
+async function loadData(){
+  const sala=document.getElementById('fSala').value,lin=document.getElementById('fLin').value,sexo=document.getElementById('fSexo').value;
   document.getElementById('loading-main').style.display='block';
   document.getElementById('main-tbl').style.display='none';
   document.getElementById('empty-main').style.display='none';
   let qs='?arquivado=false';
-  if (sala) qs+='&sala='+sala;
-  if (lin)  qs+='&linhagem='+encodeURIComponent(lin);
-  if (sexo) qs+='&sexo='+encodeURIComponent(sexo);
-  try {
-    allData = await api('/isoladores'+qs);
-    renderStats(allData); renderTable(allData);
-  } catch(e) { toast(e.message,'err'); }
-  finally { document.getElementById('loading-main').style.display='none'; }
+  if(sala)qs+='&sala='+sala;
+  if(lin)qs+='&linhagem='+encodeURIComponent(lin);
+  if(sexo)qs+='&sexo='+encodeURIComponent(sexo);
+  try{allData=await api('/isoladores'+qs);renderStats(allData);renderTable(allData);}
+  catch(e){toast(e.message,'err');}
+  finally{document.getElementById('loading-main').style.display='none';}
 }
-async function loadArch() {
+async function loadArch(){
   document.getElementById('loading-arch').style.display='block';
   document.getElementById('arch-tbl').style.display='none';
   document.getElementById('empty-arch').style.display='none';
-  try { const data=await api('/isoladores?arquivado=true'); renderArch(data); }
-  catch(e) { toast(e.message,'err'); }
-  finally { document.getElementById('loading-arch').style.display='none'; }
+  try{const data=await api('/isoladores?arquivado=true');renderArch(data);}
+  catch(e){toast(e.message,'err');}
+  finally{document.getElementById('loading-arch').style.display='none';}
 }
-function renderStats(data) {
+function renderStats(data){
   const total=data.reduce((s,r)=>s+r.quantidade,0);
   const saldo=data.reduce((s,r)=>s+(r.saldo||0),0);
   const zero=data.filter(r=>(r.saldo||0)===0).length;
@@ -359,95 +352,83 @@ function renderStats(data) {
   document.getElementById('st-sa').textContent=saldo;
   document.getElementById('st-ze').textContent=zero;
 }
-function fmtD(d) { if(!d) return ''; const p=d.split('T')[0].split('-'); return p[2]+'/'+p[1]+'/'+p[0]; }
-function renderTable(data) {
-  const tbl=document.getElementById('main-tbl');
-  const thead=document.getElementById('thead-main');
-  const tbody=document.getElementById('tbody-main');
-  const empty=document.getElementById('empty-main');
-  if (!data.length) { empty.style.display='block'; return; }
-  let hdr=`<tr>
-    <th rowspan="2" style="text-align:left;min-width:80px">Caixa</th>
-    <th rowspan="2">Sala</th><th rowspan="2">Linhagem</th>
-    <th rowspan="2">Nascimento</th><th rowspan="2" style="min-width:70px">Origem</th>
+function fmtD(d){if(!d)return '';const p=d.split('T')[0].split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function renderTable(data){
+  const tbl=document.getElementById('main-tbl'),thead=document.getElementById('thead-main'),tbody=document.getElementById('tbody-main'),empty=document.getElementById('empty-main');
+  if(!data.length){empty.style.display='block';return;}
+  thead.innerHTML=`<tr>
+    <th style="text-align:left">Caixa</th>
+    <th>Sala</th><th>Linhagem</th><th>Nascimento</th><th>Origem</th>
     <th colspan="2" class="th-qtd">Quantidade</th>
-    <th class="td-sep" rowspan="2"></th>`;
-  for (let i=1;i<=MAX_OCC;i++) hdr+=`<th colspan="3" class="th-occ">Ocorrência ${i}</th>`;
-  hdr+=`<th rowspan="2" class="th-saldo" style="min-width:55px">Saldo</th>`;
-  hdr+=`<th rowspan="2" style="min-width:80px">Ações</th></tr><tr>`;
-  hdr+=`<th class="th-qtd">Macho</th><th class="th-qtd">Fêmea</th>`;
-  for (let i=0;i<MAX_OCC;i++) hdr+=`<th class="th-occ">Tipo</th><th class="th-occ">Data</th><th class="th-occ">Qtde</th>`;
-  hdr+=`</tr>`;
-  thead.innerHTML=hdr;
+    <th class="td-sep"></th>
+    <th style="background:#FFF8F0;color:#712B13;min-width:140px">Ocorrências</th>
+    <th class="th-saldo">Saldo</th>
+    <th>Ações</th>
+  </tr>
+  <tr>
+    <th></th><th></th><th></th><th></th><th></th>
+    <th class="th-qtd">Macho</th><th class="th-qtd">Fêmea</th>
+    <th class="td-sep"></th>
+    <th style="background:#FFF8F0;font-size:9px;color:var(--muted)">+ para adicionar</th>
+    <th class="th-saldo"></th><th></th>
+  </tr>`;
   tbody.innerHTML=data.map(row=>{
-    const saldo=row.saldo??0;
-    const isMacho=row.sexo==='Macho';
-    const occs=row.ocorrencias||[];
-    let occCols='';
-    for (let i=0;i<MAX_OCC;i++) {
-      const o=occs[i];
-      if (o) occCols+=`<td class="occ-cell">${o.tipo}</td><td class="occ-cell">${fmtD(o.data_occ)}</td><td class="occ-cell">${o.quantidade}</td>`;
-      else occCols+=`<td class="occ-cell"></td><td class="occ-cell"></td><td class="occ-cell"></td>`;
-    }
-    const canAddOcc=occs.length<MAX_OCC&&!row.arquivado;
-    const occBtn=canAddOcc?`<button class="btn-occ" title="Adicionar ocorrência" onclick="openOcc(${row.id},'${row.numero}',${saldo})">+</button>`:'';
+    const saldo=row.saldo??0,isMacho=row.sexo==='Macho',occs=row.ocorrencias||[];
+    const occHtml=occs.map(o=>`<div class="occ-tag">
+      <span class="ot">${o.tipo}</span>
+      <span class="od">${fmtD(o.data_occ)}</span>
+      <span class="oq">${o.quantidade}</span>
+      <button class="del-occ" onclick="deleteOcc(${o.id})">×</button>
+    </div>`).join('');
     const archBtn=saldo===0&&!row.arquivado?`<button class="btn-sm btn-arq" onclick="archiveRow(${row.id})">Arquivar</button>`:'';
     return `<tr>
       <td class="td-caixa">${row.numero}</td>
       <td>${row.sala}</td><td>${row.linhagem}</td><td>${fmtD(row.data_nasc)}</td>
-      <td style="font-size:11px">${row.origem}</td>
+      <td>${row.origem}</td>
       <td class="td-macho">${isMacho?row.quantidade:''}</td>
       <td class="td-femea">${!isMacho?row.quantidade:''}</td>
       <td class="td-sep"></td>
-      ${occCols}
+      <td class="td-occs">
+        <div class="occ-list">${occHtml}</div>
+        ${!row.arquivado?`<button class="btn-add-occ" onclick="openOcc(${row.id},'${row.numero}',${saldo})">+ ocorrência</button>`:''}
+      </td>
       <td class="${saldo===0?'saldo-r':'saldo-v'}">${saldo}</td>
-      <td><div class="action-btns"><button class="btn-sm" onclick="openEdit(${row.id})">Editar</button>${occBtn}${archBtn}</div></td>
+      <td><div class="action-btns"><button class="btn-sm" onclick="openEdit(${row.id})">Editar</button>${archBtn}</div></td>
     </tr>`;
   }).join('');
   tbl.style.display='table';
 }
-function renderArch(data) {
-  const tbl=document.getElementById('arch-tbl');
-  const tbody=document.getElementById('tbody-arch');
-  const empty=document.getElementById('empty-arch');
-  if (!data.length) { empty.style.display='block'; return; }
+function renderArch(data){
+  const tbl=document.getElementById('arch-tbl'),tbody=document.getElementById('tbody-arch'),empty=document.getElementById('empty-arch');
+  if(!data.length){empty.style.display='block';return;}
   tbody.innerHTML=data.map(row=>`<tr>
-    <td style="text-align:left;padding:7px 8px;border:1px solid var(--border);font-weight:600">${row.numero}</td>
-    <td style="padding:7px 8px;border:1px solid var(--border);text-align:center">${row.sala}</td>
-    <td style="padding:7px 8px;border:1px solid var(--border);text-align:center">${row.linhagem}</td>
-    <td style="padding:7px 8px;border:1px solid var(--border);text-align:center">${fmtD(row.data_nasc)}</td>
-    <td style="padding:7px 8px;border:1px solid var(--border);text-align:center">${row.origem}</td>
-    <td style="padding:7px 8px;border:1px solid var(--border);text-align:center">${row.sexo}</td>
-    <td style="padding:7px 8px;border:1px solid var(--border);text-align:center">${row.quantidade}</td>
-    <td style="padding:7px 8px;border:1px solid var(--border);font-size:11px">${(row.ocorrencias||[]).map(o=>o.tipo+' ('+o.quantidade+')').join(', ')||'—'}</td>
+    <td style="text-align:left;padding:5px 6px;border:1px solid var(--border);font-weight:600">${row.numero}</td>
+    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.sala}</td>
+    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.linhagem}</td>
+    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${fmtD(row.data_nasc)}</td>
+    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.origem}</td>
+    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.sexo}</td>
+    <td style="padding:5px 6px;border:1px solid var(--border);text-align:center">${row.quantidade}</td>
+    <td style="padding:5px 6px;border:1px solid var(--border);font-size:10px">${(row.ocorrencias||[]).map(o=>o.tipo+' ('+o.quantidade+')').join(', ')||'—'}</td>
   </tr>`).join('');
   tbl.style.display='table';
 }
-function openAdd() {
+function openAdd(){
   ['a-num','a-orig','a-qtd'].forEach(x=>document.getElementById(x).value='');
   ['a-sala','a-lin','a-nasc','a-sexo'].forEach(x=>document.getElementById(x).value='');
-  document.getElementById('a-err').style.display='none';
-  openM('m-add');
+  document.getElementById('a-err').style.display='none';openM('m-add');
 }
-async function saveAdd() {
-  const num=document.getElementById('a-num').value.trim();
-  const sala=document.getElementById('a-sala').value;
-  const lin=document.getElementById('a-lin').value;
-  const nasc=document.getElementById('a-nasc').value;
-  const orig=document.getElementById('a-orig').value.trim();
-  const sexo=document.getElementById('a-sexo').value;
-  const qtd=parseInt(document.getElementById('a-qtd').value)||0;
-  const err=document.getElementById('a-err'); err.style.display='none';
-  if (!num||!sala||!lin||!nasc||!orig||!sexo||qtd<1) { err.textContent='Preencha todos os campos corretamente.'; err.style.display='block'; return; }
-  const btn=document.getElementById('a-btn'); btn.disabled=true; btn.textContent='Salvando...';
-  try {
-    await api('/isoladores','POST',{numero:num,sala,linhagem:lin,data_nasc:nasc,origem:orig,sexo,quantidade:qtd});
-    closeM('m-add'); toast('Mini-isolador cadastrado!','ok'); loadData();
-  } catch(e) { err.textContent=e.message; err.style.display='block'; }
-  finally { btn.disabled=false; btn.textContent='Salvar'; }
+async function saveAdd(){
+  const num=document.getElementById('a-num').value.trim(),sala=document.getElementById('a-sala').value,lin=document.getElementById('a-lin').value,nasc=document.getElementById('a-nasc').value,orig=document.getElementById('a-orig').value.trim(),sexo=document.getElementById('a-sexo').value,qtd=parseInt(document.getElementById('a-qtd').value)||0;
+  const err=document.getElementById('a-err');err.style.display='none';
+  if(!num||!sala||!lin||!nasc||!orig||!sexo||qtd<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
+  const btn=document.getElementById('a-btn');btn.disabled=true;btn.textContent='Salvando...';
+  try{await api('/isoladores','POST',{numero:num,sala,linhagem:lin,data_nasc:nasc,origem:orig,sexo,quantidade:qtd});closeM('m-add');toast('Cadastrado!','ok');loadData();}
+  catch(e){err.textContent=e.message;err.style.display='block';}
+  finally{btn.disabled=false;btn.textContent='Salvar';}
 }
-function openEdit(id) {
-  const row=allData.find(r=>r.id===id); if(!row) return;
+function openEdit(id){
+  const row=allData.find(r=>r.id===id);if(!row)return;
   editId=id;
   document.getElementById('e-num').value=row.numero;
   document.getElementById('e-sala').value=row.sala;
@@ -456,60 +437,52 @@ function openEdit(id) {
   document.getElementById('e-orig').value=row.origem;
   document.getElementById('e-sexo').value=row.sexo;
   document.getElementById('e-qtd').value=row.quantidade;
-  document.getElementById('e-err').style.display='none';
-  openM('m-edit');
+  document.getElementById('e-err').style.display='none';openM('m-edit');
 }
-async function saveEdit() {
-  const sala=document.getElementById('e-sala').value;
-  const lin=document.getElementById('e-lin').value;
-  const nasc=document.getElementById('e-nasc').value;
-  const orig=document.getElementById('e-orig').value.trim();
-  const sexo=document.getElementById('e-sexo').value;
-  const qtd=parseInt(document.getElementById('e-qtd').value)||0;
-  const err=document.getElementById('e-err'); err.style.display='none';
-  if (!sala||!lin||!nasc||!orig||!sexo||qtd<1) { err.textContent='Preencha todos os campos.'; err.style.display='block'; return; }
-  const btn=document.getElementById('e-btn'); btn.disabled=true; btn.textContent='Salvando...';
-  try {
-    await api('/isoladores/'+editId,'PUT',{sala,linhagem:lin,data_nasc:nasc,origem:orig,sexo,quantidade:qtd});
-    closeM('m-edit'); toast('Registro atualizado!','ok'); loadData();
-  } catch(e) { err.textContent=e.message; err.style.display='block'; }
-  finally { btn.disabled=false; btn.textContent='Salvar alterações'; }
+async function saveEdit(){
+  const sala=document.getElementById('e-sala').value,lin=document.getElementById('e-lin').value,nasc=document.getElementById('e-nasc').value,orig=document.getElementById('e-orig').value.trim(),sexo=document.getElementById('e-sexo').value,qtd=parseInt(document.getElementById('e-qtd').value)||0;
+  const err=document.getElementById('e-err');err.style.display='none';
+  if(!sala||!lin||!nasc||!orig||!sexo||qtd<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
+  const btn=document.getElementById('e-btn');btn.disabled=true;btn.textContent='Salvando...';
+  try{await api('/isoladores/'+editId,'PUT',{sala,linhagem:lin,data_nasc:nasc,origem:orig,sexo,quantidade:qtd});closeM('m-edit');toast('Atualizado!','ok');loadData();}
+  catch(e){err.textContent=e.message;err.style.display='block';}
+  finally{btn.disabled=false;btn.textContent='Salvar alterações';}
 }
-function openOcc(id,numero,saldo) {
+function openOcc(id,numero,saldo){
   occId=id;
-  document.getElementById('occ-lbl').textContent=`Caixa: ${numero} — Saldo disponível: ${saldo}`;
+  document.getElementById('occ-lbl').textContent='Caixa: '+numero+' — Saldo: '+saldo;
   document.getElementById('o-tipo').value='';
   document.getElementById('o-data').value='';
   document.getElementById('o-qtd').value='';
-  document.getElementById('o-err').style.display='none';
-  openM('m-occ');
+  document.getElementById('o-err').style.display='none';openM('m-occ');
 }
-async function saveOcc() {
-  const tipo=document.getElementById('o-tipo').value;
-  const data=document.getElementById('o-data').value;
-  const qtd=parseInt(document.getElementById('o-qtd').value)||0;
-  const err=document.getElementById('o-err'); err.style.display='none';
-  if (!tipo||!data||qtd<1) { err.textContent='Preencha todos os campos.'; err.style.display='block'; return; }
-  const btn=document.getElementById('o-btn'); btn.disabled=true; btn.textContent='Salvando...';
-  try {
-    await api('/ocorrencias','POST',{isolador_id:occId,tipo,data_occ:data,quantidade:qtd});
-    closeM('m-occ'); toast('Ocorrência registrada!','ok'); loadData();
-  } catch(e) { err.textContent=e.message; err.style.display='block'; }
-  finally { btn.disabled=false; btn.textContent='Adicionar'; }
+async function saveOcc(){
+  const tipo=document.getElementById('o-tipo').value,data=document.getElementById('o-data').value,qtd=parseInt(document.getElementById('o-qtd').value)||0;
+  const err=document.getElementById('o-err');err.style.display='none';
+  if(!tipo||!data||qtd<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
+  const btn=document.getElementById('o-btn');btn.disabled=true;btn.textContent='Salvando...';
+  try{await api('/ocorrencias','POST',{isolador_id:occId,tipo,data_occ:data,quantidade:qtd});closeM('m-occ');toast('Ocorrência registrada!','ok');loadData();}
+  catch(e){err.textContent=e.message;err.style.display='block';}
+  finally{btn.disabled=false;btn.textContent='Adicionar';}
 }
-async function archiveRow(id) {
-  if (!confirm('Arquivar este mini-isolador?')) return;
-  try { await api('/isoladores/'+id,'PATCH',{arquivado:true}); toast('Arquivado!','ok'); loadData(); }
-  catch(e) { toast(e.message,'err'); }
+async function deleteOcc(id){
+  if(!confirm('Remover esta ocorrência?'))return;
+  try{await api('/ocorrencias','DELETE',{id});toast('Removida.','ok');loadData();}
+  catch(e){toast(e.message,'err');}
 }
-function openM(id) { document.getElementById(id).classList.add('open'); }
-function closeM(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.overlay').forEach(ov=>{ ov.addEventListener('click',e=>{ if(e.target===ov) ov.classList.remove('open'); }); });
-function toast(msg,type='ok') {
-  const c=document.getElementById('toast-container');
-  const el=document.createElement('div'); el.className='toast-item '+type; el.textContent=msg;
-  c.appendChild(el); setTimeout(()=>el.remove(),3500);
+async function archiveRow(id){
+  if(!confirm('Arquivar este mini-isolador?'))return;
+  try{await api('/isoladores/'+id,'PATCH',{arquivado:true});toast('Arquivado!','ok');loadData();}
+  catch(e){toast(e.message,'err');}
+}
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.overlay').forEach(ov=>{ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');});});
+function toast(msg,type='ok'){
+  const c=document.getElementById('toast-container'),el=document.createElement('div');
+  el.className='toast-item '+type;el.textContent=msg;c.appendChild(el);setTimeout(()=>el.remove(),3500);
 }
 </script>
 </body>
 </html>
+HTMLEOF
