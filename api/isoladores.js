@@ -8,17 +8,23 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   if (req.method === 'GET') {
-    const { sala, linhagem, sexo, arquivado } = req.query;
-    let query = supabase.from('v_isoladores').select('*').order('criado_em', { ascending: false });
+    const { sala, linhagem, arquivado } = req.query;
+    let query = supabase
+      .from('v_isoladores')
+      .select('*')
+      .order('criado_em', { ascending: false });
     if (sala) query = query.eq('sala', sala);
     if (linhagem) query = query.eq('linhagem', linhagem);
-    if (sexo) query = query.eq('sexo', sexo);
     query = query.eq('arquivado', arquivado === 'true');
     const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });
     if (data && data.length > 0) {
       const ids = data.map(d => d.id);
-      const { data: occs } = await supabase.from('ocorrencias').select('*').in('isolador_id', ids).order('data_occ');
+      const { data: occs } = await supabase
+        .from('ocorrencias')
+        .select('*')
+        .in('isolador_id', ids)
+        .order('data_occ');
       const occMap = {};
       (occs || []).forEach(o => {
         if (!occMap[o.isolador_id]) occMap[o.isolador_id] = [];
@@ -30,12 +36,15 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    const { numero, sala, linhagem, data_nasc, origem, sexo, quantidade } = req.body;
-    if (!numero || !sala || !linhagem || !data_nasc || !origem || !sexo || !quantidade)
+    const { numero, sala, linhagem, data_nasc, origem, quantidade, qtd_machos, qtd_femeas } = req.body;
+    if (!numero || !sala || !linhagem || !data_nasc || !origem || !quantidade) {
       return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
-    const { data, error } = await supabase.from('isoladores')
-      .insert([{ numero, sala, linhagem, data_nasc, origem, sexo, quantidade }])
-      .select().single();
+    }
+    const { data, error } = await supabase
+      .from('isoladores')
+      .insert([{ numero, sala, linhagem, data_nasc, origem, quantidade, qtd_machos: qtd_machos||0, qtd_femeas: qtd_femeas||0 }])
+      .select()
+      .single();
     if (error) return res.status(500).json({ error: error.message });
     return res.status(201).json(data);
   }
