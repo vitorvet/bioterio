@@ -9,18 +9,25 @@ export default async function handler(req, res) {
   const { id } = req.query;
 
   if (req.method === 'PUT') {
-    const { sala, linhagem, data_nasc, origem, sexo, quantidade } = req.body;
-    const { data, error } = await supabase.from('isoladores')
-      .update({ sala, linhagem, data_nasc, origem, sexo, quantidade })
-      .eq('id', id).select().single();
+    const { sala, linhagem, data_nasc, origem, quantidade, qtd_machos, qtd_femeas } = req.body;
+    const { data, error } = await supabase
+      .from('isoladores')
+      .update({ sala, linhagem, data_nasc, origem, quantidade, qtd_machos: qtd_machos||0, qtd_femeas: qtd_femeas||0 })
+      .eq('id', id)
+      .select()
+      .single();
     if (error) return res.status(500).json({ error: error.message });
     return res.status(200).json(data);
   }
 
   if (req.method === 'PATCH') {
     const { arquivado } = req.body;
-    const { data, error } = await supabase.from('isoladores')
-      .update({ arquivado }).eq('id', id).select().single();
+    const { data, error } = await supabase
+      .from('isoladores')
+      .update({ arquivado })
+      .eq('id', id)
+      .select()
+      .single();
     if (error) return res.status(500).json({ error: error.message });
     return res.status(200).json(data);
   }
