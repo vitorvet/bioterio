@@ -119,17 +119,21 @@ tr:hover td{filter:brightness(0.97)}
 </head>
 <body>
 <div id="app">
+
   <!-- LOGIN -->
 <div class="screen active" id="s-login">
 <div class="lw"><div class="lc">
   <div class="ll">
     <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-    <h1>Biotério</h1><p>Gestão de estoque de animais</p>
+    <h1>Biotério</h1>
+    <p id="login-subtitulo">Entre com sua conta</p>
   </div>
-  <div class="fg"><label>Email</label><input id="lu" type="email" placeholder="seu@email.com"/></div>
-  <div class="fg"><label>Senha</label><input id="lp" type="password" placeholder="••••"/></div>
-  <button class="bbl" onclick="doLogin()">Entrar</button>
-  <div class="le" id="lerr">Usuário ou senha incorretos.</div>
+  <div class="fg"><label>E-mail</label><input id="lu" type="email" placeholder="seu@email.com"/></div>
+  <div class="fg"><label>Senha</label><input id="lp" type="password" placeholder="••••••••"/></div>
+  <div class="le" id="lerr"></div>
+  <div class="ls" id="lsuc" style="color:#1D9E75;font-size:11px;margin-top:6px;text-align:center;display:none"></div>
+  <button class="bbl" id="login-btn" onclick="doLogin()">Entrar</button>
+  <p style="font-size:11px;color:var(--mu);text-align:center;margin-top:12px;cursor:pointer" id="login-toggle" onclick="toggleModo()">Não tem conta? Cadastre-se</p>
 </div></div>
 </div>
 
@@ -321,18 +325,51 @@ const SUPA_URL='https://ptpcpazpxwsoquottfkk.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0cGNwYXpweHdzb3F1b3R0ZmtrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTU1MzcsImV4cCI6MjA5MjA3MTUzN30.YjoZXVZOfkE5lCrweIMt2TCyWYAPWEamMemAKnARHxA';
 let me=null,allData=[],editId=null,occId=null,salaAtual='',linhagemAtual='';
 
+let loginModo='login';
+
+function toggleModo(){
+  loginModo=loginModo==='login'?'cadastro':'login';
+  document.getElementById('login-subtitulo').textContent=loginModo==='login'?'Entre com sua conta':'Crie sua conta';
+  document.getElementById('login-btn').textContent=loginModo==='login'?'Entrar':'Criar conta';
+  document.getElementById('login-toggle').textContent=loginModo==='login'?'Não tem conta? Cadastre-se':'Já tem conta? Entre';
+  document.getElementById('lerr').style.display='none';
+  document.getElementById('lsuc').style.display='none';
+}
+
 async function doLogin(){
   const email=document.getElementById('lu').value.trim();
   const pass=document.getElementById('lp').value;
+  const err=document.getElementById('lerr');
+  const suc=document.getElementById('lsuc');
+  const btn=document.getElementById('login-btn');
+  err.style.display='none';suc.style.display='none';
+  if(!email||!pass){err.textContent='Preencha o e-mail e a senha.';err.style.display='block';return;}
+  if(loginModo==='cadastro'&&pass.length<6){err.textContent='A senha deve ter pelo menos 6 caracteres.';err.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Aguarde...';
+  if(loginModo==='cadastro'){
+    const res=await fetch(SUPA_URL+'/auth/v1/signup',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({email,password:pass})
+    });
+    const data=await res.json();
+    btn.disabled=false;btn.textContent='Criar conta';
+    if(!res.ok||data?.user?.identities?.length===0){
+      err.textContent='Este e-mail já está cadastrado. Faça login.';err.style.display='block';
+    } else {
+      suc.textContent='Conta criada! Verifique seu e-mail para confirmar.';suc.style.display='block';
+    }
+    return;
+  }
   const res=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
     method:'POST',
     headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
     body:JSON.stringify({email,password:pass})
   });
   const data=await res.json();
-  if(!res.ok){document.getElementById('lerr').style.display='block';return;}
+  btn.disabled=false;btn.textContent='Entrar';
+  if(!res.ok){err.textContent='E-mail ou senha incorretos.';err.style.display='block';return;}
   me={...data.user,access_token:data.access_token};
-  document.getElementById('lerr').style.display='none';
   const nome=data.user.email.split('@')[0];
   document.getElementById('uav').textContent=nome.substring(0,2).toUpperCase();
   document.getElementById('uname').textContent=nome;
