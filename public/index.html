@@ -523,7 +523,9 @@ function renderArch(data){
 }
 
 function openAdd(){
-  ['a-num','a-orig','a-nasc','a-mac','a-fem'].forEach(x=>document.getElementById(x).value='');
+  ['a-num','a-orig','a-nasc'].forEach(x=>document.getElementById(x).value='');
+  document.getElementById('a-mac').value='0';
+  document.getElementById('a-fem').value='0';
   document.getElementById('a-sala-lbl').value='Sala '+salaAtual;
   document.getElementById('a-lin-lbl').value=linhagemAtual;
   document.getElementById('a-err').style.display='none';
@@ -537,8 +539,8 @@ const nasc=parseDate(nascRaw);  const orig=document.getElementById('a-orig').val
   const mac=parseInt(document.getElementById('a-mac').value)||0;
   const fem=parseInt(document.getElementById('a-fem').value)||0;
   const err=document.getElementById('a-err');err.style.display='none';
-if(!num||!nasc||!orig||(mac<1&&fem<1)){err.textContent='Preencha todos os campos e informe ao menos 1 animal (macho ou fêmea).';err.style.display='block';return;}
-  const btn=document.getElementById('a-btn');btn.disabled=true;btn.textContent='Salvando...';
+if(!num||!nasc||!orig){err.textContent='Preencha todos os campos obrigatórios.';err.style.display='block';return;}
+if(mac<1&&fem<1){err.textContent='Informe ao menos 1 animal (macho ou fêmea).';err.style.display='block';return;}  const btn=document.getElementById('a-btn');btn.disabled=true;btn.textContent='Salvando...';
   try{
     await req('/isoladores','POST',{
       numero:num,sala:salaAtual,linhagem:linhagemAtual,
@@ -671,11 +673,14 @@ function maskDate(el){
   if(v.length>2)v=v.substring(0,2)+'/'+v.substring(2);
   if(v.length>5)v=v.substring(0,5)+'/'+v.substring(5);
   el.value=v;
-}
-function parseDate(str){
+}function parseDate(str){
+  if(!str)return null;
   const p=str.split('/');
   if(p.length!==3||p[2].length!==4)return null;
+  const d=new Date(p[2]+'-'+p[1].padStart(2,'0')+'-'+p[0].padStart(2,'0'));
+  if(isNaN(d.getTime()))return null;
   return p[2]+'-'+p[1].padStart(2,'0')+'-'+p[0].padStart(2,'0');
+}
 }
 function openM(id){document.getElementById(id).classList.add('open');}
 function closeM(id){document.getElementById(id).classList.remove('open');}
