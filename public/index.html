@@ -17,8 +17,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-siz
 input,select,button{font-family:inherit;font-size:12px;box-sizing:border-box}
 button{cursor:pointer}
 .screen{display:none}.screen.active{display:block}
-
-/* LOGIN */
 .lw{min-height:100vh;display:flex;align-items:center;justify-content:center}
 .lc{background:var(--wh);border:1px solid var(--br);border-radius:10px;padding:2rem 1.75rem;width:320px}
 .ll{text-align:center;margin-bottom:1.5rem}
@@ -33,8 +31,6 @@ button{cursor:pointer}
 .bbl{width:100%;padding:8px;background:var(--g);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600}
 .bbl:hover{background:var(--gd)}
 .le{color:#c0392b;font-size:11px;margin-top:6px;text-align:center;display:none}
-
-/* TOPBAR */
 .tb{height:44px;background:var(--wh);border-bottom:1px solid var(--br);display:flex;align-items:center;padding:0 16px;position:sticky;top:0;z-index:50}
 .tb .br2{display:flex;align-items:center;gap:7px;flex:1}
 .tb .br2 .ic{width:26px;height:26px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center}
@@ -43,35 +39,28 @@ button{cursor:pointer}
 .tb .ri{display:flex;align-items:center;gap:7px}
 .av{width:24px;height:24px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--gd)}
 .lo{font-size:10px;padding:2px 8px;border:1px solid var(--br);border-radius:4px;background:none;color:var(--mu);cursor:pointer}
-
-/* TABS */
 .tabs{display:flex;border-bottom:1px solid var(--br);background:var(--wh);padding:0 14px}
 .tab{padding:7px 12px;font-size:11px;font-weight:500;cursor:pointer;color:var(--mu);border-bottom:2px solid transparent;margin-bottom:-1px}
 .tab.active{color:var(--g);border-bottom-color:var(--g)}
-
-/* FILTROS */
 .filtros{padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--br);background:var(--wh);flex-wrap:wrap}
 .filtros label{font-size:11px;color:var(--mu);font-weight:500}
 .filtros select{padding:4px 8px;border:1px solid var(--br);border-radius:5px;background:var(--wh);font-size:11px;min-width:120px}
 .filtros select:focus{outline:none;border-color:var(--g)}
 .filtros select:disabled{opacity:0.5;cursor:not-allowed}
 .sp{flex:1}
-.bn{display:flex;align-items:center;gap:4px;padding:5px 12px;background:var(--g);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600;display:none}
+.bn{display:none;align-items:center;gap:4px;padding:5px 12px;background:var(--g);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600}
 .bn:hover{background:var(--gd)}
 .bn svg{width:11px;height:11px}
-
-/* TOTAIS */
 .totais{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--br)}
 .tc2{background:var(--wh);border:1px solid var(--br);border-radius:7px;padding:8px 12px}
 .tc2 .tl2{font-size:9px;color:var(--mu);font-weight:500;margin-bottom:2px;text-transform:uppercase;letter-spacing:.3px}
 .tc2 .tv{font-size:20px;font-weight:700}
 .tc2.g .tv{color:var(--gd)}.tc2.r .tv{color:#c0392b}.tc2.b .tv{color:#185FA5}.tc2.p .tv{color:#993556}
-
-/* CONTEXTO */
-.ctx{padding:6px 16px;background:var(--wh);border-bottom:1px solid var(--br);font-size:11px;color:var(--mu);display:flex;gap:12px;align-items:center}
+.ctx{padding:6px 16px;background:var(--wh);border-bottom:1px solid var(--br);font-size:11px;color:var(--mu);display:none;gap:8px;align-items:center;flex-wrap:wrap}
 .ctx .ctag{background:var(--gl);color:var(--gd);padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
-
-/* TABLE */
+.lg{display:flex;gap:8px;padding:4px 16px;border-bottom:1px solid var(--br);background:var(--wh);flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--mu)}
+.lb{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 .tw{overflow-x:auto}
 table{border-collapse:collapse;width:100%}
 th{padding:5px 8px;font-size:10px;font-weight:600;color:var(--mu);border:1px solid var(--br);background:var(--th);text-align:center;white-space:nowrap}
@@ -84,8 +73,6 @@ td{padding:5px 8px;border:1px solid var(--br);font-size:11px;text-align:center;v
 .tq{background:#D6E4F0;color:#0C447C}
 .tsa{background:#D5E8D4;color:#27500A}
 tr:hover td{filter:brightness(0.97)}
-
-/* OCC */
 .oc{background:#FFF8F0;text-align:left;padding:3px 6px;white-space:normal;min-width:130px;max-width:200px}
 .ol{display:flex;flex-direction:column;gap:2px;margin-bottom:2px}
 .ot2{display:inline-flex;align-items:center;gap:3px;background:#fff;border:1px solid #FAC775;border-radius:3px;padding:1px 4px;font-size:10px;white-space:nowrap}
@@ -96,31 +83,25 @@ tr:hover td{filter:brightness(0.97)}
 .ot2 .dx:hover{color:#c0392b}
 .ba{display:inline-flex;align-items:center;gap:2px;padding:2px 6px;background:var(--gl);border:1px solid #9FE1CB;border-radius:3px;color:var(--gd);font-size:10px;font-weight:600;cursor:pointer;margin-top:1px}
 .ba:hover{background:#9FE1CB}
-
-/* AÇÕES */
 .ac{display:flex;flex-direction:column;gap:2px;align-items:center}
 .bs{font-size:10px;padding:2px 6px;border-radius:3px;border:1px solid var(--br);background:var(--wh);color:var(--tx);cursor:pointer}
 .bs:hover{background:var(--bg)}
 .bx{background:#FCEBEB;color:#A32D2D;border-color:#F7C1C1}
 .bx:hover{background:#F09595}
-
-/* MISC */
 .empty{text-align:center;padding:2rem;color:var(--mu);font-size:12px}
 .loading{padding:1.5rem;text-align:center;color:var(--mu)}
 .spin{display:inline-block;width:13px;height:13px;border:2px solid var(--br);border-top-color:var(--g);border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle;margin-right:4px}
 @keyframes sp{to{transform:rotate(360deg)}}
-
-/* MODAL */
 .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center;padding:1rem}
 .ov.open{display:flex}
-.mo{background:var(--wh);border-radius:10px;border:1px solid var(--br);padding:1.25rem;width:100%;max-width:440px;max-height:90vh;overflow-y:auto}
+.mo{background:var(--wh);border-radius:10px;border:1px solid var(--br);padding:1.25rem;width:100%;max-width:420px;max-height:90vh;overflow-y:auto}
 .mo h3{font-size:13px;font-weight:600;margin-bottom:.9rem;padding-bottom:7px;border-bottom:1px solid var(--br)}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .mf{margin-bottom:8px}
 .mf label{display:block;font-size:10px;color:var(--mu);margin-bottom:3px;font-weight:500}
 .mf input,.mf select{width:100%;padding:5px 7px;border:1px solid var(--br);border-radius:5px;font-size:11px}
 .mf input:focus,.mf select:focus{outline:none;border-color:var(--g)}
-.mf input:disabled,.mf select:disabled{opacity:0.6;background:#f5f5f3}
+.mf input:disabled{opacity:0.6;background:#f5f5f3}
 .me{color:#c0392b;font-size:10px;margin-top:4px;display:none;padding:4px 7px;background:#FCEBEB;border-radius:4px}
 .mb{display:flex;justify-content:flex-end;gap:6px;margin-top:.9rem;padding-top:8px;border-top:1px solid var(--br)}
 .bc{padding:5px 12px;border:1px solid var(--br);border-radius:5px;background:none;font-size:11px;cursor:pointer}
@@ -128,21 +109,12 @@ tr:hover td{filter:brightness(0.97)}
 .bv{padding:5px 14px;background:var(--g);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer}
 .bv:hover{background:var(--gd)}
 .bv:disabled{opacity:0.6;cursor:not-allowed}
-
-/* TOAST */
 .toast{position:fixed;bottom:14px;right:14px;z-index:999;display:flex;flex-direction:column;gap:4px}
 .ti{background:var(--tx);color:#fff;padding:6px 12px;border-radius:6px;font-size:11px;animation:fi .2s;max-width:240px}
 .ti.ok{background:var(--gd)}.ti.err{background:#c0392b}
 @keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-
-/* ARCH / ADMIN */
 .aw{padding:14px}
 .at{font-size:11px;font-weight:600;color:var(--mu);margin-bottom:8px}
-
-/* LEGENDA */
-.lg{display:flex;gap:8px;padding:4px 16px;border-bottom:1px solid var(--br);background:var(--wh);flex-wrap:wrap}
-.li{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--mu)}
-.lb{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -154,7 +126,7 @@ tr:hover td{filter:brightness(0.97)}
     <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
     <h1>Biotério</h1><p>Gestão de estoque de animais</p>
   </div>
-  <div class="fg"><label>Usuário</label><input id="lu" type="email" placeholder="seu@email.com"/></div>
+  <div class="fg"><label>Email</label><input id="lu" type="email" placeholder="seu@email.com"/></div>
   <div class="fg"><label>Senha</label><input id="lp" type="password" placeholder="••••"/></div>
   <button class="bbl" onclick="doLogin()">Entrar</button>
   <div class="le" id="lerr">Usuário ou senha incorretos.</div>
@@ -170,7 +142,7 @@ tr:hover td{filter:brightness(0.97)}
     </div>
     <div class="ri">
       <div class="av" id="uav">AD</div>
-      <span id="uname" style="font-size:10px;color:var(--mu)">Admin</span>
+      <span id="uname" style="font-size:10px;color:var(--mu)"></span>
       <button class="lo" onclick="doLogout()">Sair</button>
     </div>
   </div>
@@ -186,7 +158,7 @@ tr:hover td{filter:brightness(0.97)}
     <div class="filtros">
       <label>Sala:</label>
       <select id="fSala" onchange="onSalaChange()">
-        <option value="">Todas</option>
+        <option value="">Todas as salas</option>
       </select>
       <label>Linhagem:</label>
       <select id="fLin" onchange="onLinhagemChange()" disabled>
@@ -201,12 +173,12 @@ tr:hover td{filter:brightness(0.97)}
 
     <div class="totais">
       <div class="tc2 b"><div class="tl2">Caixas ativas</div><div class="tv" id="st-cx">—</div></div>
-      <div class="tc2"><div class="tl2">Total de animais</div><div class="tv" id="st-tot">—</div></div>
+      <div class="tc2"><div class="tl2">Total animais</div><div class="tv" id="st-tot">—</div></div>
       <div class="tc2 b"><div class="tl2">Machos</div><div class="tv" id="st-mac">—</div></div>
       <div class="tc2 p"><div class="tl2">Fêmeas</div><div class="tv" id="st-fem">—</div></div>
     </div>
 
-    <div class="ctx" id="ctx-bar" style="display:none">
+    <div class="ctx" id="ctx-bar">
       <span>Visualizando:</span>
       <span class="ctag" id="ctx-sala"></span>
       <span class="ctag" id="ctx-lin" style="display:none"></span>
@@ -275,7 +247,7 @@ tr:hover td{filter:brightness(0.97)}
 
 <div class="toast" id="tc"></div>
 
-<!-- MODAL NOVO ISOLADOR -->
+<!-- MODAL NOVO -->
 <div class="ov" id="m-add"><div class="mo">
   <h3>Novo mini-isolador</h3>
   <div class="r2">
@@ -288,11 +260,14 @@ tr:hover td{filter:brightness(0.97)}
     <div class="mf"><label>Origem *</label><input id="a-orig" placeholder="Ex: 66.93"/></div>
   </div>
   <div class="r2">
-    <div class="mf"><label>Qtd Machos</label><input type="number" id="a-mac" min="0" placeholder="0"/></div>
-    <div class="mf"><label>Qtd Fêmeas</label><input type="number" id="a-fem" min="0" placeholder="0"/></div>
+    <div class="mf"><label>Qtd Machos</label><input type="number" id="a-mac" min="0" value="0"/></div>
+    <div class="mf"><label>Qtd Fêmeas</label><input type="number" id="a-fem" min="0" value="0"/></div>
   </div>
   <div class="me" id="a-err"></div>
-  <div class="mb"><button class="bc" onclick="closeM('m-add')">Cancelar</button><button class="bv" id="a-btn" onclick="saveAdd()">Salvar</button></div>
+  <div class="mb">
+    <button class="bc" onclick="closeM('m-add')">Cancelar</button>
+    <button class="bv" id="a-btn" onclick="saveAdd()">Salvar</button>
+  </div>
 </div></div>
 
 <!-- MODAL EDITAR -->
@@ -300,19 +275,22 @@ tr:hover td{filter:brightness(0.97)}
   <h3>Editar mini-isolador</h3>
   <div class="mf"><label>Número da caixa</label><input id="e-num" disabled/></div>
   <div class="r2">
-    <div class="mf"><label>Sala *</label><select id="e-sala"><option value="">—</option></select></div>
+    <div class="mf"><label>Sala *</label><select id="e-sala" onchange="loadLinhagensSalaEdit()"><option value="">—</option></select></div>
     <div class="mf"><label>Linhagem *</label><select id="e-lin"><option value="">—</option></select></div>
   </div>
   <div class="r2">
-    <div class="mf"><label>Data de nascimento *</label><input type="date" id="e-nasc"/></div>
+    <div class="mf"><label>Data de nascimento *</label><input type="text" id="e-nasc" placeholder="DD/MM/AAAA" maxlength="10" oninput="maskDate(this)"/></div>
     <div class="mf"><label>Origem *</label><input id="e-orig"/></div>
   </div>
   <div class="r2">
-    <div class="mf"><label>Qtd Machos</label><input type="number" id="e-mac" min="0"/></div>
-    <div class="mf"><label>Qtd Fêmeas</label><input type="number" id="e-fem" min="0"/></div>
+    <div class="mf"><label>Qtd Machos</label><input type="number" id="e-mac" min="0" value="0"/></div>
+    <div class="mf"><label>Qtd Fêmeas</label><input type="number" id="e-fem" min="0" value="0"/></div>
   </div>
   <div class="me" id="e-err"></div>
-  <div class="mb"><button class="bc" onclick="closeM('m-edit')">Cancelar</button><button class="bv" id="e-btn" onclick="saveEdit()">Salvar</button></div>
+  <div class="mb">
+    <button class="bc" onclick="closeM('m-edit')">Cancelar</button>
+    <button class="bv" id="e-btn" onclick="saveEdit()">Salvar</button>
+  </div>
 </div></div>
 
 <!-- MODAL OCC -->
@@ -320,21 +298,28 @@ tr:hover td{filter:brightness(0.97)}
   <h3>Adicionar ocorrência</h3>
   <p id="occ-lbl" style="font-size:10px;color:var(--mu);margin-bottom:10px;margin-top:-6px"></p>
   <div class="mf"><label>Tipo *</label>
-    <select id="o-tipo"><option value="">—</option><option>Acasalamento</option><option>Descarte</option><option>Doença</option><option>Óbito</option><option>Pedido</option><option>Raquítico</option><option>Transferência</option><option>Outros</option></select>
+    <select id="o-tipo">
+      <option value="">—</option>
+      <option>Acasalamento</option><option>Descarte</option><option>Doença</option>
+      <option>Óbito</option><option>Pedido</option><option>Raquítico</option>
+      <option>Transferência</option><option>Outros</option>
+    </select>
   </div>
   <div class="r2">
-    <div class="mf"><label>Data *</label><input type="date" id="o-data"/></div>
+    <div class="mf"><label>Data *</label><input type="text" id="o-data" placeholder="DD/MM/AAAA" maxlength="10" oninput="maskDate(this)"/></div>
     <div class="mf"><label>Quantidade *</label><input type="number" id="o-qtd" min="1" placeholder="0"/></div>
   </div>
   <div class="me" id="o-err"></div>
-  <div class="mb"><button class="bc" onclick="closeM('m-occ')">Cancelar</button><button class="bv" id="o-btn" onclick="saveOcc()">Adicionar</button></div>
+  <div class="mb">
+    <button class="bc" onclick="closeM('m-occ')">Cancelar</button>
+    <button class="bv" id="o-btn" onclick="saveOcc()">Adicionar</button>
+  </div>
 </div></div>
 <script>
 const API=window.location.origin+'/api';
 const SUPA_URL='https://ptpcpazpxwsoquottfkk.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0cGNwYXpweHdzb3F1b3R0ZmtrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTU1MzcsImV4cCI6MjA5MjA3MTUzN30.YjoZXVZOfkE5lCrweIMt2TCyWYAPWEamMemAKnARHxA';
-let me=null,allData=[],editId=null,occId=null;
-let salaAtual='',linhagemAtual='';
+let me=null,allData=[],editId=null,occId=null,salaAtual='',linhagemAtual='';
 
 async function doLogin(){
   const email=document.getElementById('lu').value.trim();
@@ -351,20 +336,30 @@ async function doLogin(){
   const nome=data.user.email.split('@')[0];
   document.getElementById('uav').textContent=nome.substring(0,2).toUpperCase();
   document.getElementById('uname').textContent=nome;
-  const perfil=await fetch(SUPA_URL+'/rest/v1/perfis?select=role&id=eq.'+data.user.id,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+data.access_token}});
+  const perfil=await fetch(SUPA_URL+'/rest/v1/perfis?select=role&id=eq.'+data.user.id,{
+    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+data.access_token}
+  });
   const pd=await perfil.json();
-  if(pd[0]?.role==='admin')document.getElementById('tab-admin').style.display='block';
+  if(pd[0]?.role==='admin') document.getElementById('tab-admin').style.display='block';
   showS('s-main');
   await initFiltros();
   loadData();
 }
+
 document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 
 async function doLogout(){
   await fetch(SUPA_URL+'/auth/v1/logout',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(me?.access_token||'')}});
-  me=null;document.getElementById('lu').value='';document.getElementById('lp').value='';showS('s-login');
+  me=null;
+  document.getElementById('lu').value='';
+  document.getElementById('lp').value='';
+  showS('s-login');
 }
-function showS(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+
+function showS(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 
 function switchTab(t){
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
@@ -372,8 +367,8 @@ function switchTab(t){
   document.getElementById('pane-ativo').style.display=t==='ativo'?'block':'none';
   document.getElementById('pane-arch').style.display=t==='arch'?'block':'none';
   document.getElementById('pane-admin').style.display=t==='admin'?'block':'none';
-  if(t==='arch')loadArch();
-  if(t==='admin')loadAdmin();
+  if(t==='arch') loadArch();
+  if(t==='admin') loadAdmin();
 }
 
 async function initFiltros(){
@@ -388,28 +383,24 @@ async function onSalaChange(){
   linhagemAtual='';
   const selLin=document.getElementById('fLin');
   const btnNovo=document.getElementById('btn-novo');
+  const ctxBar=document.getElementById('ctx-bar');
+  const ctxLin=document.getElementById('ctx-lin');
   btnNovo.style.display='none';
-  document.getElementById('ctx-lin').style.display='none';
-
+  ctxLin.style.display='none';
   if(!salaAtual){
     selLin.innerHTML='<option value="">Selecione a sala</option>';
     selLin.disabled=true;
-    document.getElementById('ctx-bar').style.display='none';
+    ctxBar.style.display='none';
     loadData();
     return;
   }
-
   const r=await fetch('/api/linhagens?sala_id='+salaAtual);
   const lins=await r.json();
   selLin.innerHTML='<option value="">Todas as linhagens</option>'+lins.map(l=>`<option value="${l.nome}">${l.codigo} — ${l.nome}</option>`).join('');
   selLin.disabled=false;
   selLin.value='';
-
-  const ctxBar=document.getElementById('ctx-bar');
-  const ctxSala=document.getElementById('ctx-sala');
   ctxBar.style.display='flex';
-  ctxSala.textContent='Sala '+salaAtual;
-
+  document.getElementById('ctx-sala').textContent='Sala '+salaAtual;
   loadData();
 }
 
@@ -430,11 +421,11 @@ function onLinhagemChange(){
 
 async function req(path,method='GET',body=null){
   const opts={method,headers:{'Content-Type':'application/json'}};
-  if(body)opts.body=JSON.stringify(body);
+  if(body) opts.body=JSON.stringify(body);
   const r=await fetch(API+path,opts);
-  if(r.status===204)return null;
+  if(r.status===204) return null;
   const j=await r.json();
-  if(!r.ok)throw new Error(j.error||'Erro');
+  if(!r.ok) throw new Error(j.error||'Erro');
   return j;
 }
 
@@ -443,8 +434,8 @@ async function loadData(){
   document.getElementById('main-tbl').style.display='none';
   document.getElementById('empty-main').style.display='none';
   let qs='?arquivado=false';
-  if(salaAtual)qs+='&sala='+salaAtual;
-  if(linhagemAtual)qs+='&linhagem='+encodeURIComponent(linhagemAtual);
+  if(salaAtual) qs+='&sala='+salaAtual;
+  if(linhagemAtual) qs+='&linhagem='+encodeURIComponent(linhagemAtual);
   try{
     allData=await req('/isoladores'+qs);
     const ativos=allData.filter(r=>(r.saldo||0)>0);
@@ -472,10 +463,31 @@ function renderStats(data){
   document.getElementById('st-fem').textContent=fem;
 }
 
-function fd(d){if(!d)return '';const p=d.split('T')[0].split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+function fd(d){
+  if(!d) return '';
+  const p=d.split('T')[0].split('-');
+  return p[2]+'/'+p[1]+'/'+p[0];
+}
+
+function maskDate(el){
+  let v=el.value.replace(/\D/g,'');
+  if(v.length>2) v=v.substring(0,2)+'/'+v.substring(2);
+  if(v.length>5) v=v.substring(0,5)+'/'+v.substring(5);
+  el.value=v;
+}
+
+function parseDate(str){
+  if(!str||str.length<10) return null;
+  const p=str.split('/');
+  if(p.length!==3||p[2].length!==4) return null;
+  return p[2]+'-'+p[1].padStart(2,'0')+'-'+p[0].padStart(2,'0');
+}
 
 function renderTable(data){
-  const tbl=document.getElementById('main-tbl'),th=document.getElementById('thead-main'),tb=document.getElementById('tbody-main'),em=document.getElementById('empty-main');
+  const tbl=document.getElementById('main-tbl');
+  const th=document.getElementById('thead-main');
+  const tb=document.getElementById('tbody-main');
+  const em=document.getElementById('empty-main');
   if(!data.length){em.style.display='block';return;}
   th.innerHTML=`<tr>
     <th style="text-align:left">Caixa</th>
@@ -487,15 +499,25 @@ function renderTable(data){
     <th>Ações</th>
   </tr>`;
   tb.innerHTML=data.map(row=>{
-    const s=row.saldo??0,o=row.ocorrencias||[];
-    const oh=o.map(x=>`<div class="ot2"><span class="tp">${x.tipo}</span><span class="dt">${fd(x.data_occ)}</span><span class="qt">${x.quantidade}</span><button class="dx" onclick="delOcc(${x.id})">×</button></div>`).join('');
+    const s=row.saldo??0;
+    const o=row.ocorrencias||[];
+    const oh=o.map(x=>`<div class="ot2">
+      <span class="tp">${x.tipo}</span>
+      <span class="dt">${fd(x.data_occ)}</span>
+      <span class="qt">${x.quantidade}</span>
+      <button class="dx" onclick="delOcc(${x.id})">×</button>
+    </div>`).join('');
     return `<tr>
       <td class="tdc">${row.numero}</td>
-      <td>${row.sala}</td><td>${row.linhagem}</td><td>${fd(row.data_nasc)}</td><td>${row.origem}</td>
+      <td>${row.sala}</td><td>${row.linhagem}</td>
+      <td>${fd(row.data_nasc)}</td><td>${row.origem}</td>
       <td class="tdm">${row.qtd_machos||0}</td>
       <td class="tdf">${row.qtd_femeas||0}</td>
       <td class="tds"></td>
-      <td class="oc"><div class="ol">${oh}</div>${!row.arquivado&&s>0?`<button class="ba" onclick="openOcc(${row.id},'${row.numero}',${s})">+ ocorrência</button>`:''}</td>
+      <td class="oc">
+        <div class="ol">${oh}</div>
+        ${!row.arquivado&&s>0?`<button class="ba" onclick="openOcc(${row.id},'${row.numero}',${s})">+ ocorrência</button>`:''}
+      </td>
       <td class="${s===0?'sr':'sv2'}">${s}</td>
       <td><div class="ac">
         <button class="bs" onclick="openEdit(${row.id})">Editar</button>
@@ -507,7 +529,9 @@ function renderTable(data){
 }
 
 function renderArch(data){
-  const tbl=document.getElementById('arch-tbl'),tb=document.getElementById('tbody-arch'),em=document.getElementById('empty-arch');
+  const tbl=document.getElementById('arch-tbl');
+  const tb=document.getElementById('tbody-arch');
+  const em=document.getElementById('empty-arch');
   if(!data.length){em.style.display='block';return;}
   tb.innerHTML=data.map(r=>`<tr>
     <td style="text-align:left;padding:4px 8px;border:1px solid var(--br);font-weight:600">${r.numero}</td>
@@ -523,7 +547,9 @@ function renderArch(data){
 }
 
 function openAdd(){
-  ['a-num','a-orig','a-nasc'].forEach(x=>document.getElementById(x).value='');
+  document.getElementById('a-num').value='';
+  document.getElementById('a-nasc').value='';
+  document.getElementById('a-orig').value='';
   document.getElementById('a-mac').value='0';
   document.getElementById('a-fem').value='0';
   document.getElementById('a-sala-lbl').value='Sala '+salaAtual;
@@ -534,16 +560,26 @@ function openAdd(){
 
 async function saveAdd(){
   const num=document.getElementById('a-num').value.trim();
-const nascRaw=document.getElementById('a-nasc').value;
+  const nascRaw=document.getElementById('a-nasc').value;
   const nasc=parseDate(nascRaw);
   const orig=document.getElementById('a-orig').value.trim();
   const mac=parseInt(document.getElementById('a-mac').value)||0;
   const fem=parseInt(document.getElementById('a-fem').value)||0;
-  const err=document.getElementById('a-err');err.style.display='none';
-if(!num||!nasc||!orig){err.textContent='Preencha todos os campos obrigatórios.';err.style.display='block';return;}
-if(mac<1&&fem<1){err.textContent='Informe ao menos 1 animal (macho ou fêmea).';err.style.display='block';return;}
+  const err=document.getElementById('a-err');
+  err.style.display='none';
+  if(!num||!nasc||!orig){
+    err.textContent='Preencha todos os campos obrigatórios.';
+    err.style.display='block';
+    return;
+  }
+  if(mac<1&&fem<1){
+    err.textContent='Informe ao menos 1 animal (macho ou fêmea).';
+    err.style.display='block';
+    return;
+  }
   const btn=document.getElementById('a-btn');
-    try{
+  btn.disabled=true;btn.textContent='Salvando...';
+  try{
     await req('/isoladores','POST',{
       numero:num,sala:salaAtual,linhagem:linhagemAtual,
       data_nasc:nasc,origem:orig,
@@ -555,10 +591,11 @@ if(mac<1&&fem<1){err.textContent='Informe ao menos 1 animal (macho ou fêmea).';
 }
 
 async function openEdit(id){
-  const row=allData.find(r=>r.id===id);if(!row)return;
+  const row=allData.find(r=>r.id===id);
+  if(!row) return;
   editId=id;
   document.getElementById('e-num').value=row.numero;
-  document.getElementById('e-nasc').value=row.data_nasc?row.data_nasc.split('T')[0]:'';
+  document.getElementById('e-nasc').value=fd(row.data_nasc);
   document.getElementById('e-orig').value=row.origem;
   document.getElementById('e-mac').value=row.qtd_machos||0;
   document.getElementById('e-fem').value=row.qtd_femeas||0;
@@ -572,19 +609,41 @@ async function openEdit(id){
   openM('m-edit');
 }
 
+async function loadLinhagensSalaEdit(){
+  const sala=document.getElementById('e-sala').value;
+  if(!sala) return;
+  const r=await fetch('/api/linhagens?sala_id='+sala);
+  const lins=await r.json();
+  document.getElementById('e-lin').innerHTML=lins.map(l=>`<option value="${l.nome}">${l.codigo} — ${l.nome}</option>`).join('');
+}
+
 async function saveEdit(){
   const sala=document.getElementById('e-sala').value;
   const lin=document.getElementById('e-lin').value;
-const nascRaw=document.getElementById('e-nasc').value;
+  const nascRaw=document.getElementById('e-nasc').value;
   const nasc=parseDate(nascRaw);
   const orig=document.getElementById('e-orig').value.trim();
   const mac=parseInt(document.getElementById('e-mac').value)||0;
   const fem=parseInt(document.getElementById('e-fem').value)||0;
-  const err=document.getElementById('e-err');err.style.display='none';
-  if(!sala||!lin||!nasc||!orig||(mac+fem)<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
-  const btn=document.getElementById('e-btn');btn.disabled=true;btn.textContent='Salvando...';
+  const err=document.getElementById('e-err');
+  err.style.display='none';
+  if(!sala||!lin||!nasc||!orig){
+    err.textContent='Preencha todos os campos obrigatórios.';
+    err.style.display='block';
+    return;
+  }
+  if(mac<1&&fem<1){
+    err.textContent='Informe ao menos 1 animal (macho ou fêmea).';
+    err.style.display='block';
+    return;
+  }
+  const btn=document.getElementById('e-btn');
+  btn.disabled=true;btn.textContent='Salvando...';
   try{
-    await req('/isoladores/'+editId,'PUT',{sala,linhagem:lin,data_nasc:nasc,origem:orig,quantidade:mac+fem,qtd_machos:mac,qtd_femeas:fem});
+    await req('/isoladores/'+editId,'PUT',{
+      sala,linhagem:lin,data_nasc:nasc,origem:orig,
+      quantidade:mac+fem,qtd_machos:mac,qtd_femeas:fem
+    });
     closeM('m-edit');toast('Atualizado!','ok');loadData();
   }catch(e){err.textContent=e.message;err.style.display='block';}
   finally{btn.disabled=false;btn.textContent='Salvar';}
@@ -593,28 +652,42 @@ const nascRaw=document.getElementById('e-nasc').value;
 function openOcc(id,numero,saldo){
   occId=id;
   document.getElementById('occ-lbl').textContent='Caixa: '+numero+' — Saldo: '+saldo;
-  ['o-tipo','o-data','o-qtd'].forEach(x=>document.getElementById(x).value='');
-  document.getElementById('o-err').style.display='none';openM('m-occ');
+  document.getElementById('o-tipo').value='';
+  document.getElementById('o-data').value='';
+  document.getElementById('o-qtd').value='';
+  document.getElementById('o-err').style.display='none';
+  openM('m-occ');
 }
 
 async function saveOcc(){
-  const tipo=document.getElementById('o-tipo').value,data=document.getElementById('o-data').value,qtd=parseInt(document.getElementById('o-qtd').value)||0;
-  const err=document.getElementById('o-err');err.style.display='none';
-  if(!tipo||!data||qtd<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
-  const btn=document.getElementById('o-btn');btn.disabled=true;btn.textContent='Salvando...';
-  try{await req('/ocorrencias','POST',{isolador_id:occId,tipo,data_occ:data,quantidade:qtd});closeM('m-occ');toast('Ocorrência registrada!','ok');loadData();}
-  catch(e){err.textContent=e.message;err.style.display='block';}
+  const tipo=document.getElementById('o-tipo').value;
+  const dataRaw=document.getElementById('o-data').value;
+  const dataOcc=parseDate(dataRaw);
+  const qtd=parseInt(document.getElementById('o-qtd').value)||0;
+  const err=document.getElementById('o-err');
+  err.style.display='none';
+  if(!tipo||!dataOcc||qtd<1){
+    err.textContent='Preencha todos os campos.';
+    err.style.display='block';
+    return;
+  }
+  const btn=document.getElementById('o-btn');
+  btn.disabled=true;btn.textContent='Salvando...';
+  try{
+    await req('/ocorrencias','POST',{isolador_id:occId,tipo,data_occ:dataOcc,quantidade:qtd});
+    closeM('m-occ');toast('Ocorrência registrada!','ok');loadData();
+  }catch(e){err.textContent=e.message;err.style.display='block';}
   finally{btn.disabled=false;btn.textContent='Adicionar';}
 }
 
 async function delOcc(id){
-  if(!confirm('Remover esta ocorrência?'))return;
+  if(!confirm('Remover esta ocorrência?')) return;
   try{await req('/ocorrencias','DELETE',{id});toast('Removida.','ok');loadData();}
   catch(e){toast(e.message,'err');}
 }
 
 async function archRow(id){
-  if(!confirm('Arquivar este mini-isolador?'))return;
+  if(!confirm('Arquivar este mini-isolador?')) return;
   try{await req('/isoladores/'+id,'PATCH',{arquivado:true});toast('Arquivado!','ok');loadData();}
   catch(e){toast(e.message,'err');}
 }
@@ -643,7 +716,8 @@ async function loadAdmin(){
 async function toggleSala(id,ativa){
   await fetch('/api/salas',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,ativa})});
   toast(ativa?'Sala ativada!':'Sala desativada.','ok');
-  loadAdmin();initFiltros();
+  loadAdmin();
+  initFiltros();
 }
 
 async function loadAdminLinhagens(){
@@ -671,26 +745,19 @@ async function toggleLinhagem(sala_id,linhagem_codigo,ativa){
     toast('Linhagem removida.','ok');
   }
 }
-function maskDate(el){
-  let v=el.value.replace(/\D/g,'');
-  if(v.length>2)v=v.substring(0,2)+'/'+v.substring(2);
-  if(v.length>5)v=v.substring(0,5)+'/'+v.substring(5);
-  el.value=v;
-}function parseDate(str){
-  if(!str)return null;
-  const p=str.split('/');
-  if(p.length!==3||p[2].length!==4)return null;
-  const d=new Date(p[2]+'-'+p[1].padStart(2,'0')+'-'+p[0].padStart(2,'0'));
-  if(isNaN(d.getTime()))return null;
-  return p[2]+'-'+p[1].padStart(2,'0')+'-'+p[0].padStart(2,'0');
-}
-}
+
 function openM(id){document.getElementById(id).classList.add('open');}
 function closeM(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.ov').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});});
+document.querySelectorAll('.ov').forEach(o=>{
+  o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});
+});
 function toast(msg,type='ok'){
-  const c=document.getElementById('tc'),el=document.createElement('div');
-  el.className='ti '+type;el.textContent=msg;c.appendChild(el);setTimeout(()=>el.remove(),3500);
+  const c=document.getElementById('tc');
+  const el=document.createElement('div');
+  el.className='ti '+type;
+  el.textContent=msg;
+  c.appendChild(el);
+  setTimeout(()=>el.remove(),3500);
 }
 </script>
 </body>
