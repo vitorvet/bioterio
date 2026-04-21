@@ -327,15 +327,17 @@ async function doLogin(){
   });
   const data=await res.json();
   if(!res.ok){document.getElementById('lerr').style.display='block';return;}
-  me=data.user;
+  me={...data.user, access_token: data.access_token};
   document.getElementById('lerr').style.display='none';
-  const nome=data.user.email.split('@')[0];
+ const nome=data.user.email.split('@')[0];
   document.getElementById('uav').textContent=nome.substring(0,2).toUpperCase();
   document.getElementById('uname').textContent=nome;
-const perfil=await fetch(SUPA_URL+'/rest/v1/perfis?select=role&id=eq.'+data.user.id,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+data.access_token}});
+  const perfil=await fetch(SUPA_URL+'/rest/v1/perfis?select=role&id=eq.'+data.user.id,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+data.access_token}});
   const pd=await perfil.json();
   if(pd[0]?.role==='admin')document.getElementById('tab-admin').style.display='block';
-  showS('s-main');loadData();}
+  showS('s-main');
+  loadData();
+}
 document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 async function doLogout(){
   await fetch(SUPA_URL+'/auth/v1/logout',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(me?.access_token||'')}});
