@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Biotério — Gestão de Animais</title>
+<title>Biotério - IGM — Gestão de Animais</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -172,7 +172,9 @@ tr:hover td{filter:brightness(0.97)}
   </div>
   <div class="tabs">
     <div class="tab active" id="tab-ativo" onclick="switchTab('ativo')">Estoque ativo</div>
-    <div class="tab" id="tab-arch" onclick="switchTab('arch')">Arquivados</div>
+<div class="tab" id="tab-arch" onclick="switchTab('arch')">Arquivados</div>
+    <div class="tab" id="tab-admin" onclick="switchTab('admin')" style="display:none">Admin</div>
+        <div class="tab" id="tab-admin" onclick="switchTab('admin')" style="display:none">Admin</div>
   </div>
 
   <div id="pane-ativo">
@@ -231,6 +233,27 @@ tr:hover td{filter:brightness(0.97)}
 </div>
 </div>
 
+<div id="pane-admin" style="display:none">
+    <div class="aw">
+      <p class="at" style="font-size:13px;margin-bottom:16px">Painel de administração</p>
+      <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Salas</p>
+      <div id="admin-salas" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px"></div>
+      <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Linhagens por sala</p>
+      <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px">
+        <label style="font-size:11px;color:var(--mu)">Sala:</label>
+        <select id="admin-sala-sel" onchange="loadAdminLinhagens()" style="padding:3px 8px;border:1px solid var(--br);border-radius:4px;font-size:11px"><option value="">Selecione</option></select>
+      </div>
+      <div id="admin-linhagens" style="margin-bottom:16px"></div>
+      <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Todas as linhagens cadastradas</p>
+      <table style="border-collapse:collapse;font-size:11px">
+        <thead><tr>
+          <th style="padding:4px 10px;border:1px solid var(--br);background:var(--th);text-align:left">Código</th>
+          <th style="padding:4px 10px;border:1px solid var(--br);background:var(--th);text-align:left">Nome</th>
+        </tr></thead>
+        <tbody id="admin-lin-table"></tbody>
+      </table>
+    </div>
+  </div>
 <div class="toast" id="tc"></div>
 
 <!-- MODAL NOVO -->
@@ -309,20 +332,30 @@ async function doLogin(){
   const nome=data.user.email.split('@')[0];
   document.getElementById('uav').textContent=nome.substring(0,2).toUpperCase();
   document.getElementById('uname').textContent=nome;
-  showS('s-main');loadData();
-}
+const perfil=await fetch(SUPA_URL+'/rest/v1/perfis?select=role&id=eq.'+data.user.id,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+data.access_token}});
+  const pd=await perfil.json();
+  if(pd[0]?.role==='admin')document.getElementById('tab-admin').style.display='block';
+  showS('s-main');loadData();}
 document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 async function doLogout(){
   await fetch(SUPA_URL+'/auth/v1/logout',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(me?.access_token||'')}});
   me=null;document.getElementById('lu').value='';document.getElementById('lp').value='';showS('s-login');
 }
 function showS(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+async function isAdmin(){
+  if(!me)return false;
+  const r=await fetch(SUPA_URL+'/rest/v1/perfis?select=role&id=eq.'+me.id,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+me.access_token}});
+  const d=await r.json();
+  return d[0]?.role==='admin';
+}
 function switchTab(t){
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.getElementById('tab-'+t).classList.add('active');
   document.getElementById('pane-ativo').style.display=t==='ativo'?'block':'none';
   document.getElementById('pane-arch').style.display=t==='arch'?'block':'none';
+  document.getElementById('pane-admin').style.display=t==='admin'?'block':'none';
   if(t==='arch')loadArch();
+  if(t==='admin')loadAdmin();
 }
 async function req(path,method='GET',body=null){
   const opts={method,headers:{'Content-Type':'application/json'}};
@@ -333,7 +366,55 @@ async function req(path,method='GET',body=null){
   if(!r.ok)throw new Error(j.error||'Erro');
   return j;
 }
-async function loadData(){
+async function loadAdmin(){
+  const r=await fetch('/api/salas');
+  const salas=await r.json();
+  document.getElementById('admin-salas').innerHTML=salas.map(s=>`
+    <div style="display:flex;align-items:center;gap:6px;background:var(--wh);border:1px solid var(--br);border-radius:6px;padding:6px 12px">
+      <span style="font-weight:600;font-size:12px">Sala ${s.id}</span>
+      <label style="display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer">
+        <input type="checkbox" ${s.ativa?'checked':''} onchange="toggleSala('${s.id}',this.checked)" style="width:14px;height:14px;accent-color:var(--g)">
+        <span style="color:${s.ativa?'var(--gd)':'#c0392b'}">${s.ativa?'Ativa':'Inativa'}</span>
+      </label>
+    </div>`).join('');
+  const sel=document.getElementById('admin-sala-sel');
+  sel.innerHTML='<option value="">Selecione</option>'+salas.map(s=>`<option value="${s.id}">Sala ${s.id}${s.ativa?'':' (inativa)'}</option>`).join('');
+  const r2=await fetch('/api/linhagens');
+  const lins=await r2.json();
+  document.getElementById('admin-lin-table').innerHTML=lins.map(l=>`<tr>
+    <td style="padding:3px 10px;border:1px solid var(--br);font-weight:600">${l.codigo}</td>
+    <td style="padding:3px 10px;border:1px solid var(--br)">${l.nome}</td>
+  </tr>`).join('');
+}
+async function toggleSala(id,ativa){
+  await fetch('/api/salas',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,ativa})});
+  toast(ativa?'Sala ativada!':'Sala desativada.','ok');
+  loadAdmin();
+}
+async function loadAdminLinhagens(){
+  const sala=document.getElementById('admin-sala-sel').value;
+  const div=document.getElementById('admin-linhagens');
+  if(!sala){div.innerHTML='';return;}
+  const r=await fetch('/api/linhagens');
+  const todas=await r.json();
+  const r2=await fetch('/api/linhagens?sala_id='+sala);
+  const ativas=await r2.json();
+  const ativasCod=ativas.map(l=>l.codigo);
+  div.innerHTML='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">'+todas.map(l=>`
+    <label style="display:flex;align-items:center;gap:4px;background:var(--wh);border:1px solid ${ativasCod.includes(l.codigo)?'#9FE1CB':'var(--br)'};border-radius:5px;padding:4px 8px;font-size:11px;cursor:pointer">
+      <input type="checkbox" ${ativasCod.includes(l.codigo)?'checked':''} onchange="toggleLinhagem('${sala}','${l.codigo}',this.checked)" style="width:13px;height:13px;accent-color:var(--g)">
+      <span>${l.codigo} — ${l.nome}</span>
+    </label>`).join('')+'</div>';
+}
+async function toggleLinhagem(sala_id,linhagem_codigo,ativa){
+  if(ativa){
+    await fetch('/api/linhagens',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sala_id,linhagem_codigo})});
+    toast('Linhagem adicionada!','ok');
+  } else {
+    await fetch('/api/linhagens',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({sala_id,linhagem_codigo})});
+    toast('Linhagem removida.','ok');
+  }
+}
   const sala=document.getElementById('fSala').value,lin=document.getElementById('fLin').value,sexo=document.getElementById('fSexo').value;
   document.getElementById('ld-main').style.display='block';
   document.getElementById('main-tbl').style.display='none';
