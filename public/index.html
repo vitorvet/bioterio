@@ -417,6 +417,7 @@ async function toggleLinhagem(sala_id,linhagem_codigo,ativa){
     toast('Linhagem removida.','ok');
   }
 }
+async function loadData(){
   const sala=document.getElementById('fSala').value,lin=document.getElementById('fLin').value,sexo=document.getElementById('fSexo').value;
   document.getElementById('ld-main').style.display='block';
   document.getElementById('main-tbl').style.display='none';
