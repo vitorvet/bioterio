@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     let query = supabase
       .from('v_isoladores')
       .select('*')
-      .order('criado_em', { ascending: false });
+      .order('criado_em', { ascending: true });
     if (sala) query = query.eq('sala', sala);
     if (linhagem) query = query.eq('linhagem', linhagem);
     query = query.eq('arquivado', arquivado === 'true');
