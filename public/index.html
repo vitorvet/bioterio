@@ -583,8 +583,7 @@ function renderArch(data){
   tbl.style.display='table';
 }
 
-function openAdd(){
-  document.getElementById('a-num').value='';
+async function openAdd(){
   document.getElementById('a-nasc').value='';
   document.getElementById('a-orig').value='';
   document.getElementById('a-mac').value='0';
@@ -592,6 +591,23 @@ function openAdd(){
   document.getElementById('a-sala-lbl').value='Sala '+salaAtual;
   document.getElementById('a-lin-lbl').value=linhagemAtual;
   document.getElementById('a-err').style.display='none';
+  document.getElementById('a-num').value='';
+  try{
+    const dados=await req('/isoladores?arquivado=false&linhagem='+encodeURIComponent(linhagemAtual));
+    const arquivados=await req('/isoladores?arquivado=true&linhagem='+encodeURIComponent(linhagemAtual));
+    const todos=[...(dados||[]),...(arquivados||[])];
+    if(todos.length>0){
+      const numeros=todos.map(r=>{
+        const partes=r.numero.split('.');
+        return parseFloat(partes[partes.length-1]);
+      }).filter(n=>!isNaN(n));
+      if(numeros.length>0){
+        const prefixo=todos[0].numero.substring(0,todos[0].numero.lastIndexOf('.'));
+        const maximo=Math.max(...numeros);
+        document.getElementById('a-num').value=prefixo+'.'+(maximo+1);
+      }
+    }
+  }catch(e){}
   openM('m-add');
 }
 
