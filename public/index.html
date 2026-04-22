@@ -28,9 +28,11 @@ button{cursor:pointer}
 .fg label{display:block;font-size:11px;color:var(--mu);margin-bottom:3px;font-weight:500}
 .fg input{width:100%;padding:7px 9px;border:1px solid var(--br);border-radius:6px}
 .fg input:focus{outline:none;border-color:var(--g)}
-.bbl{width:100%;padding:8px;background:var(--g);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600}
+.bbl{width:100%;padding:8px;background:var(--g);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;margin-top:4px}
 .bbl:hover{background:var(--gd)}
+.bbl:disabled{opacity:0.6;cursor:not-allowed}
 .le{color:#c0392b;font-size:11px;margin-top:6px;text-align:center;display:none}
+.ls{color:var(--g);font-size:11px;margin-top:6px;text-align:center;display:none}
 .tb{height:44px;background:var(--wh);border-bottom:1px solid var(--br);display:flex;align-items:center;padding:0 16px;position:sticky;top:0;z-index:50}
 .tb .br2{display:flex;align-items:center;gap:7px;flex:1}
 .tb .br2 .ic{width:26px;height:26px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center}
@@ -48,7 +50,7 @@ button{cursor:pointer}
 .filtros select:focus{outline:none;border-color:var(--g)}
 .filtros select:disabled{opacity:0.5;cursor:not-allowed}
 .sp{flex:1}
-.bn{display:none;align-items:center;gap:4px;padding:5px 12px;background:var(--g);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600}
+.bn{display:none;align-items:center;gap:4px;padding:5px 12px;background:var(--g);color:#fff;border:none;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer}
 .bn:hover{background:var(--gd)}
 .bn svg{width:11px;height:11px}
 .totais{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--br)}
@@ -119,7 +121,6 @@ tr:hover td{filter:brightness(0.97)}
 </head>
 <body>
 <div id="app">
-
   <!-- LOGIN -->
 <div class="screen active" id="s-login">
 <div class="lw"><div class="lc">
@@ -131,7 +132,7 @@ tr:hover td{filter:brightness(0.97)}
   <div class="fg"><label>E-mail</label><input id="lu" type="email" placeholder="seu@email.com"/></div>
   <div class="fg"><label>Senha</label><input id="lp" type="password" placeholder="••••••••"/></div>
   <div class="le" id="lerr"></div>
-  <div class="ls" id="lsuc" style="color:#1D9E75;font-size:11px;margin-top:6px;text-align:center;display:none"></div>
+  <div class="ls" id="lsuc"></div>
   <button class="bbl" id="login-btn" onclick="doLogin()">Entrar</button>
   <p style="font-size:11px;color:var(--mu);text-align:center;margin-top:12px;cursor:pointer" id="login-toggle" onclick="toggleModo()">Não tem conta? Cadastre-se</p>
 </div></div>
@@ -161,33 +162,26 @@ tr:hover td{filter:brightness(0.97)}
   <div id="pane-ativo">
     <div class="filtros">
       <label>Sala:</label>
-      <select id="fSala" onchange="onSalaChange()">
-        <option value="">Todas as salas</option>
-      </select>
+      <select id="fSala" onchange="onSalaChange()"><option value="">Todas as salas</option></select>
       <label>Linhagem:</label>
-      <select id="fLin" onchange="onLinhagemChange()" disabled>
-        <option value="">Selecione a sala</option>
-      </select>
+      <select id="fLin" onchange="onLinhagemChange()" disabled><option value="">Selecione a sala</option></select>
       <div class="sp"></div>
       <button class="bn" id="btn-novo" onclick="openAdd()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         Novo mini-isolador
       </button>
     </div>
-
     <div class="totais">
       <div class="tc2 b"><div class="tl2">Caixas ativas</div><div class="tv" id="st-cx">—</div></div>
       <div class="tc2"><div class="tl2">Total animais</div><div class="tv" id="st-tot">—</div></div>
       <div class="tc2 b"><div class="tl2">Machos</div><div class="tv" id="st-mac">—</div></div>
       <div class="tc2 p"><div class="tl2">Fêmeas</div><div class="tv" id="st-fem">—</div></div>
     </div>
-
     <div class="ctx" id="ctx-bar">
       <span>Visualizando:</span>
       <span class="ctag" id="ctx-sala"></span>
       <span class="ctag" id="ctx-lin" style="display:none"></span>
     </div>
-
     <div class="lg">
       <div class="li"><div class="lb" style="background:var(--bl);border:1px solid #B5D4F4"></div>Machos</div>
       <div class="li"><div class="lb" style="background:var(--pl);border:1px solid #F4C0D1"></div>Fêmeas</div>
@@ -195,13 +189,9 @@ tr:hover td{filter:brightness(0.97)}
       <div class="li"><div class="lb" style="background:var(--rr)"></div>Saldo zerado</div>
       <div class="li"><div class="lb" style="background:#FFF8F0;border:1px solid #FAC775"></div>Ocorrências</div>
     </div>
-
     <div class="tw">
       <div class="loading" id="ld-main"><span class="spin"></span>Carregando...</div>
-      <table id="main-tbl" style="display:none">
-        <thead id="thead-main"></thead>
-        <tbody id="tbody-main"></tbody>
-      </table>
+      <table id="main-tbl" style="display:none"><thead id="thead-main"></thead><tbody id="tbody-main"></tbody></table>
       <div class="empty" id="empty-main" style="display:none">Nenhum registro encontrado.</div>
     </div>
   </div>
@@ -215,7 +205,7 @@ tr:hover td{filter:brightness(0.97)}
         <table id="arch-tbl" style="display:none;border-collapse:collapse;width:100%">
           <thead><tr>
             <th style="text-align:left">Caixa</th><th>Sala</th><th>Linhagem</th>
-            <th>Nasc.</th><th>Origem</th><th>Machos</th><th>Fêmeas</th><th>Ocorrências</th>
+            <th>Nasc.</th><th>Idade</th><th>Origem</th><th>Machos</th><th>Fêmeas</th><th>Ocorrências</th>
           </tr></thead>
           <tbody id="tbody-arch"></tbody>
         </table>
@@ -261,7 +251,7 @@ tr:hover td{filter:brightness(0.97)}
   <div class="mf"><label>Número da caixa *</label><input id="a-num" placeholder="Ex: 66.173"/></div>
   <div class="r2">
     <div class="mf"><label>Data de nascimento *</label><input type="text" id="a-nasc" placeholder="DD/MM/AAAA" maxlength="10" oninput="maskDate(this)"/></div>
-    <div class="mf"><label>Origem *</label><input id="a-orig" placeholder="Ex: 66.93"/></div>
+    <div class="mf"><label>Origem</label><input id="a-orig" placeholder="Ex: 66.93"/></div>
   </div>
   <div class="r2">
     <div class="mf"><label>Qtd Machos</label><input type="number" id="a-mac" min="0" value="0"/></div>
@@ -284,7 +274,7 @@ tr:hover td{filter:brightness(0.97)}
   </div>
   <div class="r2">
     <div class="mf"><label>Data de nascimento *</label><input type="text" id="e-nasc" placeholder="DD/MM/AAAA" maxlength="10" oninput="maskDate(this)"/></div>
-    <div class="mf"><label>Origem *</label><input id="e-orig"/></div>
+    <div class="mf"><label>Origem</label><input id="e-orig"/></div>
   </div>
   <div class="r2">
     <div class="mf"><label>Qtd Machos</label><input type="number" id="e-mac" min="0" value="0"/></div>
@@ -319,13 +309,12 @@ tr:hover td{filter:brightness(0.97)}
     <button class="bv" id="o-btn" onclick="saveOcc()">Adicionar</button>
   </div>
 </div></div>
+
 <script>
 const API=window.location.origin+'/api';
 const SUPA_URL='https://ptpcpazpxwsoquottfkk.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0cGNwYXpweHdzb3F1b3R0ZmtrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTU1MzcsImV4cCI6MjA5MjA3MTUzN30.YjoZXVZOfkE5lCrweIMt2TCyWYAPWEamMemAKnARHxA';
-let me=null,allData=[],editId=null,occId=null,salaAtual='',linhagemAtual='';
-
-let loginModo='login';
+let me=null,allData=[],editId=null,occId=null,salaAtual='',linhagemAtual='',loginModo='login';
 
 function toggleModo(){
   loginModo=loginModo==='login'?'cadastro':'login';
@@ -378,16 +367,14 @@ async function doLogin(){
   });
   const pd=await perfil.json();
   if(pd[0]?.role==='admin') document.getElementById('tab-admin').style.display='block';
-  
   showS('s-main');
-  await initFiltros();
-  salaAtual='';
-  linhagemAtual='';
+  salaAtual='';linhagemAtual='';
   document.getElementById('fSala').value='';
   document.getElementById('fLin').value='';
   document.getElementById('fLin').disabled=true;
   document.getElementById('btn-novo').style.display='none';
   document.getElementById('ctx-bar').style.display='none';
+  await initFiltros();
   loadData();
 }
 
@@ -395,10 +382,7 @@ document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')
 
 async function doLogout(){
   await fetch(SUPA_URL+'/auth/v1/logout',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+(me?.access_token||'')}});
-  me=null;
-  document.getElementById('lu').value='';
-  document.getElementById('lp').value='';
-  showS('s-login');
+  me=null;document.getElementById('lu').value='';document.getElementById('lp').value='';showS('s-login');
 }
 
 function showS(id){
@@ -427,23 +411,20 @@ async function onSalaChange(){
   salaAtual=document.getElementById('fSala').value;
   linhagemAtual='';
   const selLin=document.getElementById('fLin');
-  const btnNovo=document.getElementById('btn-novo');
   const ctxBar=document.getElementById('ctx-bar');
   const ctxLin=document.getElementById('ctx-lin');
-  btnNovo.style.display='none';
+  document.getElementById('btn-novo').style.display='none';
   ctxLin.style.display='none';
   if(!salaAtual){
     selLin.innerHTML='<option value="">Selecione a sala</option>';
     selLin.disabled=true;
     ctxBar.style.display='none';
-    loadData();
-    return;
+    loadData();return;
   }
   const r=await fetch('/api/linhagens?sala_id='+salaAtual);
   const lins=await r.json();
   selLin.innerHTML='<option value="">Todas as linhagens</option>'+lins.map(l=>`<option value="${l.nome}">${l.codigo} — ${l.nome}</option>`).join('');
-  selLin.disabled=false;
-  selLin.value='';
+  selLin.disabled=false;selLin.value='';
   ctxBar.style.display='flex';
   document.getElementById('ctx-sala').textContent='Sala '+salaAtual;
   loadData();
@@ -523,13 +504,10 @@ function fd(d){
 }
 
 function calcIdade(d){
-
-function calcIdade(d){
   if(!d) return '';
   const nasc=new Date(d.split('T')[0]);
   const hoje=new Date();
-  const diff=hoje-nasc;
-  const dias=Math.floor(diff/(1000*60*60*24));
+  const dias=Math.floor((hoje-nasc)/(1000*60*60*24));
   if(dias<30) return dias+'d';
   const meses=Math.floor(dias/30);
   if(meses<12) return meses+'m';
@@ -579,7 +557,9 @@ function renderTable(data){
     return `<tr>
       <td class="tdc">${row.numero}</td>
       <td>${row.sala}</td><td>${row.linhagem}</td>
-      <td>${fd(row.data_nasc)}</td><td>${calcIdade(row.data_nasc)}</td><td>${row.origem}</td>
+      <td>${fd(row.data_nasc)}</td>
+      <td>${calcIdade(row.data_nasc)}</td>
+      <td>${row.origem||''}</td>
       <td class="tdm">${row.qtd_machos||0}</td>
       <td class="tdf">${row.qtd_femeas||0}</td>
       <td class="tds"></td>
@@ -607,7 +587,8 @@ function renderArch(data){
     <td style="padding:4px 8px;border:1px solid var(--br);text-align:center">${r.sala}</td>
     <td style="padding:4px 8px;border:1px solid var(--br);text-align:center">${r.linhagem}</td>
     <td style="padding:4px 8px;border:1px solid var(--br);text-align:center">${fd(r.data_nasc)}</td>
-    <td style="padding:4px 8px;border:1px solid var(--br);text-align:center">${r.origem}</td>
+    <td style="padding:4px 8px;border:1px solid var(--br);text-align:center">${calcIdade(r.data_nasc)}</td>
+    <td style="padding:4px 8px;border:1px solid var(--br);text-align:center">${r.origem||''}</td>
     <td style="padding:4px 8px;border:1px solid var(--br);text-align:center;background:var(--bl)">${r.qtd_machos||0}</td>
     <td style="padding:4px 8px;border:1px solid var(--br);text-align:center;background:var(--pl)">${r.qtd_femeas||0}</td>
     <td style="padding:4px 8px;border:1px solid var(--br);font-size:10px">${(r.ocorrencias||[]).map(o=>o.tipo+' ('+o.quantidade+')').join(', ')||'—'}</td>
@@ -640,8 +621,7 @@ async function openAdd(){
       }
     }
   }catch(e){}
-
- openM('m-add');
+  openM('m-add');
   setTimeout(()=>document.getElementById('a-nasc').focus(),100);
 }
 
@@ -654,16 +634,13 @@ async function saveAdd(){
   const fem=parseInt(document.getElementById('a-fem').value)||0;
   const err=document.getElementById('a-err');
   err.style.display='none';
-
-if(!num||!nasc){
-    err.textContent='Preencha todos os campos obrigatórios.';
-    err.style.display='block';
-    return;
+  if(!num||!nasc){
+    err.textContent='Preencha o número e a data de nascimento.';
+    err.style.display='block';return;
   }
   if(mac<1&&fem<1){
     err.textContent='Informe ao menos 1 animal (macho ou fêmea).';
-    err.style.display='block';
-    return;
+    err.style.display='block';return;
   }
   const btn=document.getElementById('a-btn');
   btn.disabled=true;btn.textContent='Salvando...';
@@ -684,7 +661,7 @@ async function openEdit(id){
   editId=id;
   document.getElementById('e-num').value=row.numero;
   document.getElementById('e-nasc').value=fd(row.data_nasc);
-  document.getElementById('e-orig').value=row.origem;
+  document.getElementById('e-orig').value=row.origem||'';
   document.getElementById('e-mac').value=row.qtd_machos||0;
   document.getElementById('e-fem').value=row.qtd_femeas||0;
   document.getElementById('e-err').style.display='none';
@@ -715,17 +692,13 @@ async function saveEdit(){
   const fem=parseInt(document.getElementById('e-fem').value)||0;
   const err=document.getElementById('e-err');
   err.style.display='none';
-
-if(!sala||!lin||!nasc){
+  if(!sala||!lin||!nasc){
     err.textContent='Preencha todos os campos obrigatórios.';
-    err.style.display='block';
-    return;
+    err.style.display='block';return;
   }
-
   if(mac<1&&fem<1){
     err.textContent='Informe ao menos 1 animal (macho ou fêmea).';
-    err.style.display='block';
-    return;
+    err.style.display='block';return;
   }
   const btn=document.getElementById('e-btn');
   btn.disabled=true;btn.textContent='Salvando...';
@@ -758,8 +731,7 @@ async function saveOcc(){
   err.style.display='none';
   if(!tipo||!dataOcc||qtd<1){
     err.textContent='Preencha todos os campos.';
-    err.style.display='block';
-    return;
+    err.style.display='block';return;
   }
   const btn=document.getElementById('o-btn');
   btn.disabled=true;btn.textContent='Salvando...';
@@ -806,8 +778,7 @@ async function loadAdmin(){
 async function toggleSala(id,ativa){
   await fetch('/api/salas',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,ativa})});
   toast(ativa?'Sala ativada!':'Sala desativada.','ok');
-  loadAdmin();
-  initFiltros();
+  loadAdmin();initFiltros();
 }
 
 async function loadAdminLinhagens(){
