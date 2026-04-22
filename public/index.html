@@ -227,7 +227,10 @@ tr:hover td{filter:brightness(0.97)}
         <select id="admin-sala-sel" onchange="loadAdminLinhagens()" style="padding:5px 10px;border:1px solid var(--br);border-radius:6px;font-size:12px"><option value="">Selecione</option></select>
       </div>
       <div id="admin-linhagens" style="margin-bottom:20px"></div>
+<p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Usuários</p>
+      <div id="admin-users" style="margin-bottom:24px"></div>
       <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Todas as linhagens</p>
+     
       <table style="border-collapse:collapse;font-size:12px">
         <thead><tr>
           <th style="padding:6px 12px;border:1px solid var(--br);background:var(--th);text-align:left">Código</th>
@@ -399,7 +402,26 @@ function switchTab(t){
   
   if(t==='arch'){initFiltrosArch();loadArch();}
   
-  if(t==='admin') loadAdmin();
+  if(t==='admin')
+  
+  async function toggleRole(id,role){
+  await fetch('/api/users',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,role})});
+  toast(role==='admin'?'Usuário promovido a Admin!':'Usuário definido como User.','ok');
+  loadAdmin();
+}
+
+  loadAdmin();
+const r3=await fetch('/api/users');
+  const users=await r3.json();
+  document.getElementById('admin-users').innerHTML=users.map(u=>`
+    <div style="display:flex;align-items:center;gap:10px;background:var(--wh);border:1px solid var(--br);border-radius:8px;padding:8px 14px;margin-bottom:6px">
+      <span style="flex:1;font-size:12px">${u.email}</span>
+      <select onchange="toggleRole('${u.id}',this.value)" style="padding:4px 8px;border:1px solid var(--br);border-radius:5px;font-size:11px;accent-color:var(--g)">
+        <option value="user" ${u.role==='user'?'selected':''}>User</option>
+        <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
+      </select>
+      <span style="font-size:10px;padding:2px 8px;border-radius:10px;background:${u.role==='admin'?'var(--gl)':'#f1f0eb'};color:${u.role==='admin'?'var(--gd)':'var(--mu)'};font-weight:600">${u.role}</span>
+    </div>`).join('');
 }
 
 async function initFiltros(){
