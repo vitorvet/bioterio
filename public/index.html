@@ -504,11 +504,15 @@ async function loadArch(){
   document.getElementById('empty-arch').style.display='none';
   const sala=document.getElementById('fSalaArch').value;
   const lin=document.getElementById('fLinArch').value;
-  let qs='?arquivado=true';
+
+  let qs='?arquivado=false';
   if(sala) qs+='&sala='+sala;
   if(lin) qs+='&linhagem='+encodeURIComponent(lin);
+
   try{
-    const d=await req('/isoladores'+qs);
+
+    const todos=await req('/isoladores'+qs);
+    const d=todos.filter(r=>(r.saldo||0)===0);
     renderArchStats(d);
     renderArch(d);
   }
@@ -519,6 +523,7 @@ async function loadArch(){
 function renderArchStats(data){
   const mac=data.reduce((s,r)=>s+(r.qtd_machos||0),0);
   const fem=data.reduce((s,r)=>s+(r.qtd_femeas||0),0);
+
   document.getElementById('arch-cx').textContent=data.length;
   document.getElementById('arch-tot').textContent=mac+fem;
   document.getElementById('arch-mac').textContent=mac;
