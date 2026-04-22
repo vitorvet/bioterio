@@ -45,15 +45,21 @@ button{cursor:pointer}
 .tabs{display:flex;border-bottom:1px solid var(--br);background:var(--wh);padding:0 16px}
 .tab{padding:10px 14px;font-size:12px;font-weight:500;cursor:pointer;color:var(--mu);border-bottom:2px solid transparent;margin-bottom:-1px}
 .tab.active{color:var(--g);border-bottom-color:var(--g)}
-.filtros{padding:10px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--br);background:var(--wh);flex-wrap:wrap}
-.filtros label{font-size:12px;color:var(--mu);font-weight:500}
-.filtros select{padding:5px 10px;border:1px solid var(--br);border-radius:6px;background:var(--wh);font-size:12px;min-width:130px}
-.filtros select:focus{outline:none;border-color:var(--g)}
+/* FILTROS */
+.filtros{padding:10px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--br);background:var(--wh);flex-wrap:wrap}
+.filtros label{font-size:11px;color:var(--mu);font-weight:500}
+.filtros select,.filtros input[type=date]{padding:5px 10px;border:1px solid var(--br);border-radius:6px;background:var(--wh);font-size:12px}
+.filtros select:focus,.filtros input:focus{outline:none;border-color:var(--g)}
 .filtros select:disabled{opacity:0.5;cursor:not-allowed}
+.filtros .sep{width:1px;height:20px;background:var(--br);margin:0 4px}
 .sp{flex:1}
 .bn{display:none;align-items:center;gap:5px;padding:7px 14px;background:var(--g);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer}
 .bn:hover{background:var(--gd)}
 .bn svg{width:12px;height:12px}
+.btn-excel{display:flex;align-items:center;gap:5px;padding:6px 12px;background:none;border:1px solid var(--br);border-radius:6px;font-size:11px;color:var(--mu);cursor:pointer}
+.btn-excel:hover{background:#E8F5E9;border-color:#4CAF50;color:#2E7D32}
+.btn-excel svg{width:13px;height:13px}
+/* TOTAIS */
 .totais{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:14px 20px;background:var(--bg);border-bottom:1px solid var(--br)}
 .tc2{background:var(--wh);border:1px solid var(--br);border-radius:8px;padding:12px 16px}
 .tc2 .tl2{font-size:10px;color:var(--mu);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
@@ -64,6 +70,7 @@ button{cursor:pointer}
 .lg{display:flex;gap:12px;padding:6px 20px;border-bottom:1px solid var(--br);background:var(--wh);flex-wrap:wrap}
 .li{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--mu)}
 .lb{width:11px;height:11px;border-radius:2px;flex-shrink:0}
+/* TABLE */
 .tw{overflow-x:auto}
 table{border-collapse:collapse;width:100%}
 th{padding:8px 10px;font-size:11px;font-weight:600;color:var(--mu);border:1px solid var(--br);background:var(--th);text-align:center;white-space:nowrap}
@@ -119,14 +126,19 @@ tr:hover td{filter:brightness(0.97)}
 .aw{padding:16px 20px}
 .at{font-size:12px;font-weight:600;color:var(--mu);margin-bottom:10px}
 .user-card{display:flex;align-items:center;gap:10px;background:var(--wh);border:1px solid var(--br);border-radius:8px;padding:10px 14px;margin-bottom:8px}
-.user-card .uemail{flex:1;font-size:12px;color:var(--tx)}
 .role-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
-.role-badge.admin{background:var(--gl);color:var(--gd)}
-.role-badge.user{background:#f1f0eb;color:var(--mu)}
+.role-badge.admin{background:#EEEDFE;color:#3C3489}
+.role-badge.user{background:#F1EFE8;color:#5F5E5A}
+/* RESUMO STATS */
+.resumo{padding:10px 20px;background:var(--wh);border-bottom:1px solid var(--br);font-size:12px;color:var(--mu);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.resumo .rv{font-weight:700;font-size:14px;color:var(--tx)}
+.resumo .rm{color:#185FA5;font-weight:600}
+.resumo .rf{color:#993556;font-weight:600}
 </style>
 </head>
 <body>
 <div id="app">
+
   <!-- LOGIN -->
 <div class="screen active" id="s-login">
 <div class="lw"><div class="lc">
@@ -172,6 +184,10 @@ tr:hover td{filter:brightness(0.97)}
       <label>Linhagem:</label>
       <select id="fLin" onchange="onLinhagemChange()" disabled><option value="">Selecione a sala</option></select>
       <div class="sp"></div>
+      <button class="btn-excel" onclick="exportAtivo()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Exportar Excel
+      </button>
       <button class="bn" id="btn-novo" onclick="openAdd()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         Novo mini-isolador
@@ -205,10 +221,35 @@ tr:hover td{filter:brightness(0.97)}
   <!-- PANE ARQUIVADOS -->
   <div id="pane-arch" style="display:none">
     <div class="filtros">
+      <label>Período:</label>
+      <select id="fPeriodo" onchange="onPeriodoChange()">
+        <option value="todos">Todos</option>
+        <option value="mes">Último mês</option>
+        <option value="periodo">Período personalizado</option>
+      </select>
+      <div id="filtro-datas" style="display:none;align-items:center;gap:6px">
+        <label>De:</label>
+        <input type="date" id="fDe"/>
+        <label>Até:</label>
+        <input type="date" id="fAte"/>
+      </div>
+      <div class="sep"></div>
       <label>Sala:</label>
-      <select id="fSalaArch" onchange="onSalaArchChange()"><option value="">Todas as salas</option></select>
+      <select id="fSalaArch" onchange="onSalaArchChange()"><option value="">Todas</option></select>
       <label>Linhagem:</label>
-      <select id="fLinArch" onchange="loadArch()" disabled><option value="">Selecione a sala</option></select>
+      <select id="fLinArch" onchange="loadArch()" disabled><option value="">Todas</option></select>
+      <label>Ocorrência:</label>
+      <select id="fOcc" onchange="loadArch()">
+        <option value="">Todas</option>
+        <option>Acasalamento</option><option>Descarte</option><option>Doença</option>
+        <option>Óbito</option><option>Pedido</option><option>Raquítico</option>
+        <option>Transferência</option><option>Outros</option>
+      </select>
+      <div class="sp"></div>
+      <button class="btn-excel" onclick="exportArquivados()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Exportar Excel
+      </button>
     </div>
     <div class="totais">
       <div class="tc2 b"><div class="tl2">Caixas zeradas</div><div class="tv" id="arch-cx">—</div></div>
@@ -219,34 +260,21 @@ tr:hover td{filter:brightness(0.97)}
     <div class="tw">
       <div class="loading" id="ld-arch"><span class="spin"></span>Carregando...</div>
       <table id="arch-tbl" style="display:none"><thead id="thead-arch"></thead><tbody id="tbody-arch"></tbody></table>
-      <div class="empty" id="empty-arch" style="display:none">Nenhum registro com saldo zerado.</div>
+      <div class="empty" id="empty-arch" style="display:none">Nenhum registro encontrado.</div>
     </div>
   </div>
 
   <!-- PANE ADMIN -->
   <div id="pane-admin" style="display:none">
     <div class="aw">
-
-<p class="at" style="font-size:14px;margin-bottom:16px">Painel de administração</p>
-
-      <!-- ABAS ADMIN -->
+      <p class="at" style="font-size:14px;margin-bottom:16px">Painel de administração</p>
       <div style="display:flex;gap:8px;margin-bottom:20px">
         <button id="abt-users" onclick="switchAdminAba('users')" style="padding:6px 16px;border-radius:8px;border:1px solid var(--br);background:var(--g);color:#fff;cursor:pointer;font-size:12px;font-weight:500">Usuários</button>
         <button id="abt-salas" onclick="switchAdminAba('salas')" style="padding:6px 16px;border-radius:8px;border:1px solid var(--br);background:none;color:var(--mu);cursor:pointer;font-size:12px;font-weight:500">Salas</button>
         <button id="abt-linhagens" onclick="switchAdminAba('linhagens')" style="padding:6px 16px;border-radius:8px;border:1px solid var(--br);background:none;color:var(--mu);cursor:pointer;font-size:12px;font-weight:500">Linhagens</button>
       </div>
-
-      <!-- ABA USUÁRIOS -->
-      <div id="admin-pane-users">
-        <div id="admin-users"></div>
-      </div>
-
-      <!-- ABA SALAS -->
-      <div id="admin-pane-salas" style="display:none">
-        <div id="admin-salas" style="display:flex;flex-wrap:wrap;gap:10px"></div>
-      </div>
-
-      <!-- ABA LINHAGENS -->
+      <div id="admin-pane-users"><div id="admin-users"></div></div>
+      <div id="admin-pane-salas" style="display:none"><div id="admin-salas" style="display:flex;flex-wrap:wrap;gap:10px"></div></div>
       <div id="admin-pane-linhagens" style="display:none">
         <div style="margin-bottom:10px;display:flex;align-items:center;gap:10px">
           <label style="font-size:12px;color:var(--mu)">Sala:</label>
@@ -262,7 +290,6 @@ tr:hover td{filter:brightness(0.97)}
           <tbody id="admin-lin-table"></tbody>
         </table>
       </div>
-
     </div>
   </div>
 </div>
@@ -338,11 +365,13 @@ tr:hover td{filter:brightness(0.97)}
     <button class="bv" id="o-btn" onclick="saveOcc()">Adicionar</button>
   </div>
 </div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const API=window.location.origin+'/api';
 const SUPA_URL='https://ptpcpazpxwsoquottfkk.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0cGNwYXpweHdzb3F1b3R0ZmtrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTU1MzcsImV4cCI6MjA5MjA3MTUzN30.YjoZXVZOfkE5lCrweIMt2TCyWYAPWEamMemAKnARHxA';
-let me=null,allData=[],editId=null,occId=null,salaAtual='',linhagemAtual='',loginModo='login';
+let me=null,allData=[],archData=[],editId=null,occId=null,salaAtual='',linhagemAtual='',loginModo='login';
 
 function toggleModo(){
   loginModo=loginModo==='login'?'cadastro':'login';
@@ -364,25 +393,14 @@ async function doLogin(){
   if(loginModo==='cadastro'&&pass.length<6){err.textContent='A senha deve ter pelo menos 6 caracteres.';err.style.display='block';return;}
   btn.disabled=true;btn.textContent='Aguarde...';
   if(loginModo==='cadastro'){
-    const res=await fetch(SUPA_URL+'/auth/v1/signup',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
-      body:JSON.stringify({email,password:pass})
-    });
+    const res=await fetch(SUPA_URL+'/auth/v1/signup',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pass})});
     const data=await res.json();
     btn.disabled=false;btn.textContent='Criar conta';
-    if(!res.ok||data?.user?.identities?.length===0){
-      err.textContent='Este e-mail já está cadastrado. Faça login.';err.style.display='block';
-    } else {
-      suc.textContent='Conta criada! Verifique seu e-mail para confirmar.';suc.style.display='block';
-    }
+    if(!res.ok||data?.user?.identities?.length===0){err.textContent='Este e-mail já está cadastrado.';err.style.display='block';}
+    else{suc.textContent='Conta criada! Verifique seu e-mail.';suc.style.display='block';}
     return;
   }
-  const res=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
-    body:JSON.stringify({email,password:pass})
-  });
+  const res=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pass})});
   const data=await res.json();
   btn.disabled=false;btn.textContent='Entrar';
   if(!res.ok){err.textContent='E-mail ou senha incorretos.';err.style.display='block';return;}
@@ -390,9 +408,7 @@ async function doLogin(){
   const nome=data.user.email.split('@')[0];
   document.getElementById('uav').textContent=nome.substring(0,2).toUpperCase();
   document.getElementById('uname').textContent=nome;
-  const perfil=await fetch(SUPA_URL+'/rest/v1/perfis?select=role&id=eq.'+data.user.id,{
-    headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+data.access_token}
-  });
+  const perfil=await fetch(SUPA_URL+'/rest/v1/perfis?select=role&id=eq.'+data.user.id,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+data.access_token}});
   const pd=await perfil.json();
   if(pd[0]?.role==='admin') document.getElementById('tab-admin').style.display='block';
   showS('s-main');
@@ -405,7 +421,6 @@ async function doLogin(){
   await initFiltros();
   loadData();
 }
-
 document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 
 async function doLogout(){
@@ -413,10 +428,7 @@ async function doLogout(){
   me=null;document.getElementById('lu').value='';document.getElementById('lp').value='';showS('s-login');
 }
 
-function showS(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+function showS(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
 
 function switchTab(t){
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
@@ -440,7 +452,7 @@ async function initFiltrosArch(){
   const salas=await r.json();
   const sel=document.getElementById('fSalaArch');
   const atual=sel.value;
-  sel.innerHTML='<option value="">Todas as salas</option>'+salas.map(s=>`<option value="${s.id}">${s.nome}</option>`).join('');
+  sel.innerHTML='<option value="">Todas</option>'+salas.map(s=>`<option value="${s.id}">${s.nome}</option>`).join('');
   sel.value=atual;
 }
 
@@ -471,27 +483,33 @@ function onLinhagemChange(){
   linhagemAtual=document.getElementById('fLin').value;
   const btnNovo=document.getElementById('btn-novo');
   const ctxLin=document.getElementById('ctx-lin');
-  if(linhagemAtual){
-    btnNovo.style.display='flex';
-    ctxLin.textContent=linhagemAtual;
-    ctxLin.style.display='inline';
-  } else {
-    btnNovo.style.display='none';
-    ctxLin.style.display='none';
-  }
+  if(linhagemAtual){btnNovo.style.display='flex';ctxLin.textContent=linhagemAtual;ctxLin.style.display='inline';}
+  else{btnNovo.style.display='none';ctxLin.style.display='none';}
   loadData();
+}
+
+function onPeriodoChange(){
+  const p=document.getElementById('fPeriodo').value;
+  const divDatas=document.getElementById('filtro-datas');
+  divDatas.style.display=p==='periodo'?'flex':'none';
+  if(p==='mes'){
+    const hoje=new Date();
+    const mesPassado=new Date();
+    mesPassado.setMonth(hoje.getMonth()-1);
+    document.getElementById('fDe').value=mesPassado.toISOString().split('T')[0];
+    document.getElementById('fAte').value=hoje.toISOString().split('T')[0];
+  }
+  loadArch();
 }
 
 async function onSalaArchChange(){
   const sala=document.getElementById('fSalaArch').value;
   const selLin=document.getElementById('fLinArch');
-  if(!sala){
-    selLin.innerHTML='<option value="">Selecione a sala</option>';
-    selLin.disabled=true;
-  } else {
+  if(!sala){selLin.innerHTML='<option value="">Todas</option>';selLin.disabled=true;}
+  else{
     const r=await fetch('/api/linhagens?sala_id='+sala);
     const lins=await r.json();
-    selLin.innerHTML='<option value="">Todas as linhagens</option>'+lins.map(l=>`<option value="${l.nome}">${l.codigo} — ${l.nome}</option>`).join('');
+    selLin.innerHTML='<option value="">Todas</option>'+lins.map(l=>`<option value="${l.nome}">${l.codigo} — ${l.nome}</option>`).join('');
     selLin.disabled=false;
   }
   loadArch();
@@ -529,12 +547,36 @@ async function loadArch(){
   document.getElementById('empty-arch').style.display='none';
   const sala=document.getElementById('fSalaArch').value;
   const lin=document.getElementById('fLinArch').value;
+  const occ=document.getElementById('fOcc').value;
+  const periodo=document.getElementById('fPeriodo').value;
+  const de=document.getElementById('fDe').value;
+  const ate=document.getElementById('fAte').value;
   let qs='?arquivado=false';
   if(sala) qs+='&sala='+sala;
   if(lin) qs+='&linhagem='+encodeURIComponent(lin);
   try{
     const todos=await req('/isoladores'+qs);
-    const zeradas=todos.filter(r=>(r.saldo||0)===0);
+    let zeradas=todos.filter(r=>(r.saldo||0)===0);
+    if(periodo==='mes'||periodo==='periodo'){
+      const dataInicio=de?new Date(de):null;
+      const dataFim=ate?new Date(ate):null;
+      if(dataFim) dataFim.setHours(23,59,59);
+      zeradas=zeradas.filter(r=>{
+        const occs=r.ocorrencias||[];
+        if(occs.length===0) return false;
+        const ultimaOcc=new Date(occs[occs.length-1].data_occ);
+        if(dataInicio&&ultimaOcc<dataInicio) return false;
+        if(dataFim&&ultimaOcc>dataFim) return false;
+        return true;
+      });
+    }
+    if(occ){
+      zeradas=zeradas.filter(r=>{
+        const occs=r.ocorrencias||[];
+        return occs.some(o=>o.tipo===occ);
+      });
+    }
+    archData=zeradas;
     renderArchStats(zeradas);
     renderArch(zeradas);
   }catch(e){toast(e.message,'err');}
@@ -565,34 +607,29 @@ function renderArchStats(data){
   document.getElementById('arch-fem').textContent=fem;
 }
 
-function fd(d){
-  if(!d) return '';
-  const p=d.split('T')[0].split('-');
-  return p[2]+'/'+p[1]+'/'+p[0];
-}
+function fd(d){if(!d)return '';const p=d.split('T')[0].split('-');return p[2]+'/'+p[1]+'/'+p[0];}
 
 function calcIdade(d){
-  if(!d) return '';
+  if(!d)return '';
   const nasc=new Date(d.split('T')[0]);
-  const hoje=new Date();
-  const dias=Math.floor((hoje-nasc)/(1000*60*60*24));
-  if(dias<30) return dias+'d';
+  const dias=Math.floor((new Date()-nasc)/(1000*60*60*24));
+  if(dias<30)return dias+'d';
   const meses=dias/30.44;
-  if(meses<24) return meses.toFixed(1).replace('.',',')+'m';
+  if(meses<24)return meses.toFixed(1).replace('.',',')+'m';
   return (meses/12).toFixed(1).replace('.',',')+'a';
 }
 
 function maskDate(el){
   let v=el.value.replace(/\D/g,'');
-  if(v.length>2) v=v.substring(0,2)+'/'+v.substring(2);
-  if(v.length>5) v=v.substring(0,5)+'/'+v.substring(5);
+  if(v.length>2)v=v.substring(0,2)+'/'+v.substring(2);
+  if(v.length>5)v=v.substring(0,5)+'/'+v.substring(5);
   el.value=v;
 }
 
 function parseDate(str){
-  if(!str||str.length<10) return null;
+  if(!str||str.length<10)return null;
   const p=str.split('/');
-  if(p.length!==3||p[2].length!==4) return null;
+  if(p.length!==3||p[2].length!==4)return null;
   return p[2]+'-'+p[1].padStart(2,'0')+'-'+p[0].padStart(2,'0');
 }
 
@@ -608,18 +645,12 @@ function renderTable(data){
     <th class="tq">Machos</th><th class="tq">Fêmeas</th>
     <th class="tds"></th>
     <th style="background:#FFF8F0;color:#712B13">Ocorrências</th>
-    <th class="tsa">Saldo</th>
-    <th>Ações</th>
+    <th class="tsa">Saldo</th><th>Ações</th>
   </tr>`;
   tb.innerHTML=data.map(row=>{
     const s=row.saldo??0;
     const o=row.ocorrencias||[];
-    const oh=o.map(x=>`<div class="ot2">
-      <span class="tp">${x.tipo}</span>
-      <span class="dt">${fd(x.data_occ)}</span>
-      <span class="qt">${x.quantidade}</span>
-      <button class="dx" onclick="delOcc(${x.id})">×</button>
-    </div>`).join('');
+    const oh=o.map(x=>`<div class="ot2"><span class="tp">${x.tipo}</span><span class="dt">${fd(x.data_occ)}</span><span class="qt">${x.quantidade}</span><button class="dx" onclick="delOcc(${x.id})">×</button></div>`).join('');
     return `<tr>
       <td class="tdc">${row.numero}</td>
       <td>${row.sala}</td><td>${row.linhagem}</td>
@@ -628,15 +659,9 @@ function renderTable(data){
       <td class="tdm">${row.qtd_machos||0}</td>
       <td class="tdf">${row.qtd_femeas||0}</td>
       <td class="tds"></td>
-      <td class="oc">
-        <div class="ol">${oh}</div>
-        ${!row.arquivado&&s>0?`<button class="ba" onclick="openOcc(${row.id},'${row.numero}',${s})">+ ocorrência</button>`:''}
-      </td>
+      <td class="oc"><div class="ol">${oh}</div>${!row.arquivado&&s>0?`<button class="ba" onclick="openOcc(${row.id},'${row.numero}',${s})">+ ocorrência</button>`:''}</td>
       <td class="${s===0?'sr':'sv2'}">${s}</td>
-      <td><div class="ac">
-        <button class="bs" onclick="openEdit(${row.id})">Editar</button>
-        ${s===0&&!row.arquivado?`<button class="bs bx" onclick="archRow(${row.id})">Arquivar</button>`:''}
-      </div></td>
+      <td><div class="ac"><button class="bs" onclick="openEdit(${row.id})">Editar</button>${s===0&&!row.arquivado?`<button class="bs bx" onclick="archRow(${row.id})">Arquivar</button>`:''}</div></td>
     </tr>`;
   }).join('');
   tbl.style.display='table';
@@ -663,13 +688,40 @@ function renderArch(data){
     <td class="tdm">${r.qtd_machos||0}</td>
     <td class="tdf">${r.qtd_femeas||0}</td>
     <td class="tds"></td>
-    <td class="oc">${(r.ocorrencias||[]).map(o=>`<div class="ot2">
-      <span class="tp">${o.tipo}</span>
-      <span class="dt">${fd(o.data_occ)}</span>
-      <span class="qt">${o.quantidade}</span>
-    </div>`).join('')||'—'}</td>
+    <td class="oc">${(r.ocorrencias||[]).map(o=>`<div class="ot2"><span class="tp">${o.tipo}</span><span class="dt">${fd(o.data_occ)}</span><span class="qt">${o.quantidade}</span></div>`).join('')||'—'}</td>
   </tr>`).join('');
   tbl.style.display='table';
+}
+
+function exportAtivo(){
+  const data=allData.filter(r=>(r.saldo||0)>0);
+  if(!data.length){toast('Nenhum dado para exportar.','err');return;}
+  const rows=data.map(r=>({
+    'Caixa':r.numero,'Sala':r.sala,'Linhagem':r.linhagem,
+    'Nascimento':fd(r.data_nasc),'Idade':calcIdade(r.data_nasc),'Origem':r.origem||'',
+    'Machos':r.qtd_machos||0,'Fêmeas':r.qtd_femeas||0,'Saldo':r.saldo||0,
+    'Ocorrências':(r.ocorrencias||[]).map(o=>o.tipo+' ('+o.quantidade+')').join(', ')
+  }));
+  exportXLSX(rows,'estoque_ativo');
+}
+
+function exportArquivados(){
+  if(!archData.length){toast('Nenhum dado para exportar.','err');return;}
+  const rows=archData.map(r=>({
+    'Caixa':r.numero,'Sala':r.sala,'Linhagem':r.linhagem,
+    'Nascimento':fd(r.data_nasc),'Idade':calcIdade(r.data_nasc),'Origem':r.origem||'',
+    'Machos':r.qtd_machos||0,'Fêmeas':r.qtd_femeas||0,
+    'Ocorrências':(r.ocorrencias||[]).map(o=>o.tipo+' ('+fd(o.data_occ)+') - '+o.quantidade).join(', ')
+  }));
+  exportXLSX(rows,'arquivados');
+}
+
+function exportXLSX(rows,nome){
+  const ws=XLSX.utils.json_to_sheet(rows);
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Dados');
+  XLSX.writeFile(wb,nome+'_'+new Date().toLocaleDateString('pt-BR').replace(/\//g,'-')+'.xlsx');
+  toast('Excel exportado!','ok');
 }
 
 async function openAdd(){
@@ -686,10 +738,7 @@ async function openAdd(){
     const arquivados=await req('/isoladores?arquivado=true&linhagem='+encodeURIComponent(linhagemAtual));
     const todos=[...(dados||[]),...(arquivados||[])];
     if(todos.length>0){
-      const numeros=todos.map(r=>{
-        const p=r.numero.split('.');
-        return parseFloat(p[p.length-1]);
-      }).filter(n=>!isNaN(n));
+      const numeros=todos.map(r=>{const p=r.numero.split('.');return parseFloat(p[p.length-1]);}).filter(n=>!isNaN(n));
       if(numeros.length>0){
         const prefixo=todos[0].numero.substring(0,todos[0].numero.lastIndexOf('.'));
         document.getElementById('a-num').value=prefixo+'.'+(Math.max(...numeros)+1);
@@ -711,8 +760,7 @@ async function saveAdd(){
   err.style.display='none';
   if(!num||!nasc){err.textContent='Preencha o número e a data de nascimento.';err.style.display='block';return;}
   if(mac<1&&fem<1){err.textContent='Informe ao menos 1 animal.';err.style.display='block';return;}
-  const btn=document.getElementById('a-btn');
-  btn.disabled=true;btn.textContent='Salvando...';
+  const btn=document.getElementById('a-btn');btn.disabled=true;btn.textContent='Salvando...';
   try{
     await req('/isoladores','POST',{numero:num,sala:salaAtual,linhagem:linhagemAtual,data_nasc:nasc,origem:orig,quantidade:mac+fem,qtd_machos:mac,qtd_femeas:fem});
     closeM('m-add');toast('Cadastrado!','ok');loadData();
@@ -722,7 +770,7 @@ async function saveAdd(){
 
 async function openEdit(id){
   const row=allData.find(r=>r.id===id);
-  if(!row) return;
+  if(!row)return;
   editId=id;
   document.getElementById('e-num').value=row.numero;
   document.getElementById('e-nasc').value=fd(row.data_nasc);
@@ -741,7 +789,7 @@ async function openEdit(id){
 
 async function loadLinhagensSalaEdit(){
   const sala=document.getElementById('e-sala').value;
-  if(!sala) return;
+  if(!sala)return;
   const r=await fetch('/api/linhagens?sala_id='+sala);
   const lins=await r.json();
   document.getElementById('e-lin').innerHTML=lins.map(l=>`<option value="${l.nome}">${l.codigo} — ${l.nome}</option>`).join('');
@@ -759,8 +807,7 @@ async function saveEdit(){
   err.style.display='none';
   if(!sala||!lin||!nasc){err.textContent='Preencha todos os campos obrigatórios.';err.style.display='block';return;}
   if(mac<1&&fem<1){err.textContent='Informe ao menos 1 animal.';err.style.display='block';return;}
-  const btn=document.getElementById('e-btn');
-  btn.disabled=true;btn.textContent='Salvando...';
+  const btn=document.getElementById('e-btn');btn.disabled=true;btn.textContent='Salvando...';
   try{
     await req('/isoladores/'+editId,'PUT',{sala,linhagem:lin,data_nasc:nasc,origem:orig,quantidade:mac+fem,qtd_machos:mac,qtd_femeas:fem});
     closeM('m-edit');toast('Atualizado!','ok');loadData();
@@ -786,8 +833,7 @@ async function saveOcc(){
   const err=document.getElementById('o-err');
   err.style.display='none';
   if(!tipo||!dataOcc||qtd<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
-  const btn=document.getElementById('o-btn');
-  btn.disabled=true;btn.textContent='Salvando...';
+  const btn=document.getElementById('o-btn');btn.disabled=true;btn.textContent='Salvando...';
   try{
     await req('/ocorrencias','POST',{isolador_id:occId,tipo,data_occ:dataOcc,quantidade:qtd});
     closeM('m-occ');toast('Ocorrência registrada!','ok');loadData();
@@ -796,21 +842,15 @@ async function saveOcc(){
 }
 
 async function delOcc(id){
-  if(!confirm('Remover esta ocorrência?')) return;
+  if(!confirm('Remover esta ocorrência?'))return;
   try{await req('/ocorrencias','DELETE',{id});toast('Removida.','ok');loadData();}
   catch(e){toast(e.message,'err');}
 }
 
 async function archRow(id){
-  if(!confirm('Arquivar este mini-isolador?')) return;
+  if(!confirm('Arquivar este mini-isolador?'))return;
   try{await req('/isoladores/'+id,'PATCH',{arquivado:true});toast('Arquivado!','ok');loadData();}
   catch(e){toast(e.message,'err');}
-}
-
-async function toggleRole(id,role){
-  await fetch('/api/users',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,role})});
-  toast(role==='admin'?'Promovido a Admin!':'Definido como User.','ok');
-  loadAdmin();
 }
 
 function switchAdminAba(aba){
@@ -823,8 +863,6 @@ function switchAdminAba(aba){
 }
 
 async function loadAdmin(){
-
-
   const r=await fetch('/api/salas');
   const salas=await r.json();
   document.getElementById('admin-salas').innerHTML=salas.map(s=>`
@@ -845,29 +883,21 @@ async function loadAdmin(){
   </tr>`).join('');
   const r3=await fetch('/api/users');
   const users=await r3.json();
-
-document.getElementById('admin-users').innerHTML=`
+  document.getElementById('admin-users').innerHTML=`
     <table style="width:100%;border-collapse:collapse;font-size:12px;background:var(--wh);border:1px solid var(--br);border-radius:8px;overflow:hidden">
-      <thead>
-        <tr style="background:var(--th)">
-          <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">E-mail</th>
-          <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">Perfil</th>
-          <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">Cadastrado em</th>
-          <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">Ação</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${users.map(u=>`
-          <tr style="border-bottom:1px solid #f0f0f0">
-            <td style="padding:10px 14px">${u.email}</td>
-            <td style="padding:10px 14px">
-              <span style="background:${u.role==='admin'?'#EEEDFE':'#F1EFE8'};color:${u.role==='admin'?'#3C3489':'#5F5E5A'};border-radius:99px;padding:2px 8px;font-size:11px;font-weight:500">${u.role}</span>
-            </td>
-            <td style="padding:10px 14px;color:var(--mu);font-size:11px">${new Date(u.criado_em).toLocaleString('pt-BR')}</td>
-            <td style="padding:10px 14px">
-              ${u.email!==me?.email?`<button onclick="toggleRole('${u.id}','${u.role==='admin'?'user':'admin'}')" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--br);background:none;cursor:pointer;color:${u.role==='admin'?'#791F1F':'#085041'}">${u.role==='admin'?'Tornar user':'Tornar admin'}</button>`:''}
-            </td>
-          </tr>`).join('')}
+      <thead><tr style="background:var(--th)">
+        <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">E-mail</th>
+        <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">Perfil</th>
+        <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">Cadastrado em</th>
+        <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">Ação</th>
+      </tr></thead>
+      <tbody>${users.map(u=>`
+        <tr style="border-bottom:1px solid #f0f0f0">
+          <td style="padding:10px 14px">${u.email}</td>
+          <td style="padding:10px 14px"><span style="background:${u.role==='admin'?'#EEEDFE':'#F1EFE8'};color:${u.role==='admin'?'#3C3489':'#5F5E5A'};border-radius:99px;padding:2px 8px;font-size:11px;font-weight:500">${u.role}</span></td>
+          <td style="padding:10px 14px;color:var(--mu);font-size:11px">${new Date(u.criado_em).toLocaleString('pt-BR')}</td>
+          <td style="padding:10px 14px">${u.email!==me?.email?`<button onclick="toggleRole('${u.id}','${u.role==='admin'?'user':'admin'}')" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--br);background:none;cursor:pointer;color:${u.role==='admin'?'#791F1F':'#085041'}">${u.role==='admin'?'Tornar user':'Tornar admin'}</button>`:''}</td>
+        </tr>`).join('')}
       </tbody>
     </table>`;
 }
@@ -894,28 +924,24 @@ async function loadAdminLinhagens(){
     </label>`).join('')+'</div>';
 }
 
+async function toggleRole(id,role){
+  await fetch('/api/users',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,role})});
+  toast(role==='admin'?'Promovido a Admin!':'Definido como User.','ok');
+  loadAdmin();
+}
+
 async function toggleLinhagem(sala_id,linhagem_codigo,ativa){
-  if(ativa){
-    await fetch('/api/linhagens',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sala_id,linhagem_codigo})});
-    toast('Linhagem adicionada!','ok');
-  } else {
-    await fetch('/api/linhagens',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({sala_id,linhagem_codigo})});
-    toast('Linhagem removida.','ok');
-  }
+  if(ativa){await fetch('/api/linhagens',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sala_id,linhagem_codigo})});toast('Linhagem adicionada!','ok');}
+  else{await fetch('/api/linhagens',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({sala_id,linhagem_codigo})});toast('Linhagem removida.','ok');}
 }
 
 function openM(id){document.getElementById(id).classList.add('open');}
 function closeM(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.ov').forEach(o=>{
-  o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});
-});
+document.querySelectorAll('.ov').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});});
 function toast(msg,type='ok'){
   const c=document.getElementById('tc');
   const el=document.createElement('div');
-  el.className='ti '+type;
-  el.textContent=msg;
-  c.appendChild(el);
-  setTimeout(()=>el.remove(),3500);
+  el.className='ti '+type;el.textContent=msg;c.appendChild(el);setTimeout(()=>el.remove(),3500);
 }
 </script>
 </body>
