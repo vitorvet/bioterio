@@ -197,18 +197,21 @@ tr:hover td{filter:brightness(0.97)}
   </div>
 
   <div id="pane-arch" style="display:none">
-    <div class="aw">
-      <p class="at">Mini-isoladores arquivados</p>
+    <div class="filtros">
+      <label>Sala:</label>
+      <select id="fSalaArch" onchange="onSalaArchChange()"><option value="">Todas as salas</option></select>
+      <label>Linhagem:</label>
+      <select id="fLinArch" onchange="loadArch()" disabled><option value="">Selecione a sala</option></select>
+    </div>
+    <div class="totais">
+      <div class="tc2 b"><div class="tl2">Caixas arquivadas</div><div class="tv" id="arch-cx">—</div></div>
+      <div class="tc2"><div class="tl2">Total animais</div><div class="tv" id="arch-tot">—</div></div>
+      <div class="tc2 b"><div class="tl2">Machos</div><div class="tv" id="arch-mac">—</div></div>
+      <div class="tc2 p"><div class="tl2">Fêmeas</div><div class="tv" id="arch-fem">—</div></div>
+    </div>
+    <div class="tw">
       <div class="loading" id="ld-arch"><span class="spin"></span>Carregando...</div>
-      <div class="tw">
-        <table id="arch-tbl" style="display:none">
-          <thead><tr>
-            <th style="text-align:left">Caixa</th><th>Sala</th><th>Linhagem</th>
-            <th>Nasc.</th><th>Idade</th><th>Origem</th><th>Machos</th><th>Fêmeas</th><th>Ocorrências</th>
-          </tr></thead>
-          <tbody id="tbody-arch"></tbody>
-        </table>
-      </div>
+      <table id="arch-tbl" style="display:none"><thead id="thead-arch"></thead><tbody id="tbody-arch"></tbody></table>
       <div class="empty" id="empty-arch" style="display:none">Nenhum registro arquivado.</div>
     </div>
   </div>
@@ -393,7 +396,9 @@ function switchTab(t){
   document.getElementById('pane-ativo').style.display=t==='ativo'?'block':'none';
   document.getElementById('pane-arch').style.display=t==='arch'?'block':'none';
   document.getElementById('pane-admin').style.display=t==='admin'?'block':'none';
-  if(t==='arch') loadArch();
+  
+  if(t==='arch'){initFiltrosArch();loadArch();}
+  
   if(t==='admin') loadAdmin();
 }
 
@@ -468,13 +473,56 @@ async function loadData(){
   finally{document.getElementById('ld-main').style.display='none';}
 }
 
+async function initFiltrosArch(){
+  const r=await fetch('/api/salas');
+  const salas=await r.json();
+  const sel=document.getElementById('fSalaArch');
+  const atual=sel.value;
+  sel.innerHTML='<option value="">Todas as salas</option>'+salas.map(s=>`<option value="${s.id}">${s.nome}</option>`).join('');
+  sel.value=atual;
+}
+
+
+async function onSalaArchChange(){
+  const sala=document.getElementById('fSalaArch').value;
+  const selLin=document.getElementById('fLinArch');
+  if(!sala){
+    selLin.innerHTML='<option value="">Selecione a sala</option>';
+    selLin.disabled=true;
+  } else {
+    const r=await fetch('/api/linhagens?sala_id='+sala);
+    const lins=await r.json();
+    selLin.innerHTML='<option value="">Todas as linhagens</option>'+lins.map(l=>`<option value="${l.nome}">${l.codigo} — ${l.nome}</option>`).join('');
+    selLin.disabled=false;
+  }
+  loadArch();
+}
+
 async function loadArch(){
   document.getElementById('ld-arch').style.display='block';
   document.getElementById('arch-tbl').style.display='none';
   document.getElementById('empty-arch').style.display='none';
-  try{const d=await req('/isoladores?arquivado=true');renderArch(d);}
+  const sala=document.getElementById('fSalaArch').value;
+  const lin=document.getElementById('fLinArch').value;
+  let qs='?arquivado=true';
+  if(sala) qs+='&sala='+sala;
+  if(lin) qs+='&linhagem='+encodeURIComponent(lin);
+  try{
+    const d=await req('/isoladores'+qs);
+    renderArchStats(d);
+    renderArch(d);
+  }
   catch(e){toast(e.message,'err');}
   finally{document.getElementById('ld-arch').style.display='none';}
+}
+
+function renderArchStats(data){
+  const mac=data.reduce((s,r)=>s+(r.qtd_machos||0),0);
+  const fem=data.reduce((s,r)=>s+(r.qtd_femeas||0),0);
+  document.getElementById('arch-cx').textContent=data.length;
+  document.getElementById('arch-tot').textContent=mac+fem;
+  document.getElementById('arch-mac').textContent=mac;
+  document.getElementById('arch-fem').textContent=fem;
 }
 
 function renderStats(data){
