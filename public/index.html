@@ -516,10 +516,18 @@ function renderStats(data){
   document.getElementById('st-fem').textContent=fem;
 }
 
-function fd(d){
+function calcIdade(d){
   if(!d) return '';
-  const p=d.split('T')[0].split('-');
-  return p[2]+'/'+p[1]+'/'+p[0];
+  const nasc=new Date(d.split('T')[0]);
+  const hoje=new Date();
+  const diff=hoje-nasc;
+  const dias=Math.floor(diff/(1000*60*60*24));
+  if(dias<30) return dias+'d';
+  const meses=Math.floor(dias/30);
+  if(meses<12) return meses+'m';
+  const anos=Math.floor(meses/12);
+  const mesesRest=meses%12;
+  return mesesRest>0?anos+'a '+mesesRest+'m':anos+'a';
 }
 
 function maskDate(el){
@@ -544,7 +552,7 @@ function renderTable(data){
   if(!data.length){em.style.display='block';return;}
   th.innerHTML=`<tr>
     <th style="text-align:left">Caixa</th>
-    <th>Sala</th><th>Linhagem</th><th>Nasc.</th><th>Origem</th>
+    <th>Sala</th><th>Linhagem</th><th>Nasc.</th><th>Idade</th><th>Origem</th>
     <th class="tq">Machos</th><th class="tq">Fêmeas</th>
     <th class="tds"></th>
     <th style="background:#FFF8F0;color:#712B13">Ocorrências</th>
@@ -563,7 +571,7 @@ function renderTable(data){
     return `<tr>
       <td class="tdc">${row.numero}</td>
       <td>${row.sala}</td><td>${row.linhagem}</td>
-      <td>${fd(row.data_nasc)}</td><td>${row.origem}</td>
+      <td>${fd(row.data_nasc)}</td><td>${calcIdade(row.data_nasc)}</td><td>${row.origem}</td>
       <td class="tdm">${row.qtd_machos||0}</td>
       <td class="tdf">${row.qtd_femeas||0}</td>
       <td class="tds"></td>
