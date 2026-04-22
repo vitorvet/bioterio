@@ -378,8 +378,16 @@ async function doLogin(){
   });
   const pd=await perfil.json();
   if(pd[0]?.role==='admin') document.getElementById('tab-admin').style.display='block';
+  
   showS('s-main');
   await initFiltros();
+  salaAtual='';
+  linhagemAtual='';
+  document.getElementById('fSala').value='';
+  document.getElementById('fLin').value='';
+  document.getElementById('fLin').disabled=true;
+  document.getElementById('btn-novo').style.display='none';
+  document.getElementById('ctx-bar').style.display='none';
   loadData();
 }
 
