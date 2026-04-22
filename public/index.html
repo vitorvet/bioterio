@@ -492,8 +492,16 @@ async function loadArch(){
 }
 
 function renderStats(data){
-  const mac=data.reduce((s,r)=>s+(r.qtd_machos||0),0);
-  const fem=data.reduce((s,r)=>s+(r.qtd_femeas||0),0);
+  let mac=0,fem=0;
+  data.forEach(r=>{
+    const saldo=r.saldo||0;
+    const total=(r.qtd_machos||0)+(r.qtd_femeas||0);
+    if(total===0) return;
+    const propMac=(r.qtd_machos||0)/total;
+    const propFem=(r.qtd_femeas||0)/total;
+    mac+=Math.round(saldo*propMac);
+    fem+=Math.round(saldo*propFem);
+  });
   document.getElementById('st-cx').textContent=data.length;
   document.getElementById('st-tot').textContent=mac+fem;
   document.getElementById('st-mac').textContent=mac;
