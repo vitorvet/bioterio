@@ -226,33 +226,43 @@ tr:hover td{filter:brightness(0.97)}
   <!-- PANE ADMIN -->
   <div id="pane-admin" style="display:none">
     <div class="aw">
-      <p class="at" style="font-size:14px;margin-bottom:20px">Painel de administração</p>
 
-      <!-- USUÁRIOS -->
-      <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Usuários</p>
-      <div id="admin-users" style="margin-bottom:24px"></div>
+<p class="at" style="font-size:14px;margin-bottom:16px">Painel de administração</p>
 
-      <!-- SALAS -->
-      <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Salas</p>
-      <div id="admin-salas" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px"></div>
-
-      <!-- LINHAGENS -->
-      <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Linhagens por sala</p>
-      <div style="margin-bottom:10px;display:flex;align-items:center;gap:10px">
-        <label style="font-size:12px;color:var(--mu)">Sala:</label>
-        <select id="admin-sala-sel" onchange="loadAdminLinhagens()" style="padding:5px 10px;border:1px solid var(--br);border-radius:6px;font-size:12px"><option value="">Selecione</option></select>
+      <!-- ABAS ADMIN -->
+      <div style="display:flex;gap:8px;margin-bottom:20px">
+        <button id="abt-users" onclick="switchAdminAba('users')" style="padding:6px 16px;border-radius:8px;border:1px solid var(--br);background:var(--g);color:#fff;cursor:pointer;font-size:12px;font-weight:500">Usuários</button>
+        <button id="abt-salas" onclick="switchAdminAba('salas')" style="padding:6px 16px;border-radius:8px;border:1px solid var(--br);background:none;color:var(--mu);cursor:pointer;font-size:12px;font-weight:500">Salas</button>
+        <button id="abt-linhagens" onclick="switchAdminAba('linhagens')" style="padding:6px 16px;border-radius:8px;border:1px solid var(--br);background:none;color:var(--mu);cursor:pointer;font-size:12px;font-weight:500">Linhagens</button>
       </div>
-      <div id="admin-linhagens" style="margin-bottom:20px"></div>
 
-      <!-- TABELA LINHAGENS -->
-      <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Todas as linhagens</p>
-      <table style="border-collapse:collapse;font-size:12px">
-        <thead><tr>
-          <th style="padding:6px 12px;border:1px solid var(--br);background:var(--th);text-align:left">Código</th>
-          <th style="padding:6px 12px;border:1px solid var(--br);background:var(--th);text-align:left">Nome</th>
-        </tr></thead>
-        <tbody id="admin-lin-table"></tbody>
-      </table>
+      <!-- ABA USUÁRIOS -->
+      <div id="admin-pane-users">
+        <div id="admin-users"></div>
+      </div>
+
+      <!-- ABA SALAS -->
+      <div id="admin-pane-salas" style="display:none">
+        <div id="admin-salas" style="display:flex;flex-wrap:wrap;gap:10px"></div>
+      </div>
+
+      <!-- ABA LINHAGENS -->
+      <div id="admin-pane-linhagens" style="display:none">
+        <div style="margin-bottom:10px;display:flex;align-items:center;gap:10px">
+          <label style="font-size:12px;color:var(--mu)">Sala:</label>
+          <select id="admin-sala-sel" onchange="loadAdminLinhagens()" style="padding:5px 10px;border:1px solid var(--br);border-radius:6px;font-size:12px"><option value="">Selecione</option></select>
+        </div>
+        <div id="admin-linhagens" style="margin-bottom:20px"></div>
+        <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Todas as linhagens</p>
+        <table style="border-collapse:collapse;font-size:12px">
+          <thead><tr>
+            <th style="padding:6px 12px;border:1px solid var(--br);background:var(--th);text-align:left">Código</th>
+            <th style="padding:6px 12px;border:1px solid var(--br);background:var(--th);text-align:left">Nome</th>
+          </tr></thead>
+          <tbody id="admin-lin-table"></tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </div>
@@ -803,7 +813,18 @@ async function toggleRole(id,role){
   loadAdmin();
 }
 
+function switchAdminAba(aba){
+  ['users','salas','linhagens'].forEach(a=>{
+    document.getElementById('admin-pane-'+a).style.display=a===aba?'block':'none';
+    const btn=document.getElementById('abt-'+a);
+    btn.style.background=a===aba?'var(--g)':'none';
+    btn.style.color=a===aba?'#fff':'var(--mu)';
+  });
+}
+
 async function loadAdmin(){
+
+
   const r=await fetch('/api/salas');
   const salas=await r.json();
   document.getElementById('admin-salas').innerHTML=salas.map(s=>`
