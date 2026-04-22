@@ -824,15 +824,31 @@ async function loadAdmin(){
   </tr>`).join('');
   const r3=await fetch('/api/users');
   const users=await r3.json();
-  document.getElementById('admin-users').innerHTML=users.map(u=>`
-    <div class="user-card">
-      <span class="uemail">${u.email}</span>
-      <select onchange="toggleRole('${u.id}',this.value)" style="padding:4px 8px;border:1px solid var(--br);border-radius:5px;font-size:11px">
-        <option value="user" ${u.role==='user'?'selected':''}>User</option>
-        <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
-      </select>
-      <span class="role-badge ${u.role}">${u.role}</span>
-    </div>`).join('');
+
+document.getElementById('admin-users').innerHTML=`
+    <table style="width:100%;border-collapse:collapse;font-size:12px;background:var(--wh);border:1px solid var(--br);border-radius:8px;overflow:hidden">
+      <thead>
+        <tr style="background:var(--th)">
+          <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">E-mail</th>
+          <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">Perfil</th>
+          <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">Cadastrado em</th>
+          <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--mu);border-bottom:1px solid var(--br)">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${users.map(u=>`
+          <tr style="border-bottom:1px solid #f0f0f0">
+            <td style="padding:10px 14px">${u.email}</td>
+            <td style="padding:10px 14px">
+              <span style="background:${u.role==='admin'?'#EEEDFE':'#F1EFE8'};color:${u.role==='admin'?'#3C3489':'#5F5E5A'};border-radius:99px;padding:2px 8px;font-size:11px;font-weight:500">${u.role}</span>
+            </td>
+            <td style="padding:10px 14px;color:var(--mu);font-size:11px">${new Date(u.criado_em).toLocaleString('pt-BR')}</td>
+            <td style="padding:10px 14px">
+              ${u.email!==me?.email?`<button onclick="toggleRole('${u.id}','${u.role==='admin'?'user':'admin'}')" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--br);background:none;cursor:pointer;color:${u.role==='admin'?'#791F1F':'#085041'}">${u.role==='admin'?'Tornar user':'Tornar admin'}</button>`:''}
+            </td>
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
 }
 
 async function toggleSala(id,ativa){
