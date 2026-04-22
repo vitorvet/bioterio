@@ -624,7 +624,9 @@ async function openAdd(){
       }
     }
   }catch(e){}
-  openM('m-add');
+
+ openM('m-add');
+  setTimeout(()=>document.getElementById('a-nasc').focus(),100);
 }
 
 async function saveAdd(){
