@@ -118,6 +118,11 @@ tr:hover td{filter:brightness(0.97)}
 @keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .aw{padding:16px 20px}
 .at{font-size:12px;font-weight:600;color:var(--mu);margin-bottom:10px}
+.user-card{display:flex;align-items:center;gap:10px;background:var(--wh);border:1px solid var(--br);border-radius:8px;padding:10px 14px;margin-bottom:8px}
+.user-card .uemail{flex:1;font-size:12px;color:var(--tx)}
+.role-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.role-badge.admin{background:var(--gl);color:var(--gd)}
+.role-badge.user{background:#f1f0eb;color:var(--mu)}
 </style>
 </head>
 <body>
@@ -159,6 +164,7 @@ tr:hover td{filter:brightness(0.97)}
     <div class="tab" id="tab-admin" onclick="switchTab('admin')" style="display:none">Admin</div>
   </div>
 
+  <!-- PANE ATIVO -->
   <div id="pane-ativo">
     <div class="filtros">
       <label>Sala:</label>
@@ -196,6 +202,7 @@ tr:hover td{filter:brightness(0.97)}
     </div>
   </div>
 
+  <!-- PANE ARQUIVADOS -->
   <div id="pane-arch" style="display:none">
     <div class="filtros">
       <label>Sala:</label>
@@ -204,7 +211,7 @@ tr:hover td{filter:brightness(0.97)}
       <select id="fLinArch" onchange="loadArch()" disabled><option value="">Selecione a sala</option></select>
     </div>
     <div class="totais">
-      <div class="tc2 b"><div class="tl2">Caixas arquivadas</div><div class="tv" id="arch-cx">—</div></div>
+      <div class="tc2 b"><div class="tl2">Caixas zeradas</div><div class="tv" id="arch-cx">—</div></div>
       <div class="tc2"><div class="tl2">Total animais</div><div class="tv" id="arch-tot">—</div></div>
       <div class="tc2 b"><div class="tl2">Machos</div><div class="tv" id="arch-mac">—</div></div>
       <div class="tc2 p"><div class="tl2">Fêmeas</div><div class="tv" id="arch-fem">—</div></div>
@@ -212,25 +219,33 @@ tr:hover td{filter:brightness(0.97)}
     <div class="tw">
       <div class="loading" id="ld-arch"><span class="spin"></span>Carregando...</div>
       <table id="arch-tbl" style="display:none"><thead id="thead-arch"></thead><tbody id="tbody-arch"></tbody></table>
-      <div class="empty" id="empty-arch" style="display:none">Nenhum registro arquivado.</div>
+      <div class="empty" id="empty-arch" style="display:none">Nenhum registro com saldo zerado.</div>
     </div>
   </div>
 
+  <!-- PANE ADMIN -->
   <div id="pane-admin" style="display:none">
     <div class="aw">
-      <p class="at" style="font-size:14px;margin-bottom:16px">Painel de administração</p>
+      <p class="at" style="font-size:14px;margin-bottom:20px">Painel de administração</p>
+
+      <!-- USUÁRIOS -->
+      <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Usuários</p>
+      <div id="admin-users" style="margin-bottom:24px"></div>
+
+      <!-- SALAS -->
       <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Salas</p>
       <div id="admin-salas" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px"></div>
+
+      <!-- LINHAGENS -->
       <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Linhagens por sala</p>
       <div style="margin-bottom:10px;display:flex;align-items:center;gap:10px">
         <label style="font-size:12px;color:var(--mu)">Sala:</label>
         <select id="admin-sala-sel" onchange="loadAdminLinhagens()" style="padding:5px 10px;border:1px solid var(--br);border-radius:6px;font-size:12px"><option value="">Selecione</option></select>
       </div>
       <div id="admin-linhagens" style="margin-bottom:20px"></div>
-<p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Usuários</p>
-      <div id="admin-users" style="margin-bottom:24px"></div>
+
+      <!-- TABELA LINHAGENS -->
       <p style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Todas as linhagens</p>
-     
       <table style="border-collapse:collapse;font-size:12px">
         <thead><tr>
           <th style="padding:6px 12px;border:1px solid var(--br);background:var(--th);text-align:left">Código</th>
@@ -399,29 +414,8 @@ function switchTab(t){
   document.getElementById('pane-ativo').style.display=t==='ativo'?'block':'none';
   document.getElementById('pane-arch').style.display=t==='arch'?'block':'none';
   document.getElementById('pane-admin').style.display=t==='admin'?'block':'none';
-  
   if(t==='arch'){initFiltrosArch();loadArch();}
-  
-  if(t==='admin')
-  
-  async function toggleRole(id,role){
-  await fetch('/api/users',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,role})});
-  toast(role==='admin'?'Usuário promovido a Admin!':'Usuário definido como User.','ok');
-  loadAdmin();
-}
-
-  loadAdmin();
-const r3=await fetch('/api/users');
-  const users=await r3.json();
-  document.getElementById('admin-users').innerHTML=users.map(u=>`
-    <div style="display:flex;align-items:center;gap:10px;background:var(--wh);border:1px solid var(--br);border-radius:8px;padding:8px 14px;margin-bottom:6px">
-      <span style="flex:1;font-size:12px">${u.email}</span>
-      <select onchange="toggleRole('${u.id}',this.value)" style="padding:4px 8px;border:1px solid var(--br);border-radius:5px;font-size:11px;accent-color:var(--g)">
-        <option value="user" ${u.role==='user'?'selected':''}>User</option>
-        <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
-      </select>
-      <span style="font-size:10px;padding:2px 8px;border-radius:10px;background:${u.role==='admin'?'var(--gl)':'#f1f0eb'};color:${u.role==='admin'?'var(--gd)':'var(--mu)'};font-weight:600">${u.role}</span>
-    </div>`).join('');
+  if(t==='admin') loadAdmin();
 }
 
 async function initFiltros(){
@@ -429,6 +423,15 @@ async function initFiltros(){
   const salas=await r.json();
   const sel=document.getElementById('fSala');
   sel.innerHTML='<option value="">Todas as salas</option>'+salas.filter(s=>s.ativa).map(s=>`<option value="${s.id}">${s.nome}</option>`).join('');
+}
+
+async function initFiltrosArch(){
+  const r=await fetch('/api/salas');
+  const salas=await r.json();
+  const sel=document.getElementById('fSalaArch');
+  const atual=sel.value;
+  sel.innerHTML='<option value="">Todas as salas</option>'+salas.map(s=>`<option value="${s.id}">${s.nome}</option>`).join('');
+  sel.value=atual;
 }
 
 async function onSalaChange(){
@@ -469,6 +472,21 @@ function onLinhagemChange(){
   loadData();
 }
 
+async function onSalaArchChange(){
+  const sala=document.getElementById('fSalaArch').value;
+  const selLin=document.getElementById('fLinArch');
+  if(!sala){
+    selLin.innerHTML='<option value="">Selecione a sala</option>';
+    selLin.disabled=true;
+  } else {
+    const r=await fetch('/api/linhagens?sala_id='+sala);
+    const lins=await r.json();
+    selLin.innerHTML='<option value="">Todas as linhagens</option>'+lins.map(l=>`<option value="${l.nome}">${l.codigo} — ${l.nome}</option>`).join('');
+    selLin.disabled=false;
+  }
+  loadArch();
+}
+
 async function req(path,method='GET',body=null){
   const opts={method,headers:{'Content-Type':'application/json'}};
   if(body) opts.body=JSON.stringify(body);
@@ -495,61 +513,22 @@ async function loadData(){
   finally{document.getElementById('ld-main').style.display='none';}
 }
 
-async function initFiltrosArch(){
-  const r=await fetch('/api/salas');
-  const salas=await r.json();
-  const sel=document.getElementById('fSalaArch');
-  const atual=sel.value;
-  sel.innerHTML='<option value="">Todas as salas</option>'+salas.map(s=>`<option value="${s.id}">${s.nome}</option>`).join('');
-  sel.value=atual;
-}
-
-
-async function onSalaArchChange(){
-  const sala=document.getElementById('fSalaArch').value;
-  const selLin=document.getElementById('fLinArch');
-  if(!sala){
-    selLin.innerHTML='<option value="">Selecione a sala</option>';
-    selLin.disabled=true;
-  } else {
-    const r=await fetch('/api/linhagens?sala_id='+sala);
-    const lins=await r.json();
-    selLin.innerHTML='<option value="">Todas as linhagens</option>'+lins.map(l=>`<option value="${l.nome}">${l.codigo} — ${l.nome}</option>`).join('');
-    selLin.disabled=false;
-  }
-  loadArch();
-}
-
 async function loadArch(){
   document.getElementById('ld-arch').style.display='block';
   document.getElementById('arch-tbl').style.display='none';
   document.getElementById('empty-arch').style.display='none';
   const sala=document.getElementById('fSalaArch').value;
   const lin=document.getElementById('fLinArch').value;
-
   let qs='?arquivado=false';
   if(sala) qs+='&sala='+sala;
   if(lin) qs+='&linhagem='+encodeURIComponent(lin);
-
   try{
-
     const todos=await req('/isoladores'+qs);
-    const d=todos.filter(r=>(r.saldo||0)===0);
-    renderArchStats(d);
-    renderArch(d);
-  }
-  catch(e){toast(e.message,'err');}
+    const zeradas=todos.filter(r=>(r.saldo||0)===0);
+    renderArchStats(zeradas);
+    renderArch(zeradas);
+  }catch(e){toast(e.message,'err');}
   finally{document.getElementById('ld-arch').style.display='none';}
-}
-
-function renderArchStats(data){
-  const mac=data.reduce((s,r)=>s+(r.qtd_machos||0),0);
-  const fem=data.reduce((s,r)=>s+(r.qtd_femeas||0),0);
-
-  document.getElementById('arch-cx').textContent=data.length;
-  document.getElementById('arch-tot').textContent=mac+fem;
-  document.getElementById('arch-mac').textContent=mac;
-  document.getElementById('arch-fem').textContent=fem;
 }
 
 function renderStats(data){
@@ -567,6 +546,15 @@ function renderStats(data){
   document.getElementById('st-fem').textContent=fem;
 }
 
+function renderArchStats(data){
+  const mac=data.reduce((s,r)=>s+(r.qtd_machos||0),0);
+  const fem=data.reduce((s,r)=>s+(r.qtd_femeas||0),0);
+  document.getElementById('arch-cx').textContent=data.length;
+  document.getElementById('arch-tot').textContent=mac+fem;
+  document.getElementById('arch-mac').textContent=mac;
+  document.getElementById('arch-fem').textContent=fem;
+}
+
 function fd(d){
   if(!d) return '';
   const p=d.split('T')[0].split('-');
@@ -578,15 +566,10 @@ function calcIdade(d){
   const nasc=new Date(d.split('T')[0]);
   const hoje=new Date();
   const dias=Math.floor((hoje-nasc)/(1000*60*60*24));
-  if(dias<30){
-    return dias+'d';
-  }
+  if(dias<30) return dias+'d';
   const meses=dias/30.44;
-  if(meses<24){
-    return meses.toFixed(1).replace('.',',')+'m';
-  }
-  const anos=meses/12;
-  return anos.toFixed(1).replace('.',',')+'a';
+  if(meses<24) return meses.toFixed(1).replace('.',',')+'m';
+  return (meses/12).toFixed(1).replace('.',',')+'a';
 }
 
 function maskDate(el){
@@ -611,13 +594,8 @@ function renderTable(data){
   if(!data.length){em.style.display='block';return;}
   th.innerHTML=`<tr>
     <th style="text-align:left">Caixa</th>
-    <th>Sala</th>
-    <th>Linhagem</th>
-    <th>Nascimento</th>
-    <th>Idade</th>
-    <th>Origem</th>
-    <th class="tq">Machos</th>
-    <th class="tq">Fêmeas</th>
+    <th>Sala</th><th>Linhagem</th><th>Nascimento</th><th>Idade</th><th>Origem</th>
+    <th class="tq">Machos</th><th class="tq">Fêmeas</th>
     <th class="tds"></th>
     <th style="background:#FFF8F0;color:#712B13">Ocorrências</th>
     <th class="tsa">Saldo</th>
@@ -634,10 +612,8 @@ function renderTable(data){
     </div>`).join('');
     return `<tr>
       <td class="tdc">${row.numero}</td>
-      <td>${row.sala}</td>
-      <td>${row.linhagem}</td>
-      <td>${fd(row.data_nasc)}</td>
-      <td>${calcIdade(row.data_nasc)}</td>
+      <td>${row.sala}</td><td>${row.linhagem}</td>
+      <td>${fd(row.data_nasc)}</td><td>${calcIdade(row.data_nasc)}</td>
       <td>${row.origem||'—'}</td>
       <td class="tdm">${row.qtd_machos||0}</td>
       <td class="tdf">${row.qtd_femeas||0}</td>
@@ -658,19 +634,30 @@ function renderTable(data){
 
 function renderArch(data){
   const tbl=document.getElementById('arch-tbl');
+  const th=document.getElementById('thead-arch');
   const tb=document.getElementById('tbody-arch');
   const em=document.getElementById('empty-arch');
   if(!data.length){em.style.display='block';return;}
+  th.innerHTML=`<tr>
+    <th style="text-align:left">Caixa</th>
+    <th>Sala</th><th>Linhagem</th><th>Nascimento</th><th>Idade</th><th>Origem</th>
+    <th class="tq">Machos</th><th class="tq">Fêmeas</th>
+    <th class="tds"></th>
+    <th style="background:#FFF8F0;color:#712B13">Ocorrências</th>
+  </tr>`;
   tb.innerHTML=data.map(r=>`<tr>
-    <td style="text-align:left;padding:7px 10px;border:1px solid var(--br);font-weight:600">${r.numero}</td>
-    <td style="padding:7px 10px;border:1px solid var(--br);text-align:center">${r.sala}</td>
-    <td style="padding:7px 10px;border:1px solid var(--br);text-align:center">${r.linhagem}</td>
-    <td style="padding:7px 10px;border:1px solid var(--br);text-align:center">${fd(r.data_nasc)}</td>
-    <td style="padding:7px 10px;border:1px solid var(--br);text-align:center">${calcIdade(r.data_nasc)}</td>
-    <td style="padding:7px 10px;border:1px solid var(--br);text-align:center">${r.origem||'—'}</td>
-    <td style="padding:7px 10px;border:1px solid var(--br);text-align:center;background:var(--bl)">${r.qtd_machos||0}</td>
-    <td style="padding:7px 10px;border:1px solid var(--br);text-align:center;background:var(--pl)">${r.qtd_femeas||0}</td>
-    <td style="padding:7px 10px;border:1px solid var(--br);font-size:11px">${(r.ocorrencias||[]).map(o=>o.tipo+' ('+o.quantidade+')').join(', ')||'—'}</td>
+    <td class="tdc">${r.numero}</td>
+    <td>${r.sala}</td><td>${r.linhagem}</td>
+    <td>${fd(r.data_nasc)}</td><td>${calcIdade(r.data_nasc)}</td>
+    <td>${r.origem||'—'}</td>
+    <td class="tdm">${r.qtd_machos||0}</td>
+    <td class="tdf">${r.qtd_femeas||0}</td>
+    <td class="tds"></td>
+    <td class="oc">${(r.ocorrencias||[]).map(o=>`<div class="ot2">
+      <span class="tp">${o.tipo}</span>
+      <span class="dt">${fd(o.data_occ)}</span>
+      <span class="qt">${o.quantidade}</span>
+    </div>`).join('')||'—'}</td>
   </tr>`).join('');
   tbl.style.display='table';
 }
@@ -690,13 +677,12 @@ async function openAdd(){
     const todos=[...(dados||[]),...(arquivados||[])];
     if(todos.length>0){
       const numeros=todos.map(r=>{
-        const partes=r.numero.split('.');
-        return parseFloat(partes[partes.length-1]);
+        const p=r.numero.split('.');
+        return parseFloat(p[p.length-1]);
       }).filter(n=>!isNaN(n));
       if(numeros.length>0){
         const prefixo=todos[0].numero.substring(0,todos[0].numero.lastIndexOf('.'));
-        const maximo=Math.max(...numeros);
-        document.getElementById('a-num').value=prefixo+'.'+(maximo+1);
+        document.getElementById('a-num').value=prefixo+'.'+(Math.max(...numeros)+1);
       }
     }
   }catch(e){}
@@ -713,22 +699,12 @@ async function saveAdd(){
   const fem=parseInt(document.getElementById('a-fem').value)||0;
   const err=document.getElementById('a-err');
   err.style.display='none';
-  if(!num||!nasc){
-    err.textContent='Preencha o número e a data de nascimento.';
-    err.style.display='block';return;
-  }
-  if(mac<1&&fem<1){
-    err.textContent='Informe ao menos 1 animal (macho ou fêmea).';
-    err.style.display='block';return;
-  }
+  if(!num||!nasc){err.textContent='Preencha o número e a data de nascimento.';err.style.display='block';return;}
+  if(mac<1&&fem<1){err.textContent='Informe ao menos 1 animal.';err.style.display='block';return;}
   const btn=document.getElementById('a-btn');
   btn.disabled=true;btn.textContent='Salvando...';
   try{
-    await req('/isoladores','POST',{
-      numero:num,sala:salaAtual,linhagem:linhagemAtual,
-      data_nasc:nasc,origem:orig,
-      quantidade:mac+fem,qtd_machos:mac,qtd_femeas:fem
-    });
+    await req('/isoladores','POST',{numero:num,sala:salaAtual,linhagem:linhagemAtual,data_nasc:nasc,origem:orig,quantidade:mac+fem,qtd_machos:mac,qtd_femeas:fem});
     closeM('m-add');toast('Cadastrado!','ok');loadData();
   }catch(e){err.textContent=e.message;err.style.display='block';}
   finally{btn.disabled=false;btn.textContent='Salvar';}
@@ -771,21 +747,12 @@ async function saveEdit(){
   const fem=parseInt(document.getElementById('e-fem').value)||0;
   const err=document.getElementById('e-err');
   err.style.display='none';
-  if(!sala||!lin||!nasc){
-    err.textContent='Preencha todos os campos obrigatórios.';
-    err.style.display='block';return;
-  }
-  if(mac<1&&fem<1){
-    err.textContent='Informe ao menos 1 animal.';
-    err.style.display='block';return;
-  }
+  if(!sala||!lin||!nasc){err.textContent='Preencha todos os campos obrigatórios.';err.style.display='block';return;}
+  if(mac<1&&fem<1){err.textContent='Informe ao menos 1 animal.';err.style.display='block';return;}
   const btn=document.getElementById('e-btn');
   btn.disabled=true;btn.textContent='Salvando...';
   try{
-    await req('/isoladores/'+editId,'PUT',{
-      sala,linhagem:lin,data_nasc:nasc,origem:orig,
-      quantidade:mac+fem,qtd_machos:mac,qtd_femeas:fem
-    });
+    await req('/isoladores/'+editId,'PUT',{sala,linhagem:lin,data_nasc:nasc,origem:orig,quantidade:mac+fem,qtd_machos:mac,qtd_femeas:fem});
     closeM('m-edit');toast('Atualizado!','ok');loadData();
   }catch(e){err.textContent=e.message;err.style.display='block';}
   finally{btn.disabled=false;btn.textContent='Salvar';}
@@ -808,10 +775,7 @@ async function saveOcc(){
   const qtd=parseInt(document.getElementById('o-qtd').value)||0;
   const err=document.getElementById('o-err');
   err.style.display='none';
-  if(!tipo||!dataOcc||qtd<1){
-    err.textContent='Preencha todos os campos.';
-    err.style.display='block';return;
-  }
+  if(!tipo||!dataOcc||qtd<1){err.textContent='Preencha todos os campos.';err.style.display='block';return;}
   const btn=document.getElementById('o-btn');
   btn.disabled=true;btn.textContent='Salvando...';
   try{
@@ -833,6 +797,12 @@ async function archRow(id){
   catch(e){toast(e.message,'err');}
 }
 
+async function toggleRole(id,role){
+  await fetch('/api/users',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,role})});
+  toast(role==='admin'?'Promovido a Admin!':'Definido como User.','ok');
+  loadAdmin();
+}
+
 async function loadAdmin(){
   const r=await fetch('/api/salas');
   const salas=await r.json();
@@ -852,6 +822,17 @@ async function loadAdmin(){
     <td style="padding:5px 12px;border:1px solid var(--br);font-weight:600">${l.codigo}</td>
     <td style="padding:5px 12px;border:1px solid var(--br)">${l.nome}</td>
   </tr>`).join('');
+  const r3=await fetch('/api/users');
+  const users=await r3.json();
+  document.getElementById('admin-users').innerHTML=users.map(u=>`
+    <div class="user-card">
+      <span class="uemail">${u.email}</span>
+      <select onchange="toggleRole('${u.id}',this.value)" style="padding:4px 8px;border:1px solid var(--br);border-radius:5px;font-size:11px">
+        <option value="user" ${u.role==='user'?'selected':''}>User</option>
+        <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
+      </select>
+      <span class="role-badge ${u.role}">${u.role}</span>
+    </div>`).join('');
 }
 
 async function toggleSala(id,ativa){
