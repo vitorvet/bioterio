@@ -780,8 +780,12 @@ async function saveAdd(){
 }
 
 async function openEdit(id){
-  const row=allData.find(r=>r.id===id);
+  let row=allData.find(r=>r.id===id);
+  if(!row){
+    try{row=await req('/isoladores/'+id);}catch(e){toast('Erro ao carregar registro.','err');return;}
+  }
   if(!row)return;
+
   editId=id;
   document.getElementById('e-num').value=row.numero;
   document.getElementById('e-nasc').value=fd(row.data_nasc);
