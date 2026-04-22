@@ -178,9 +178,12 @@ tr:hover td{filter:brightness(0.97)}
 
   <!-- PANE ATIVO -->
   <div id="pane-ativo">
-    <div class="filtros">
+
+    <div class="filtros" id="filtros-ativo" style="display:none">
       <label>Sala:</label>
-      <select id="fSala" onchange="onSalaChange()"><option value="">Todas as salas</option></select>
+      <select id="fSala"
+      
+      onchange="onSalaChange()"><option value="">Todas as salas</option></select>
       <label>Linhagem:</label>
       <select id="fLin" onchange="onLinhagemChange()" disabled><option value="">Selecione a sala</option></select>
       <div class="sp"></div>
@@ -220,8 +223,10 @@ tr:hover td{filter:brightness(0.97)}
 
   <!-- PANE ARQUIVADOS -->
   <div id="pane-arch" style="display:none">
-    <div class="filtros">
+
+<div class="filtros" id="filtros-arch" style="display:none">
       <label>Período:</label>
+
       <select id="fPeriodo" onchange="onPeriodoChange()">
         <option value="todos">Todos</option>
         <option value="mes">Último mês</option>
@@ -410,7 +415,13 @@ async function doLogin(){
   document.getElementById('uname').textContent=nome;
   const perfil=await fetch(SUPA_URL+'/rest/v1/perfis?select=role&id=eq.'+data.user.id,{headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+data.access_token}});
   const pd=await perfil.json();
-  if(pd[0]?.role==='admin') document.getElementById('tab-admin').style.display='block';
+
+  if(pd[0]?.role==='admin'){
+    document.getElementById('tab-admin').style.display='block';
+    document.getElementById('filtros-ativo').style.display='flex';
+    document.getElementById('filtros-arch').style.display='flex';
+  }
+
   showS('s-main');
   salaAtual='';linhagemAtual='';
   document.getElementById('fSala').value='';
