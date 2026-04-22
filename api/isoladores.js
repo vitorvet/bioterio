@@ -37,7 +37,8 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     const { numero, sala, linhagem, data_nasc, origem, quantidade, qtd_machos, qtd_femeas } = req.body;
-    if (!numero || !sala || !linhagem || !data_nasc || !origem || !quantidade) {
+
+if (!numero || !sala || !linhagem || !data_nasc || !quantidade) {      
       return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
     }
     const { data, error } = await supabase

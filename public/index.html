@@ -636,7 +636,8 @@ async function saveAdd(){
   const fem=parseInt(document.getElementById('a-fem').value)||0;
   const err=document.getElementById('a-err');
   err.style.display='none';
-  if(!num||!nasc||!orig){
+
+if(!num||!nasc){
     err.textContent='Preencha todos os campos obrigatórios.';
     err.style.display='block';
     return;
@@ -696,11 +697,13 @@ async function saveEdit(){
   const fem=parseInt(document.getElementById('e-fem').value)||0;
   const err=document.getElementById('e-err');
   err.style.display='none';
-  if(!sala||!lin||!nasc||!orig){
+
+if(!sala||!lin||!nasc){
     err.textContent='Preencha todos os campos obrigatórios.';
     err.style.display='block';
     return;
   }
+
   if(mac<1&&fem<1){
     err.textContent='Informe ao menos 1 animal (macho ou fêmea).';
     err.style.display='block';
