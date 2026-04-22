@@ -68,8 +68,8 @@ button{cursor:pointer}
 
 table{border-collapse:collapse;width:auto;table-layout:auto}
 
-th{padding:4px 6px;font-size:10px;font-weight:600;color:var(--mu);border:1px solid var(--br);background:var(--th);text-align:center;white-space:nowrap}
-td{padding:4px 6px;border:1px solid var(--br);font-size:11px;text-align:center;vertical-align:middle;white-space:nowrap}
+th{padding:3px 5px;font-size:10px;font-weight:600;color:var(--mu);border:1px solid var(--br);background:var(--th);text-align:center;white-space:nowrap}
+td{padding:3px 5px;border:1px solid var(--br);font-size:11px;text-align:center;vertical-align:middle;white-space:nowrap}
 
 .tdc{font-weight:600;text-align:left;background:#fafaf8}
 .tdm{background:var(--bl)}.tdf{background:var(--pl)}
@@ -543,18 +543,18 @@ function renderTable(data){
 
  th.innerHTML=`<tr>
 
-  <th style="text-align:left">Caixa</th>
-    <th>Sala</th>
-    <th>Linhagem</th>
-    <th>Nasc.</th>
-    <th>Idade</th>
-    <th>Origem</th>
-    <th class="tq">Machos</th>
-    <th class="tq">Fêmeas</th>
+<th style="text-align:left;width:60px">Caixa</th>
+    <th style="width:30px">Sala</th>
+    <th style="width:110px">Linhagem</th>
+    <th style="width:75px">Nasc.</th>
+    <th style="width:38px">Idade</th>
+    <th style="width:60px">Origem</th>
+    <th class="tq" style="width:42px">M</th>
+    <th class="tq" style="width:42px">F</th>
     <th class="tds"></th>
-    <th style="background:#FFF8F0;color:#712B13">Ocorrências</th>
-    <th class="tsa">Saldo</th>
-    <th>Ações</th>
+    <th style="background:#FFF8F0;color:#712B13;width:160px">Ocorrências</th>
+    <th class="tsa" style="width:40px">Saldo</th>
+    <th style="width:45px">Ações</th>
   </tr>`;
 
   tb.innerHTML=data.map(row=>{
