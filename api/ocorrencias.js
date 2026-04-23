@@ -21,5 +21,13 @@ export default async function handler(req, res) {
     return res.status(201).json(data);
   }
 
+  if (req.method === 'DELETE') {
+    const { id } = req.body;
+    if (!id) return res.status(400).json({ error: 'ID da ocorrência obrigatório.' });
+    const { error } = await supabase.from('ocorrencias').delete().eq('id', id);
+    if (error) return res.status(500).json({ error: error.message });
+    return res.status(204).end();
+  }
+
   return res.status(405).json({ error: 'Método não permitido.' });
 }
