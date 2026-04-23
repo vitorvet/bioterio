@@ -8,7 +8,25 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   const { id } = req.query;
 
+if (req.method === 'GET') {
+    const { data, error } = await supabase
+      .from('v_isoladores')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (error) return res.status(404).json({ error: 'Não encontrado.' });
+    const { data: occs } = await supabase
+      .from('ocorrencias')
+      .select('*')
+      .eq('isolador_id', id)
+      .order('data_occ');
+    data.ocorrencias = occs || [];
+    return res.status(200).json(data);
+  }
+
+
   if (req.method === 'PUT') {
+
     const { sala, linhagem, data_nasc, origem, quantidade, qtd_machos, qtd_femeas } = req.body;
     const { data, error } = await supabase
       .from('isoladores')
